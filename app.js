@@ -5,12 +5,15 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressHBS = require('express-handlebars');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
-var routes = require('./routes/index');
+const router = require('./routes/index');
+const users = require('./routes/users');
 
-var app = express();
+const app = express();
 
-mongoose.connect('mongodb://localhost:27017/shopping', { useUnifiedTopology: true, useNewUrlParser: true });
+app.use(express.urlencoded({ extended: true }));
+mongoose.connect('mongodb://localhost:27017/market', { useUnifiedTopology: true, useNewUrlParser: true });
 
 // view engine setup
 app.engine('.hbs', expressHBS({
@@ -19,13 +22,16 @@ app.engine('.hbs', expressHBS({
 }));
 app.set('view engine', '.hbs');
 
+app.use(methodOverride());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', router);
+app.use('/dashboard', router);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
