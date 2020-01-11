@@ -9,8 +9,10 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "ejs": "^3.0.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.1.0",
+    "handlebars-helpers": "^0.10.0",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "method-override": "^3.0.0",

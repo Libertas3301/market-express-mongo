@@ -3,23 +3,25 @@
     <label>costea daun</label><input type="radio" name="radioOption" value="radioOption2"></label>
     <input type="submit" value="apasa">
 </form>
-
-{{# each products }}
-<div class="row">
-    {{# each this }}
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="/uploads/{{this.imagePath}}" alt="">
-            <div class="caption">
-                <h3>{{ this.title }}</h3>
-                <p class="description">{{ this.description }}</p>
-                <div class="clearfix">
-                    <div class="price pull-left">{{ this.price }}</div>
-                    <a href="#" class="btn btn-success pull-right" role="button">Add to shopping cart</a>
+<form action="/createpage">
+    {{# each products }}
+    <div class="row">
+        {{# each this }}
+        <p name="identificator">{{ this._id }}</p>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="/uploads/{{this.imagePath}}" alt="">
+                <div class="caption">
+                    <h3>{{ this.title }}</h3>
+                    <p class="description">{{ this.description }}</p>
+                    <div class="clearfix">
+                        <div class="price pull-left">{{ this.price }}</div>
+                        <a href="#" class="btn btn-success pull-right" role="button">Add to shopping cart</a>
+                    </div>
                 </div>
             </div>
         </div>
+        {{/each}}
     </div>
     {{/each}}
-</div>
-{{/each}}
+</form>

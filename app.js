@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressHBS = require('express-handlebars');
+const ejs = require('ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
@@ -20,7 +21,9 @@ app.engine('.hbs', expressHBS({
   defaultLayout: 'layout',
   extname: '.hbs'
 }));
+
 app.set('view engine', '.hbs');
+app.set('view engine', 'ejs');
 
 app.use(methodOverride());
 app.use(logger('dev'));
