@@ -2,6 +2,7 @@ const Product = require('../models/product')
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const url = require('url')
 
 const mongoose = require('mongoose');
 
@@ -19,20 +20,33 @@ const mongoose = require('mongoose');
 //   });
 // });
 
+// router.get('/blbl', (req, res) => {
+//   const { query } = url.parse(req.url, true) //de aici extragi parametrii din url cu query (adica ?id=) 
+//   const requiredProduct = db.products.findOne({ _id: query }) //vezi obiectul query de mai sus {query}
+//   console.log(requiredProduct);
+//   res.render('/shop/product_template_overview.hbs', { products: requiredProduct });
+// });
+
+router.get('/', (req, res) => {
+  const { query } = url.parse(req.url, true);
+  Product.findOne({ _id: query.id }, (err, docs) => {
+    res.render('shop/product_template_overview.hbs', { title: 'lol', products: docs });
+  })
+});
+
 router.get('/products/:page', function (req, res, next) {
   var perPage = 9
   var page = req.params.page || 1
-
   Product
     .find({})
+    .sort({ _id: -1 })
     .skip((perPage * page) - perPage)
     .limit(perPage)
-    .exec(function (err, products) {
-      console.log(products);
+    .exec(function (err, docs) {
       Product.count().exec(function (err, count) {
         if (err) return next(err)
         res.render('products.ejs', {
-          products: products,
+          products: docs,
           current: page,
           pages: Math.ceil(count / perPage)
         })
@@ -40,8 +54,8 @@ router.get('/products/:page', function (req, res, next) {
     })
 })
 
-router.get('/', function (req, res, next) {
-  res.render('index.ejs')
+router.get('/home', function (req, res, next) {
+  res.render('shop/index.hbs');
 })
 
 // router.post('/filterRequest', function (req, res) {

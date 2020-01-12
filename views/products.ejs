@@ -20,7 +20,8 @@
                         <p>$<%= products[i].price %></p>
                     </div>
                     <div class="clearfix">
-                        <a href="#" class="btn btn-success pull-right" role="button">Add to shopping cart</a>
+                        <a class="btn btn-success pull-right" role="button"
+                            href="/product?id=<%= products[i]._id %>">Add to shopping cart</a>
                     </div>
                 </div>
             </div>
