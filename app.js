@@ -8,7 +8,8 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+const MongoStore = require('connect-mongo')(session);
 
 const router = require('./routes/index');
 const app = express();
@@ -43,13 +44,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app session
 app.use(session({
-  secret: 'work hard',
+  secret: 'a wonderful secret you will never knew)',
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: db
   })
 }));
+
+// Flash messages
+app.use(flash());
 
 // include routes
 app.use('/', router);

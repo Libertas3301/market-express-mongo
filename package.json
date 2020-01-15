@@ -9,6 +9,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -16,8 +17,9 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+    "flash": "^1.1.0",
     "handlebars-helpers": "^0.10.0",
-    "hbs": "~4.0.4",
+    "hbs": "^4.1.0",
     "http-errors": "~1.6.3",
     "method-override": "^3.0.0",
     "mongoose": "^5.8.5",

@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
 
 // GET route for reading data
 router.get('/auth', (req, res, next) => {
-  res.render('user/index.hbs');
+  res.render('user/index.hbs', { message: req.flash('message') });
 });
 
 //POST route for updating data
@@ -48,8 +48,16 @@ router.post('/authpost', (req, res, next) => {
     var err = new Error('Passwords do not match.');
     err.status = 400;
     res.send("passwords dont match");
-    return next(err);
+    // return next(err);
   }
+
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (user) {
+      var err = 'A user with that email has already registered. Please use a different email..';
+      req.flash('message', err);
+      res.redirect('/auth');
+    }
+  });
 
   if (req.body.email &&
     req.body.username &&
