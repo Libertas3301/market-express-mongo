@@ -2,7 +2,8 @@ const Product = require('../models/product')
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const url = require('url')
+const url = require('url');
+var User = require('../models/user');
 
 const mongoose = require('mongoose');
 
@@ -34,6 +35,92 @@ router.get('/', (req, res) => {
   })
 });
 
+
+// GET route for reading data
+router.get('/auth', (req, res, next) => {
+  res.render('user/index.hbs');
+});
+
+//POST route for updating data
+router.post('/authpost', (req, res, next) => {
+  // confirm that user typed same password twice
+  if (req.body.password !== req.body.passwordConf) {
+    var err = new Error('Passwords do not match.');
+    err.status = 400;
+    res.send("passwords dont match");
+    return next(err);
+  }
+
+  if (req.body.email &&
+    req.body.username &&
+    req.body.password &&
+    req.body.passwordConf) {
+
+    let userData = {
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password,
+    }
+
+    User.create(userData, (error, user) => {
+      if (error) {
+        return next(error);
+      } else {
+        req.session.userId = user._id;
+        res.redirect('/profile');
+      }
+    });
+
+  } else if (req.body.logemail && req.body.logpassword) {
+    User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
+      if (error || !user) {
+        var err = new Error('Wrong email or password.');
+        err.status = 401;
+        return next(err);
+      } else {
+        req.session.userId = user._id;
+        res.redirect('/profile');
+      }
+    });
+  } else {
+    var err = new Error('All fields required.');
+    err.status = 400;
+    return next(err);
+  }
+})
+
+// GET route after registering
+router.get('/profile', (req, res, next) => {
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+        }
+      }
+    });
+});
+
+// GET for logout logout
+router.get('/logout', (req, res, next) => {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function (err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
+
 router.get('/products/:page', function (req, res, next) {
   var perPage = 9
   var page = req.params.page || 1
@@ -58,30 +145,30 @@ router.get('/home', function (req, res, next) {
   res.render('shop/index.hbs');
 })
 
-// router.post('/filterRequest', function (req, res) {
-//   if (req.body.radioOption === 'radioOption1') {
-//     Product.find({ title: 'best costea' }, (err, docs) => {
-//       const productChunks = [];
-//       const chunkSize = 3;
-//       docs.reverse();
-//       for (var i = 0; i < docs.length; i += chunkSize) {
-//         productChunks.push(docs.slice(i, i + chunkSize));
-//       }
-//       res.render('shop/index.hbs', { title: 'Market', products: productChunks });
-//     });
-//   }
-//   else if (req.body.radioOption === 'radioOption2') {
-//     Product.find({ title: 'costea daun' }, (err, docs) => {
-//       const productChunks = [];
-//       const chunkSize = 3;
-//       docs.reverse();
-//       for (var i = 0; i < docs.length; i += chunkSize) {
-//         productChunks.push(docs.slice(i, i + chunkSize));
-//       }
-//       res.render('shop/index.hbs', { title: 'Market', products: productChunks });
-//     });
-//   }
-// });
+router.post('/filterRequest', function (req, res) {
+  if (req.body.radioOption === 'radioOption1') {
+    Product.find({ title: 'best costea' }, (err, docs) => {
+      const productChunks = [];
+      const chunkSize = 3;
+      docs.reverse();
+      for (var i = 0; i < docs.length; i += chunkSize) {
+        productChunks.push(docs.slice(i, i + chunkSize));
+      }
+      res.render('index.ejs', { title: 'Market', products: productChunks });
+    });
+  }
+  else if (req.body.radioOption === 'radioOption2') {
+    Product.find({ title: 'costea daun' }, (err, docs) => {
+      const productChunks = [];
+      const chunkSize = 3;
+      docs.reverse();
+      for (var i = 0; i < docs.length; i += chunkSize) {
+        productChunks.push(docs.slice(i, i + chunkSize));
+      }
+      res.render('index.ejs', { title: 'Market', products: productChunks });
+    });
+  }
+});
 
 /* GET dashboard. */
 router.get('/dashboard', function (req, res, next) {

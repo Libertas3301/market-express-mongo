@@ -7,14 +7,21 @@ const expressHBS = require('express-handlebars');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 const router = require('./routes/index');
-const users = require('./routes/users');
-
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect('mongodb://localhost:27017/market', { useUnifiedTopology: true, useNewUrlParser: true });
+var db = mongoose.connection;
+
+//handle mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // we're connected!
+});
 
 // view engine setup
 app.engine('.hbs', expressHBS({
@@ -30,12 +37,24 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app session
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
+
+// include routes
 app.use('/', router);
 app.use('/dashboard', router);
 app.use('/product', router);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

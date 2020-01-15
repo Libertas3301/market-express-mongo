@@ -8,6 +8,11 @@
 </head>
 
 <body>
+    <form action="/filterRequest" method="POST">
+        <label>costea geniu<input type="radio" name="radioOption" value="radioOption1"></label>
+        <label>costea daun</label><input type="radio" name="radioOption" value="radioOption2"></label>
+        <input type="submit" value="apasa">
+    </form>
     <div class="container">
         <div class="row">
             <% for (var i = 0; i < products.length; i++) { %>
@@ -57,5 +62,6 @@
         <% } %>
     </div>
 </body>
+
 
 </html>
