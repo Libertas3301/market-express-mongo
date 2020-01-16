@@ -21,20 +21,19 @@ const mongoose = require('mongoose');
 //   });
 // });
 
-// router.get('/blbl', (req, res) => {
-//   const { query } = url.parse(req.url, true) //de aici extragi parametrii din url cu query (adica ?id=) 
-//   const requiredProduct = db.products.findOne({ _id: query }) //vezi obiectul query de mai sus {query}
-//   console.log(requiredProduct);
-//   res.render('/shop/product_template_overview.hbs', { products: requiredProduct });
-// });
-
-router.get('/', (req, res) => {
-  const { query } = url.parse(req.url, true);
-  Product.findOne({ _id: query.id }, (err, docs) => {
-    res.render('shop/product_template_overview.hbs', { title: 'lol', products: docs });
-  })
+router.post('/deletePost228', (req, res) => {
+  console.log(req.body.idshnic);
+  Product.findOne({ _id: req.body.idshnic }, (err, doc) => {
+    // or simply use
+    if (err) {
+      console.log(err);
+    }
+    else if (doc) {
+      doc.remove();
+      res.redirect('/dashboard/deletePost/:page');
+    }
+  });
 });
-
 
 // GET route for reading data
 router.get('/auth', (req, res, next) => {
@@ -149,38 +148,63 @@ router.get('/products/:page', function (req, res, next) {
     })
 })
 
+
+router.get('/dashboard/deletePost/:page', function (req, res, next) {
+  var perPage = 9
+  var page = req.params.page || 1
+  Product
+    .find({})
+    .sort({ _id: -1 })
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .exec(function (err, docs) {
+      Product.count().exec(function (err, count) {
+        if (err) return next(err)
+        res.render('shop/dashboard-delete.ejs', {
+          products: docs,
+          current: page,
+          pages: Math.ceil(count / perPage)
+        })
+      })
+    })
+})
 router.get('/home', function (req, res, next) {
   res.render('shop/index.hbs');
 })
 
-router.post('/filterRequest', function (req, res) {
-  if (req.body.radioOption === 'radioOption1') {
-    Product.find({ title: 'best costea' }, (err, docs) => {
-      const productChunks = [];
-      const chunkSize = 3;
-      docs.reverse();
-      for (var i = 0; i < docs.length; i += chunkSize) {
-        productChunks.push(docs.slice(i, i + chunkSize));
-      }
-      res.render('index.ejs', { title: 'Market', products: productChunks });
-    });
-  }
-  else if (req.body.radioOption === 'radioOption2') {
-    Product.find({ title: 'costea daun' }, (err, docs) => {
-      const productChunks = [];
-      const chunkSize = 3;
-      docs.reverse();
-      for (var i = 0; i < docs.length; i += chunkSize) {
-        productChunks.push(docs.slice(i, i + chunkSize));
-      }
-      res.render('index.ejs', { title: 'Market', products: productChunks });
-    });
-  }
+// router.post('/filterRequest', function (req, res) {
+//   if (req.body.radioOption === 'radioOption1') {
+//     Product.find({ title: 'best costea' }, (err, docs) => {
+//       const productChunks = [];
+//       const chunkSize = 3;
+//       docs.reverse();
+//       for (var i = 0; i < docs.length; i += chunkSize) {
+//         productChunks.push(docs.slice(i, i + chunkSize));
+//       }
+//       res.render('index.ejs', { title: 'Market', products: productChunks });
+//     });
+//   }
+//   else if (req.body.radioOption === 'radioOption2') {
+//     Product.find({ title: 'costea daun' }, (err, docs) => {
+//       const productChunks = [];
+//       const chunkSize = 3;
+//       docs.reverse();
+//       for (var i = 0; i < docs.length; i += chunkSize) {
+//         productChunks.push(docs.slice(i, i + chunkSize));
+//       }
+//       res.render('index.ejs', { title: 'Market', products: productChunks });
+//     });
+//   }
+// });
+
+/* GET dashboard - add new post. */
+router.get('/dashboard/newPost', (req, res, next) => {
+  res.render('shop/dashboard.hbs');
 });
 
-/* GET dashboard. */
-router.get('/dashboard', function (req, res, next) {
-  res.render('shop/dashboard.hbs');
+/* GET dashboard - delete selected post */
+router.get('/dashboard/deletePost', (req, res, next) => {
+  res.render('shop/dashboard-delete.ejs');
 });
 
 router.post('/addproduct', function (req, res) {

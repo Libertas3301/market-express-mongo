@@ -33,16 +33,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <h1>Test Authentication 🚀 </h1>
     <!-- main -->
     <div class="main">
-        <!--login-profile-->
-
-        <!--login-profile-->
-        <!--signin-form-->
         <div class="w3">
             <div class="signin-form profile">
                 <h3>Login</h3>
-
+                {{#if message}}
                 <div class="alert alert-danger">{{message}}</div>
-
+                {{/if}}
                 <div class="login-form">
                     <form action="/authpost" method="post">
                         <input type="text" name="logemail" placeholder="E-mail" required="">

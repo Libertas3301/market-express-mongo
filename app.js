@@ -24,6 +24,8 @@ db.once('open', function () {
   // we're connected!
 });
 
+
+
 // view engine setup
 app.engine('.hbs', expressHBS({
   defaultLayout: 'layout',

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .thumbnail {
+            overflow: hidden;
+            height: 180px;
+            padding: 4px;
+            margin-bottom: 20px;
+            line-height: 1.42857143;
+            background-color: #fff;
+            border: 0;
+        }
+
+        .thumbnail a>img,
+        .thumbnail>img {
+            width: 150px !important;
+            height: 150px !important;
+            position: relative;
+            left: -409px;
+        }
+
+        .col-md-4 {
+            width: 100%;
+        }
+
+        .thumbnail .caption {
+            padding: 9px;
+            position: relative;
+            color: #333;
+            left: 261px;
+            top: -143px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <% for (var i = 0; i < products.length; i++) { %>
+            <form action="/deletePost228" method="post">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/uploads/<%= products[i].imagePath %>" style="width: 300px; height: 200px;">
+                        <div class="caption">
+                            <h3><%= products[i].title %></h3>
+                            <p><%= products[i].description %></p>
+                            <p>$<%= products[i].price %></p>
+                            <input type="hidden" name="idshnic" value="<%= products[i]._id %>">
+
+                        </div>
+                        <!-- <div class="clearfix">
+                            <a class="btn btn-success pull-right" role="button"
+                                href="/dashboard/deletePost?id=<%= products[i]._id %>">Sterge din baza de date</a>
+                                /deletePost?id=<%= products[i]._id %>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <input class="btn btn-success pull-right" type="submit" value="sterge postul"></input>
+                </div>
+            </form>
+            <% } %>
+        </div>
+        <% if (pages > 0) { %>
+        <ul class="pagination text-center">
+            <% if (current == 1) { %>
+            <li class="disabled"><a>First</a></li>
+            <% } else { %>
+            <li><a href="/dashboard/deletePost/1">First</a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+            <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+            <% if (i == current) { %>
+            <li class="active"><a><%= i %></a></li>
+            <% } else { %>
+            <li><a href="/dashboard/deletePost/<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(current) + 4 && i < pages) { %>
+            <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+            <li class="disabled"><a>Last</a></li>
+            <% } else { %>
+            <li><a href="/dashboard/deletePost/<%= pages %>">Last</a></li>
+            <% } %>
+        </ul>
+        <% } %>
+    </div>
+
+</body>
+
+</html>
