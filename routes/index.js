@@ -1,14 +1,18 @@
-const Product = require('../models/product')
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const url = require('url');
-var User = require('../models/user');
+
+const Product = require('../models/product')
+const Cart = require('../models/cart')
+const User = require('../models/user');
 
 const mongoose = require('mongoose');
 
 /* GET home page. */
 
+let isAdminLoggedIn;
+let isUserLoggedIn;
 // router.get('/', function (req, res, next) {
 //   Product.find((err, docs) => {
 //     const productChunks = [];
@@ -18,6 +22,49 @@ const mongoose = require('mongoose');
 //       productChunks.push(docs.slice(i, i + chunkSize));
 //     }
 //     res.render('shop/index', { title: 'Market', products: productChunks });
+//   });
+// });
+
+// router.get('/blbl', (req, res) => {
+//   const { query } = url.parse(req.url, true) //de aici extragi parametrii din url cu query (adica ?id=) 
+//   const requiredProduct = db.products.findOne({ _id: query }) //vezi obiectul query de mai sus {query}
+//   console.log(requiredProduct);
+//   res.render('/shop/product_template_overview.hbs', { products: requiredProduct });
+// });
+
+router.get('/product-review', (req, res, next) => {
+  const { query } = url.parse(req.url, true);
+  Product.findOne({ _id: query.id }, (err, docs) => {
+    res.render('shop/product_template_overview.hbs', { products: docs });
+  });
+});
+
+router.get('/add-to-cart/:id', (req, res, next) => {
+  let productId = req.params.id;
+  let cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  Product.findById(productId, (err, product) => {
+    if (err) {
+      return res.redirect('/');
+    }
+    cart.add(product, product.id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect('/products/:page');
+  });
+});
+
+router.get('/shopping-cart', (req, res, next) => {
+  if (!req.session.cart) {
+    return res.render('shop/shopping-cart.hbs', { products: null })
+  }
+  let cart = new Cart(req.session.cart);
+  res.render('shop/shopping-cart.hbs', { products: cart.generateArray(), totalPrice: cart.totalPrice })
+});
+
+// router.post('/deletePost', (req, res) => {
+//   Product.findOneAndRemove({ '_id': req.body.id }, (err, offer) => {
+//     res.redirect('/shop/dashboard-delete.ejs');
 //   });
 // });
 
@@ -36,7 +83,7 @@ router.post('/deletePost228', (req, res) => {
 });
 
 // GET route for reading data
-router.get('/auth', (req, res, next) => {
+router.get('/auth', isLoggedInFoAuth, (req, res, next) => {
   res.render('user/index.hbs', { message: req.flash('message') });
 });
 
@@ -87,6 +134,11 @@ router.post('/authpost', (req, res, next) => {
       } else {
         req.session.userId = user._id;
         res.redirect('/profile');
+        if (req.body.logemail === 'root-vladislav@gmail.com') {
+          isAdminLoggedIn = true;
+        }
+        isUserLoggedIn = true;
+        console.log(req.body.logemail === 'root-vladislav@gmail.com');
       }
     });
   } else {
@@ -97,7 +149,7 @@ router.post('/authpost', (req, res, next) => {
 })
 
 // GET route after registering
-router.get('/profile', (req, res, next) => {
+router.get('/profile', isLoggedIn, (req, res, next) => {
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -115,20 +167,21 @@ router.get('/profile', (req, res, next) => {
 });
 
 // GET for logout logout
-router.get('/logout', (req, res, next) => {
+router.get('/logout', isLoggedIn, (req, res, next) => {
   if (req.session) {
     // delete session object
     req.session.destroy(function (err) {
       if (err) {
         return next(err);
       } else {
-        return res.redirect('/');
+        return res.redirect('/auth');
       }
     });
   }
+  isUserLoggedIn = false;
 });
 
-router.get('/products/:page', function (req, res, next) {
+router.get('/products/:page', (req, res, next) => {
   var perPage = 9
   var page = req.params.page || 1
   Product
@@ -149,7 +202,7 @@ router.get('/products/:page', function (req, res, next) {
 })
 
 
-router.get('/dashboard/deletePost/:page', function (req, res, next) {
+router.get('/dashboard/deletePost/:page', isAdmin, (req, res, next) => {
   var perPage = 9
   var page = req.params.page || 1
   Product
@@ -168,7 +221,7 @@ router.get('/dashboard/deletePost/:page', function (req, res, next) {
       })
     })
 })
-router.get('/home', function (req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('shop/index.hbs');
 })
 
@@ -198,12 +251,12 @@ router.get('/home', function (req, res, next) {
 // });
 
 /* GET dashboard - add new post. */
-router.get('/dashboard/newPost', (req, res, next) => {
+router.get('/dashboard/newPost', isAdmin, (req, res, next) => {
   res.render('shop/dashboard.hbs');
 });
 
 /* GET dashboard - delete selected post */
-router.get('/dashboard/deletePost', (req, res, next) => {
+router.get('/dashboard', isAdmin, (req, res, next) => {
   res.render('shop/dashboard-delete.ejs');
 });
 
@@ -238,3 +291,26 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('imagePath');
 
 module.exports = router;
+
+function isLoggedIn(req, res, next) {
+  if (isUserLoggedIn) {
+    return next();
+  } else if (!isUserLoggedIn) res.redirect('/');
+  console.log(isUserLoggedIn);
+}
+
+function isLoggedInFoAuth(req, res, next) {
+  if (!isUserLoggedIn) {
+    return next();
+  } else if (isUserLoggedIn) res.redirect('/profile');
+  console.log(isUserLoggedIn);
+}
+
+function isAdmin(req, res, next) {
+  if (isAdminLoggedIn) {
+    return next();
+  } else if (!isAdminLoggedIn) res.redirect('/');
+  console.log(isAdminLoggedIn);
+}
+// root-vladislav@gmail.com
+// rootroot

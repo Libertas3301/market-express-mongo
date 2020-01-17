@@ -16,15 +16,13 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect('mongodb://localhost:27017/market', { useUnifiedTopology: true, useNewUrlParser: true });
-var db = mongoose.connection;
+let db = mongoose.connection;
 
 //handle mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-  // we're connected!
+  console.log('MongoDB is allready connected')
 });
-
-
 
 // view engine setup
 app.engine('.hbs', expressHBS({
@@ -49,10 +47,16 @@ app.use(session({
   secret: 'a wonderful secret you will never knew)',
   resave: true,
   saveUninitialized: false,
-  store: new MongoStore({
-    mongooseConnection: db
-  })
+  store: new MongoStore({ mongooseConnection: db }),
+  cookie: { maxAge: 180 * 60 * 1000 }
 }));
+
+// Global variables
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+
 
 // Flash messages
 app.use(flash());
