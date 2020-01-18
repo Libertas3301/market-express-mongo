@@ -80,7 +80,7 @@ router.get('/remove/:id', function (req, res, next) {
   res.redirect('/shopping-cart');
 });
 
-router.get('/checkout', isLoggedIn, function (req, res, next) {
+router.get('/checkout', isLoggedInCheckout, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart');
   }
@@ -110,6 +110,7 @@ router.post('/checkout', function (req, res, next) {
       return res.redirect('/checkout');
     }
     var order = new Order({
+      _id: req.body._id,
       user: req.user,
       cart: cart,
       address: req.body.address,
@@ -261,7 +262,7 @@ router.get('/products/:page', (req, res, next) => {
         res.render('products.ejs', {
           products: docs,
           current: page,
-          pages: Math.ceil(count / perPage)
+          pages: Math.ceil(count / perPage),
         })
       })
     })
@@ -288,7 +289,8 @@ router.get('/dashboard/deletePost/:page', isAdmin, (req, res, next) => {
     })
 })
 router.get('/', function (req, res, next) {
-  res.render('shop/index.hbs');
+  var successMsg = req.flash('success')[0];
+  res.render('shop/index.hbs', { successMsg: successMsg, noMessage: !successMsg });
 })
 
 // router.post('/filterRequest', function (req, res) {
@@ -362,14 +364,18 @@ function isLoggedIn(req, res, next) {
   if (isUserLoggedIn) {
     return next();
   } else if (!isUserLoggedIn) res.redirect('/');
-  console.log(isUserLoggedIn);
+}
+
+function isLoggedInCheckout(req, res, next) {
+  if (isUserLoggedIn) {
+    return next();
+  } else if (!isUserLoggedIn) res.redirect('/auth');
 }
 
 function isLoggedInFoAuth(req, res, next) {
   if (!isUserLoggedIn) {
     return next();
   } else if (isUserLoggedIn) res.redirect('/profile');
-  console.log(isUserLoggedIn);
 }
 
 function isAdmin(req, res, next) {

@@ -3,6 +3,13 @@
     <label>costea daun</label><input type="radio" name="radioOption" value="radioOption2"></label>
     <input type="submit" value="apasa">
 </form>
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <div id="succes" class="alert alert-success" {{#if noMessage}}hidden{{/if}}>
+            {{successMsg}}
+        </div>
+    </div>
+</div>
 {{!-- <form action="/createpage">
     {{# each products }}
     <div class="row">
