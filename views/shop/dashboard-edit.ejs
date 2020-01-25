@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        @media screen and (max-width: 9999px) and (min-width: 1200px) {
+            .thumbnail {
+                overflow: hidden;
+                height: 180px;
+                padding: 4px;
+                margin-bottom: 20px;
+                line-height: 1.42857143;
+                background-color: #fff;
+                border: 0;
+                width: 83%;
+            }
+
+            .thumbnail a>img,
+            .thumbnail>img {
+                width: 200px !important;
+                height: 133px !important;
+                position: relative;
+                left: -320px;
+                top: 36px;
+            }
+
+            .col-md-4 {
+                width: 100%;
+            }
+
+            .thumbnail .caption {
+                padding: 9px;
+                position: relative;
+                color: #333;
+                left: 261px;
+                top: -143px;
+            }
+
+            main.l-main .content-wrapper--with-bg .page-content {
+                background: #fff;
+                border-radius: 3px;
+                border: 1px solid #d0d0d0;
+                padding: 25px;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            button,
+            input,
+            select,
+            textarea {
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+                position: relative;
+                top: 21px;
+                left: -71px;
+            }
+
+            .pull-right {
+                float: right !important;
+                position: relative;
+                left: -245px;
+                top: -87px;
+            }
+
+            .input1 {
+                position: relative;
+                top: -60px;
+            }
+
+            .input2 {
+                position: relative;
+                top: -63px;
+                left: -46px;
+            }
+
+            .input3 {
+                position: relative;
+                left: -93px;
+                top: -64px;
+            }
+
+            .input3>input {
+                position: relative;
+                left: -33px;
+            }
+
+            .pull-right {
+                float: right !important;
+                position: relative;
+                left: -288px;
+                top: -73px;
+            }
+
+            .input2>textarea {
+                top: 108px;
+                resize: none;
+            }
+
+            .c-search__input {
+                margin-top: -21px;
+            }
+
+            main.l-main .page-title {
+                font-weight: 400;
+                margin-top: 0;
+                margin-bottom: 25px;
+                text-align: center;
+                color: grey;
+            }
+        }
+
+
+        @media screen and (max-width: 1200px) and (min-width: 1000px) {
+
+            .thumbnail {
+                overflow: hidden;
+                height: 180px;
+                padding: 4px;
+                margin-bottom: 20px;
+                line-height: 1.42857143;
+                background-color: #fff;
+                border: 0;
+                width: 83%;
+            }
+
+            .thumbnail a>img,
+            .thumbnail>img {
+                width: 200px !important;
+                height: 133px !important;
+                position: relative;
+                left: -320px;
+                top: 36px;
+            }
+
+            .col-md-4 {
+                width: 100%;
+            }
+
+            .thumbnail .caption {
+                padding: 9px;
+                position: relative;
+                color: #333;
+                left: 177px;
+                top: -143px;
+            }
+
+            main.l-main .content-wrapper--with-bg .page-content {
+                background: #fff;
+                border-radius: 3px;
+                border: 1px solid #d0d0d0;
+                padding: 25px;
+                margin: 0 auto;
+                max-width: 865px;
+            }
+
+            button,
+            input,
+            select,
+            textarea {
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+                position: relative;
+                top: 21px;
+                left: -71px;
+            }
+
+            .pull-right {
+                float: right !important;
+                position: relative;
+                left: -245px;
+                top: -87px;
+            }
+
+            .input1 {
+                position: relative;
+                top: -60px;
+            }
+
+            .input2 {
+                position: relative;
+                top: -63px;
+                left: -46px;
+            }
+
+            .input3 {
+                position: relative;
+                left: -93px;
+                top: -64px;
+            }
+
+            .input3>input {
+                position: relative;
+                left: -33px;
+            }
+
+            .pull-right {
+                float: right !important;
+                position: relative;
+                left: -176px;
+                top: -73px;
+            }
+
+            .input2>textarea {
+                top: 108px;
+                resize: none;
+            }
+
+            .c-search__input {
+                margin-top: -21px;
+            }
+
+            main.l-main .page-title {
+                font-weight: 400;
+                margin-top: 0;
+                margin-bottom: 25px;
+                text-align: center;
+                color: grey;
+            }
+
+            .container {
+                width: 974px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) and (min-width: 300px) {
+            .thumbnail {
+                display: block;
+                padding: 4px;
+                margin-bottom: 20px;
+                line-height: 1.42857143;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                -webkit-transition: border .2s ease-in-out;
+                height: 477px;
+                -o-transition: border .2s ease-in-out;
+                transition: border .2s ease-in-out;
+                background-color: white;
+            }
+
+            input {
+                position: relative;
+            }
+
+            .input1 {
+                top: -86px;
+                position: relative;
+            }
+
+            .input2 {
+                top: 4px;
+                left: -255px;
+                position: relative;
+            }
+
+            .input3 {
+                top: -81px;
+                position: relative;
+            }
+
+            .input1>input {
+                width: 271%;
+                position: relative;
+            }
+
+            .input2>textarea {
+                position: relative;
+                top: 110px;
+                left: -72px;
+                width: 350px;
+            }
+
+            .input3>input {
+                width: 319%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <link rel="stylesheet" href="/stylesheets/dashboard.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+
+        <body class="sidebar-is-reduced">
+            <header class="l-header">
+                <div class="l-header__inner clearfix">
+                    <div class="c-header-icon js-hamburger">
+                        <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span
+                                class="bar-bot"></span></div>
+                    </div>
+                    <div class="c-search">
+                        <input class="c-search__input u-input" placeholder="Search..." type="text" />
+                    </div>
+                    <div class="header-icons-group">
+                        <div class="c-header-icon basket"><a href="/dashboard/orders"><i
+                                    class="fa fa-shopping-basket"></i></a>
+                        </div>
+                        <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
+                    </div>
+                </div>
+            </header>
+            <div class="l-sidebar">
+                <div class="logo">
+                    <div class="logo__txt">D</div>
+                </div>
+                <div class="l-sidebar__content">
+                    <nav class="c-menu js-menu">
+                        <ul class="u-list">
+                            <a href="/dashboard/newPost">
+                                <li class="c-menu__item" data-toggle="tooltip" title="Flights">
+                                    <div class="c-menu__item__inner"><i class="far fa-plus-square"></i>
+                                        <div class="c-menu-item__title"><span>Adauga produs nou</span></div>
+                                    </div>
+                                </li>
+                            </a>
+                            <a href="/dashboard/editPost/1">
+                                <li class="c-menu__item has-submenu is-active" data-toggle="tooltip" title="Modules">
+                                    <div class="c-menu__item__inner"><i class="fas fa-edit"></i>
+                                        <div class="c-menu-item__title"><span>Editeaza produs</span></div>
+                                    </div>
+                                </li>
+                            </a>
+                            <a href="/dashboard/deletePost/1">
+                                <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Statistics">
+                                    <div class="c-menu__item__inner"><i class="fas fa-trash"></i>
+                                        <div class="c-menu-item__title"><span>Sterge produs</span></div>
+                                    </div>
+                                </li>
+                                </li>
+                            </a>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <main class="l-main">
+                <div class="content-wrapper content-wrapper--with-bg">
+                    <h1 class="page-title">Dashboard</h1>
+                    <div class="page-content">
+                        <div class="container">
+                            <div class="row">
+                                <% for (var i = 0; i < products.length; i++) { %>
+                                <form action="/editPost228" method="post">
+                                    <div class="col-md-4">
+                                        <div class="thumbnail">
+                                            <img src="/uploads/<%= products[i].imagePath %>"
+                                                style="width: 300px; height: 200px;">
+                                            <div class="caption">
+                                                <label class="input1">denumire
+                                                    <input type="text" name="title" value="<%= products[i].title %>">
+                                                </label>
+                                                <label class="input2">descriere
+                                                    <textarea type="text" name="description"
+                                                        rows="5"><%= products[i].description %></textarea>
+                                                </label>
+
+                                                <label class="input3">pret
+                                                    <input type="text" name="price" value="<%= products[i].price %>">
+                                                </label>
+
+                                                <input type="hidden" name="idshnic" value="<%= products[i]._id %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <input class="btn btn-success pull-right" type="submit"
+                                            value="editeaza"></input>
+                                    </div>
+                                </form>
+                                <% } %>
+                            </div>
+                            <% if (pages > 0) { %>
+                            <ul class="pagination text-center">
+                                <% if (current == 1) { %>
+                                <li class="disabled"><a>First</a></li>
+                                <% } else { %>
+                                <li><a href="/dashboard/editPost/1">First</a></li>
+                                <% } %>
+                                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                <% if (i !== 1) { %>
+                                <li class="disabled"><a>...</a></li>
+                                <% } %>
+                                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                <% if (i == current) { %>
+                                <li class="active"><a><%= i %></a></li>
+                                <% } else { %>
+                                <li><a href="/dashboard/editPost/<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% if (i == Number(current) + 4 && i < pages) { %>
+                                <li class="disabled"><a>...</a></li>
+                                <% } %>
+                                <% } %>
+                                <% if (current == pages) { %>
+                                <li class="disabled"><a>Last</a></li>
+                                <% } else { %>
+                                <li><a href="/dashboard/editPost/<%= pages %>">Last</a></li>
+                                <% } %>
+                            </ul>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <script src="/js/dashboard.js"></script>
+        </body>
+
+</html>

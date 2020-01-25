@@ -1,0 +1,458 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="/assets/css/style.css" />
+<link rel="stylesheet" href="/assets/css/all.css" />
+<style>
+    .nav-list2 {
+        text-align: center;
+    }
+
+    nav>div>.dropdown>.nav-icon {
+        width: 40px;
+    }
+
+    nav>div:nth-child(2) {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .dropdown-content2 {
+        width: 80px;
+        color: #484848;
+    }
+
+    .dropdown-content2>p:nth-child(1)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #484848;
+        position: relative;
+        top: -6px;
+    }
+
+    .dropdown-content2>p:nth-child(3)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: center;
+        color: #484848;
+        position: relative;
+        top: 6px;
+
+    }
+
+    /* header {
+        height: 1000px;
+    } */
+
+    .mainContainer {
+        max-width: 1920px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 9999px) and (min-width: 1700px) {
+        header {
+            height: 1000px !important;
+        }
+    }
+
+    @media screen and (max-width: 1700px) and (min-width: 1130px) {
+        .mainContainer {
+            max-width: 1700px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+    }
+
+    @media screen and (max-width: 1691px) and (min-width: 1305px) {
+        .produse-populare {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            justify-content: center;
+            margin-top: 226px;
+        }
+    }
+
+    @media screen and (max-width: 1130px) and (min-width: 300px) {
+        .mainContainer {
+            max-width: 1130px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        /* header {
+            height: 571px !important;
+        } */
+    }
+
+    .produse-populare :nth-child(4) {
+        display: none;
+    }
+</style>
+
+<title>Oglinzi.biz</title>
+
+
+<body>
+    <div class="not-available-error">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h1>Sorry, your device is not supported</h1>
+        <h2>
+            But, don't worry ;) Try using a device with a screen wider than 320px
+        </h2>
+        <i class="fas fa-tablet-alt"></i>
+    </div>
+    <div>
+        <div class="mainContainer">
+            <header>
+                <!-- <video class="video" src="assets/video/header.mp4" autoplay="autoplay" loop></video> -->
+                <div id="mySidebar" class="sidebar">
+                    <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeNav()">×</a>
+                    <a href="/">Acasa <i class="fas fa-chevron-right"></i></a>
+                    <a href="/products/1">Oglinzi <i class="fas fa-chevron-right"></i></a>
+                    <a href="/#despre">Despre noi<i class="fas fa-chevron-right"></i></a>
+                    <a href="/contacts">Contacte<i class="fas fa-chevron-right"></i></a>
+                </div>
+                <nav>
+                    <p class="logo">
+                        <a href="/">oglinzi<span class="biz">.biz</span></a>
+                        <span onclick="openNav(80)" class="burger"><i class="fas fa-bars"></i></span>
+                    </p>
+                    <div>
+                        <ul class="nav-list">
+                            <li><a href="/">Acasa</a></li>
+                            <li><a href="/products/1">Oglinzi</a></li>
+                            <li><a href="/#despre">Despre noi</a></li>
+                            <li><a href="/contacts">Contacte</a></li>
+                        </ul>
+                        <a href="/shopping-cart">
+                            <img class="nav-icon" width="21" height="27" src="assets/img/shopping-bag.svg" alt="" /></a>
+
+                        <div class="dropdown">
+                            <img class="nav-icon" width="27" height="27" src="assets/img/account.svg" alt="" />
+                            <div class="dropdown-content2 dropdown-content">
+                                <p><a href="/profile">
+                                        Profile</a></p>
+                                <hr>
+                                <p><a href="/logout">
+                                        Logout</a></p>
+                            </div>
+                        </div>
+
+                        <div class="dropdown">
+                            <span>RO</span>
+                            <div class="dropdown-content">
+                                <p><a href="/">RO</a></p>
+                                <p><a href="#">RU</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <p class="header-title">oglinzi<span class="biz2">.biz</span></p>
+                <hr class="header-stick" />
+                <p class="under-title">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea commodo consequat.
+                </p>
+
+                <button class="header-button">
+                    Comanda
+                </button>
+            </header>
+
+            <section class="produse-populare">
+                <div>
+                    <hr class="produs-stick" />
+                    <p class="produse">
+                        Produse populare
+                    </p>
+                    <p class="produse-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <% for (var i = 0; i < products.length; i++) { %>
+                <div style="background: url('/uploads/<%= products[i].imagePath %>')no-repeat; background-size: cover">
+                    <p class="denumire-oglinda">
+                        <%= products[i].title %>
+                    </p>
+                    <p class="pret">
+                        $<%= products[i].price %>
+                    </p>
+                    <a href="/product-review?id=<%= products[i]._id %>">
+                        <button class="hover-button">
+                            Detalii
+                        </button>
+                    </a>
+                </div>
+                <% } %>
+            </section>
+
+            <section class="produse-noi">
+                <hr class="produs-stick" />
+                <p class="produse">
+                    Produse noi
+                </p>
+                <div class="noi">
+                    <% for (var i = 0; i < products.length; i++) { %>
+                    <div>
+                        <a href="/product-review?id=<%= products[i]._id %>"><img width="493" height="399"
+                                src="/uploads/<%= products[i].imagePath %>" alt="error" /></a>
+                        <div class="noi-denumire">
+                            <%= products[i].title %>
+                        </div>
+                        <div class="noi-pret">
+                            $<%= products[i].price %>
+                        </div>
+                        <a href="/product-review?id=<%= products[i]._id %>">
+                            <div class="mai-multe">
+                                Mai multe detalii
+                            </div>
+                        </a>
+                    </div>
+                    <% } %>
+                </div>
+            </section>
+
+            <section id="despre" class="despre">
+                <div>
+                    <div class="black-rectangle"></div>
+                    <img class="despre-mirror" width="640" height="640" src="assets/img/mirror.png" alt="error" />
+                </div>
+                <div>
+                    <hr class="despre-stick" />
+                    <p class="despre-noi">Despre noi</p>
+                    <p class="despre-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </section>
+
+            <section class="pareri">
+                <hr class="produs-stick" />
+                <p class="produse">
+                    Parerile oamenilor
+                </p>
+                <div class="testimonials">
+                    <div class="quotes">
+                        <img class="ghilimele" width="40" height="47" src="assets/img/Component 2 – 10.svg"
+                            alt="error" />
+                    </div>
+                    <div>
+                        <div class="current-person">
+                            <img width="118" height="118" src="assets/img/NoPath - Copy.png" alt="error" />
+                        </div>
+                        <p class="feedback-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </p>
+                        <hr class="feedback-stick" />
+                        <p class="feedback-name">
+                            Numele
+                        </p>
+                        <div class="another-people">
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="current-person">
+                            <img width="118" height="118" src="assets/img/NoPath - Copy.png" alt="error" />
+                        </div>
+                        <p class="feedback-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </p>
+                        <hr class="feedback-stick" />
+                        <p class="feedback-name">
+                            Numele
+                        </p>
+                        <div class="another-people">
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="current-person">
+                            <img width="118" height="118" src="assets/img/NoPath - Copy.png" alt="error" />
+                        </div>
+                        <p class="feedback-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </p>
+                        <hr class="feedback-stick" />
+                        <p class="feedback-name">
+                            Numele
+                        </p>
+                        <div class="another-people">
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="current-person">
+                            <img width="118" height="118" src="assets/img/NoPath - Copy.png" alt="error" />
+                        </div>
+                        <p class="feedback-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </p>
+                        <hr class="feedback-stick" />
+                        <p class="feedback-name">
+                            Numele
+                        </p>
+                        <div class="another-people">
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                            <img width="59" height="59" src="assets/img/NoPath - Copy.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div>
+                    <div>
+                        <p class="logo">
+                            <a href="/">oglinzi<span class="biz">.biz</span></a>
+                        </p>
+                        <p class="footer-text">
+                            Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si
+                            Romania Cu senzor de aprindere garanție 1 an. Dimensiuni la comanda
+                        </p>
+                    </div>
+                    <div>
+                        <ul class="nav-list">
+                            <li><a href="/">Acasa</a></li>
+                            <li><a href="/products/1">Oglinzi</a></li>
+                            <li><a href="/#despre">Despre noi</a></li>
+                            <li><a href="/contacts">Contacte</a></li>
+                        </ul>
+                    </div>
+                    <div class="third-column">
+                        <p class="footer-title">
+                            Telefon
+                        </p>
+                        <p class="footer-subtitle">
+                            +373 603 77771
+                        </p>
+                        <br />
+                        <p class="footer-title">
+                            Email
+                        </p>
+                        <p class="footer-subtitle">
+                            oglinzibiz@gmail.com
+                        </p>
+                        <br />
+                        <p class="footer-title">
+                            Oficiu
+                        </p>
+                        <p class="footer-subtitle">
+                            Chisinau, <br /> str Tudor Vladimirescu 3
+                        </p>
+                        <br />
+                        <div class="social">
+                            <a href=""><img width="36" height="36" src="assets/img/facebook.svg" alt="error" /></a>
+                            <a href=""><img class="instagram" width="35" height="35" src="assets/img/instagram2.svg"
+                                    alt="error" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-stick-container">
+                    <hr class="footer-stick" />
+                </div>
+                <p class="copyright">
+                    Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+                </p>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/language.js"></script>
+    <script>
+        var k = 0;
+
+        function myMethod() {
+            if (k > 3) k = 1;
+            else k++;
+
+            if (k == 1) {
+                $(".testimonials>:nth-child(2)").show("slow");
+                $(".testimonials>:nth-child(3)").hide("slow");
+                $(".testimonials>:nth-child(4)").hide("slow");
+                $(".testimonials>:nth-child(5)").hide("slow");
+            } else if (k == 2) {
+                $(".testimonials>:nth-child(2)").hide("slow");
+                $(".testimonials>:nth-child(3)").show("slow");
+                $(".testimonials>:nth-child(4)").hide("slow");
+                $(".testimonials>:nth-child(5)").hide("slow");
+            } else if (k == 3) {
+                $(".testimonials>:nth-child(2)").hide("slow");
+                $(".testimonials>:nth-child(3)").hide("slow");
+                $(".testimonials>:nth-child(4)").show("slow");
+                $(".testimonials>:nth-child(5)").hide("slow");
+            } else if (k == 4) {
+                $(".testimonials>:nth-child(2)").hide("slow");
+                $(".testimonials>:nth-child(3)").hide("slow");
+                $(".testimonials>:nth-child(4)").hide("slow");
+                $(".testimonials>:nth-child(5)").show("slow");
+            }
+            setInterval(myMethod, 4000);
+        }
+    </script>
+    <script src="/assets/js/sideBar.js"></script>
+</body>
+
+</html>

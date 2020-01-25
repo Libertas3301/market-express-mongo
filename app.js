@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressHBS = require('express-handlebars');
-const ejs = require('ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const session = require('express-session');
@@ -48,7 +47,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: db }),
-  cookie: { maxAge: 180 * 60 * 1000 }
+  cookie: { maxAge: 180 * 60 * 100000 }
 }));
 
 // Global variables

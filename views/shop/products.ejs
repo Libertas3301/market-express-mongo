@@ -1,0 +1,629 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="../assets/css/oglinzi.css" />
+<link rel="stylesheet" href="../assets/css/all.css" />
+<title>Oglinzi.biz</title>
+<style>
+    .noi-denumire {
+        height: 115px;
+    }
+
+    .pagination>li {
+        display: inline
+    }
+
+    .pagination>li>a,
+    .pagination>li>span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd
+    }
+
+    .pagination>li:first-child>a,
+    .pagination>li:first-child>span {
+        margin-left: 0;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px
+    }
+
+    .pagination>li:last-child>a,
+    .pagination>li:last-child>span {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px
+    }
+
+    .pagination>li>a:focus,
+    .pagination>li>a:hover,
+    .pagination>li>span:focus,
+    .pagination>li>span:hover {
+        z-index: 2;
+        color: #23527c;
+        background-color: #eee;
+        border-color: #ddd
+    }
+
+    .pagination>.active>a,
+    .pagination>.active>a:focus,
+    .pagination>.active>a:hover,
+    .pagination>.active>span,
+    .pagination>.active>span:focus,
+    .pagination>.active>span:hover {
+        z-index: 3;
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border-color: #337ab7
+    }
+
+    .pagination>.disabled>a,
+    .pagination>.disabled>a:focus,
+    .pagination>.disabled>a:hover,
+    .pagination>.disabled>span,
+    .pagination>.disabled>span:focus,
+    .pagination>.disabled>span:hover {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd
+    }
+
+    .pagination-lg>li>a,
+    .pagination-lg>li>span {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.3333333
+    }
+
+    .pagination-lg>li:first-child>a,
+    .pagination-lg>li:first-child>span {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px
+    }
+
+    .pagination-lg>li:last-child>a,
+    .pagination-lg>li:last-child>span {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px
+    }
+
+    .pagination-sm>li>a,
+    .pagination-sm>li>span {
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5
+    }
+
+    .pagination-sm>li:first-child>a,
+    .pagination-sm>li:first-child>span {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px
+    }
+
+    .pagination-sm>li:last-child>a,
+    .pagination-sm>li:last-child>span {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px
+    }
+
+    .mainContainer {
+        max-width: 1920px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 9999px) and (min-width: 1700px) {
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 0px 0;
+            border-radius: 4px;
+            position: relative;
+            width: 294px;
+            left: 82.3% !important;
+            top: 50px !important;
+            margin-bottom: -47px;
+        }
+
+    }
+
+    @media screen and (max-width: 1700px) and (min-width: 1130px) {
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 0px 0;
+            border-radius: 4px;
+            position: relative;
+            width: 287px;
+            left: 71% !important;
+            top: 50px !important;
+            margin-bottom: -47px;
+        }
+
+        .mainContainer {
+            max-width: 1700px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+    }
+
+
+    @media screen and (max-width: 1130px) and (min-width: 300px) {
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 0px 0;
+            border-radius: 4px;
+            position: relative;
+            width: 400px;
+            left: calc(50% - 240px / 2) !important;
+            top: 50px !important;
+            margin-bottom: -47px;
+        }
+
+        .filter-toggle-button>div:nth-child(2) {
+            display: none;
+        }
+
+        .mirror-choose>div img {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .mainContainer {
+            max-width: 1130px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+    }
+
+    @media screen and (max-width: 1134px) and (min-width: 0) {
+        nav>div>.dropdown>.nav-icon {
+            width: 40px !important;
+            height: 40px !important;
+        }
+    }
+
+    @media screen and (max-width: 320px) and (min-width: 0) {
+        .mainContainer {
+            display: none;
+            margin: 0 auto;
+        }
+    }
+
+    nav>div:nth-child(2) {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    nav>div>.dropdown>.nav-icon {
+        width: 40px;
+    }
+
+    .dropdown-content2 {
+        width: 80px;
+    }
+
+    .dropdown-content2>p:nth-child(1)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: left;
+        color: white;
+        position: relative;
+        top: -6px;
+    }
+
+    .dropdown-content2>p:nth-child(3)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: center;
+        color: white;
+        position: relative;
+        top: 6px;
+    }
+
+    header {
+        height: 100px !important;
+    }
+
+    nav>div>.dropdown>.nav-icon {
+        width: 40px;
+    }
+
+    .mai-multe>a {
+        color: black;
+    }
+
+    .rel {
+        position: relative;
+    }
+
+
+    .radio {
+        margin-top: 22px;
+        margin-left: 60px;
+    }
+
+    .filter-type {
+        font-family: "Gordita", sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.35;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+
+    input[type="reset"] {
+        width: 122px;
+        height: 47px;
+        background-color: #d33123;
+        border: none;
+        margin-top: 47px;
+        margin-left: 25px;
+        font-family: "Gordita", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    input[type="submit"] {
+        width: 122px;
+        height: 47px;
+        background-color: #252525;
+        border: none;
+        margin-left: -1px;
+        font-family: "Gordita", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .sideFilter {
+        padding-top: 0;
+    }
+</style>
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<div class="not-available-error">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h1>Sorry, your device is not supported</h1>
+    <h2>
+        But, don't worry ;) Try using a device with a screen wider than 320px
+    </h2>
+    <i class="fas fa-tablet-alt"></i>
+</div>
+<div class="mainContainer">
+    <header>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeNav()">×</a>
+            <a href="/">Acasa<i class="fas fa-chevron-right"></i></a>
+            <a href="/products/1">Oglinzi<i class="fas fa-chevron-right"></i></a>
+            <a href="/#despre">Despre noi<i class="fas fa-chevron-right"></i></a>
+            <a href="/contacts">Contacte<i class="fas fa-chevron-right"></i></a>
+        </div>
+        <nav>
+            <p class="logo">
+                <a href="index.html">oglinzi<span class="biz">.biz</span></a>
+                <span onclick="openNav(80)" class="burger"><i class="fas fa-bars"></i></span>
+            </p>
+            <div>
+                <ul class="nav-list">
+                    <li><a href="/">Acasa</a></li>
+                    <li><a href="/products/1">Oglinzi</a></li>
+                    <li><a href="/#despre">Despre noi</a></li>
+                    <li><a href="/contacts">Contacte</a></li>
+                </ul>
+                <a href="/shopping-cart">
+                    <img class="nav-icon" src="../assets/img/shopping-bag-black.svg" alt="" /></a>
+
+                <div class="dropdown">
+                    <img class="nav-icon" width="27" height="27" src="../assets/img/account-black.svg" alt="" />
+                    <div class="dropdown-content2 dropdown-content">
+                        <p><a href="/profile">
+                                Profile</a></p>
+                        <hr>
+                        <p><a href="/logout">
+                                Logout</a></p>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <span>RO</span>
+                    <div class="dropdown-content">
+                        <p><a href="index.html">RO</a></p>
+                        <p><a href="indexrus.html">RU</a></p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="mySideFilters" class="sideFilter">
+        <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeFilter()">×</a>
+        <div style="margin-top: 33px;">
+            <hr class="filtre-stick" />
+            <p class="filtre-text">Filtre</p>
+        </div>
+        <h1>Forma oglinzii</h1>
+        <label for="">
+            <input type="radio" name="forma_oglinda" id="" value="dreptunghiulara" checked />
+            Dreptunghiulară</label>
+        <label for="">
+            <input type="radio" name="forma_oglinda" id="" value="ovala" />
+            Ovală</label>
+
+        <label for="">
+            <input type="radio" name="forma_oglinda" id="" value="patrata" />
+            Pătrată</label>
+
+        <label for="">
+            <input type="radio" name="forma_oglinda" id="" value="rotunda" />
+            Rotundă</label>
+
+        <label for="">
+            <input type="radio" name="forma_oglinda" id="" value="asimetrica" />
+            Asimetrică</label>
+
+        <h1>Locul de amplasare</h1>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="baie" checked />
+            Baie</label>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="hol" checked />
+            Hol</label>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="living" checked />
+            Living</label>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="dormitor" checked />
+            Dormitor</label>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="Dressing" checked />
+            Dressing</label>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="make-up" checked />
+            Make-up</label>
+        <label for="">
+            <input type="radio" name="loc_amplasare" id="" value="spatii_comerciale" checked />
+            Spații comerciale</label>
+
+        <h1>Tipul oglinzii</h1>
+        <label for="">
+            <input type="radio" name="tip_oglinda" id="" value="led" checked />
+            Oglinzi led</label>
+        <label for="">
+            <input type="radio" name="tip_oglinda" id="" value="led_sensor_buton" checked />
+            Oglinzi led sensor buton</label>
+        <label for="">
+            <input type="radio" name="tip_oglinda" id="" value="sensor_mana" checked />
+            Oglinzi sensor mana</label>
+        <label for="">
+            <input type="radio" name="tip_oglinda" id="" value="cu_incalzire" checked />
+            Oglinzi cu incalzire</label>
+        <input type="submit" value="Filtreaza" style="background-color: #252525;margin-top: 10px;margin-left: 28px;" />
+        <input type="reset" value="Anulare" style="margin-top: -47px;margin-left: 182px;
+    " />
+    </div>
+
+    <div class="filter-toggle-button">
+        <div>
+            <a onclick="openFilter(80)" href="#" class="filtretz">
+                <i class="fas fa-filter"></i>Filtre</a>
+        </div>
+        <div>
+            <a href=""><i class="fas fa-square"></i>Show by</a>
+        </div>
+    </div>
+    <section class="filtre">
+        <div>
+            <form action="/filterRequest" method="POST">
+                <div style="margin-top: 33px;">
+                    <hr class="filtre-stick" />
+                    <p class="filtre-text">Filtre</p>
+                </div>
+                <p class="filter-type">
+                    Forma oglinzii
+                </p>
+                <div class="radio">
+                    <input type="radio" name="radiogroup1" id="rd1" value="dreptunghiulara" />
+                    <label for="rd1">dreptunghiulara</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup1" id="rd2" value="ovala" />
+                    <label for="rd2">ovala</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup1" id="rd3" value="patrata" />
+                    <label for="rd3">patrata</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup1" id="rd4" value="rotunda" />
+                    <label for="rd4">rotunda</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup1" id="rd5" value="asimetrica" />
+                    <label for="rd5">asimetrica</label> <br />
+                </div>
+                <p class="filter-type">
+                    Locul de amplasare
+                </p>
+                <div class="radio">
+                    <input type="radio" name="radiogroup2" id="rs1" value="baie" />
+                    <label for="rs1">baie</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup2" id="rs2" value="hol" />
+                    <label for="rs2">hol</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup2" id="rs3" value="living" />
+                    <label for="rs3">living</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup2" id="rs4" value="dormitor" />
+                    <label for="rs4">dormitor</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup2" id="rs5" value="Dressing" />
+                    <label for="rs5">Dressing</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup2" id="rs6" value="make-up" />
+                    <label for="rs6">make-up</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup2" id="rs7" value="spatii_comerciale" />
+                    <label for="rs7">spatii_comerciale</label> <br />
+                </div>
+
+                <p class="filter-type">
+                    Tipul oglinzii
+                </p>
+                <div class="radio">
+                    <input type="radio" name="radiogroup3" id="rv1" value="led" />
+                    <label for="rv1">led</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup3" id="rv2" value="led_sensor_buton" />
+                    <label for="rv2">led_sensor_buton</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup3" id="rv3" value="sensor_mana" />
+                    <label for="rv3">sensor_mana</label> <br />
+                    <br />
+                    <input type="radio" name="radiogroup3" id="rv4" value="cu_incalzire" />
+                    <label for="rv4">cu_incalzire</label> <br />
+                </div>
+                <input type="reset" value="Anulare" />
+                <input type="submit" value="Filtreaza" />
+            </form>
+        </div>
+        <div class="mirror-choose">
+            <% for (var i = 0; i < products.length; i++) { %>
+            <div>
+                <img src="/uploads/<%= products[i].imagePath %>" style="width: 399px; height: 265px;">
+                <div class="noi-denumire">
+                    <%= products[i].title %>
+                </div>
+                <div class="noi-pret">
+                    $<%= products[i].price %>
+                </div>
+                <div class="rel">
+                    <div class="mai-multe">
+                        <a href="/product-review?id=<%= products[i]._id %>">Mai multe detalii</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </section>
+    <% if (pages > 0) { %>
+    <ul class="pagination text-center">
+        <% if (current == 1) { %>
+        <li class="disabled"><a>First</a></li>
+        <% } else { %>
+        <li><a href="/products/1">First</a></li>
+        <% } %>
+        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+        <% if (i !== 1) { %>
+        <li class="disabled"><a>...</a></li>
+        <% } %>
+        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+        <% if (i == current) { %>
+        <li class="active"><a><%= i %></a></li>
+        <% } else { %>
+        <li><a href="/products/<%= i %>"><%= i %></a></li>
+        <% } %>
+        <% if (i == Number(current) + 4 && i < pages) { %>
+        <li class="disabled"><a>...</a></li>
+        <% } %>
+        <% } %>
+        <% if (current == pages) { %>
+        <li class="disabled"><a>Last</a></li>
+        <% } else { %>
+        <li><a href="/products/<%= pages %>">Last</a></li>
+        <% } %>
+    </ul>
+    <% } %>
+
+    <footer>
+        <div>
+            <div>
+                <p class="logo2">
+                    <a href="index.html">oglinzi<span class="biz">.biz</span></a>
+                </p>
+                <p class="footer-text">
+                    Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si Romania
+                    Cu senzor de aprindere garanție 1 an. Dimensiuni la comanda
+                </p>
+            </div>
+            <div>
+                <ul class="nav-list2">
+                    <li><a href="index.html">Acasa</a></li>
+                    <li><a href="oglinzi.html">Oglinzi</a></li>
+                    <li><a href="index.html#despre">Despre noi</a></li>
+                    <li><a href="contacte.html">Contacte</a></li>
+                </ul>
+            </div>
+            <div class="third-column">
+                <p class="footer-title">
+                    Telefon
+                </p>
+                <p class="footer-subtitle">
+                    +373 603 77771
+                </p>
+                <br />
+                <p class="footer-title">
+                    Email
+                </p>
+                <p class="footer-subtitle">
+                    oglinzibiz@gmail.com
+                </p>
+                <br />
+                <p class="footer-title">
+                    Oficiu
+                </p>
+                <p class="footer-subtitle">
+                    Chisinau, <br /> str Tudor Vladimirescu 3
+                </p>
+                <br />
+                <a href=""><img width="36" height="36" src="../assets/img/facebook.svg" alt="error" /></a>
+                <a href=""><img class="instagram" width="35" height="35" src="../assets/img/instagram2.svg"
+                        alt="error" /></a>
+            </div>
+        </div>
+        <div class="footer-stick-container">
+            <hr class="footer-stick" />
+        </div>
+        <p class="copyright">
+            Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+        </p>
+    </footer>
+</div>
+<script>
+    $(".filtretz").click(function () {
+        $('body').css('overflow-y', 'hidden')
+    })
+    $(".closebtn").click(function () {
+        $('body').css('overflow-y', 'scroll')
+    })
+</script>
+<script src="../assets/js/sideBar.js"></script>
+<script src="../assets/js/filterSideBar.js"></script>

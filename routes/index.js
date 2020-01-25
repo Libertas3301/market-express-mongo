@@ -1,60 +1,63 @@
+// libraries
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const url = require('url');
 
-var Cart = require('../models/cart');
-var Product = require('../models/product');
-var Order = require('../models/order');
+// imports
+const Cart = require('../models/cart');
+const Product = require('../models/product');
+const Order = require('../models/order');
 const User = require('../models/user');
 
-const mongoose = require('mongoose');
-
-/* GET home page. */
-
+// variables
 let isAdminLoggedIn;
 let isUserLoggedIn;
-// router.get('/', function (req, res, next) {
-//   Product.find((err, docs) => {
-//     const productChunks = [];
-//     const chunkSize = 3;
-//     docs.reverse();
-//     for (var i = 0; i < docs.length; i += chunkSize) {
-//       productChunks.push(docs.slice(i, i + chunkSize));
-//     }
-//     res.render('shop/index', { title: 'Market', products: productChunks });
-//   });
-// });
 
-// router.get('/blbl', (req, res) => {
-//   const { query } = url.parse(req.url, true) //de aici extragi parametrii din url cu query (adica ?id=) 
-//   const requiredProduct = db.products.findOne({ _id: query }) //vezi obiectul query de mai sus {query}
-//   console.log(requiredProduct);
-//   res.render('/shop/product_template_overview.hbs', { products: requiredProduct });
-// });
-
-router.get('/product-review', (req, res, next) => {
-  const { query } = url.parse(req.url, true);
-  Product.findOne({ _id: query.id }, (err, docs) => {
-    res.render('shop/product_template_overview.hbs', { products: docs });
-  });
+// Get home page
+router.get('/', (req, res, next) => {
+  Product
+    .find({})
+    .sort({ _id: -1 })
+    .limit(3)
+    .exec((err, docs) => {
+      let successMsg = req.flash('success')[0];
+      if (err) return next(err)
+      res.render('shop/index.ejs', {
+        successMsg: successMsg,
+        noMessage: !successMsg,
+        products: docs,
+      });
+    });
 });
 
-router.get('/add-to-cart/:id', (req, res, next) => {
-  let productId = req.params.id;
-  let cart = new Cart(req.session.cart ? req.session.cart : {});
-
-  Product.findById(productId, (err, product) => {
-    if (err) {
-      return res.redirect('/');
-    }
-    cart.add(product, product.id);
-    req.session.cart = cart;
-    console.log(req.session.cart);
-    res.redirect('/products/:page');
-  });
+// Get products page
+router.get('/products/:page', (req, res, next) => {
+  var perPage = 6
+  var page = req.params.page || 1
+  Product
+    .find({})
+    .sort({ _id: -1 })
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .exec((err, docs) => {
+      Product.count().exec((err, count) => {
+        if (err) return next(err)
+        res.render('shop/products.ejs', {
+          products: docs,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+      });
+    });
 });
 
+// Get contacts page
+router.get('/contacts', (req, res, next) => {
+  res.render('shop/contacte.hbs');
+});
+
+// Get Shopping cart
 router.get('/shopping-cart', (req, res, next) => {
   if (!req.session.cart) {
     return res.render('shop/shopping-cart.hbs', { products: null })
@@ -63,7 +66,8 @@ router.get('/shopping-cart', (req, res, next) => {
   res.render('shop/shopping-cart.hbs', { products: cart.generateArray(), totalPrice: cart.totalPrice })
 });
 
-router.get('/reduce/:id', function (req, res, next) {
+// Reduce product count on click
+router.get('/reduce/:id', (req, res, next) => {
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   cart.reduceByOne(productId);
@@ -71,7 +75,17 @@ router.get('/reduce/:id', function (req, res, next) {
   res.redirect('/shopping-cart');
 });
 
-router.get('/remove/:id', function (req, res, next) {
+// increase product count on click
+router.get('/addprod/:id', (req, res, next) => {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  cart.addByOne(productId);
+  req.session.cart = cart;
+  res.redirect('/shopping-cart');
+});
+
+// Remove product
+router.get('/remove/:id', (req, res, next) => {
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
 
@@ -80,16 +94,21 @@ router.get('/remove/:id', function (req, res, next) {
   res.redirect('/shopping-cart');
 });
 
-router.get('/checkout', isLoggedInCheckout, function (req, res, next) {
+// Get checkout page
+router.get('/checkout', isLoggedInCheckout, (req, res, next) => {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart');
   }
   var cart = new Cart(req.session.cart);
   var errMsg = req.flash('error')[0];
-  res.render('shop/checkout.hbs', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
+  User.findById(req.session.userId).exec((error, user) => {
+    res.render('shop/checkout.hbs', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg, user, cart: cart });
+  });
 });
 
-router.post('/checkout', function (req, res, next) {
+// Initialize a payment
+router.post('/checkout', (req, res, next) => {
+
   if (!req.session.cart) {
     return res.redirect('/shopping-cart');
   }
@@ -104,67 +123,123 @@ router.post('/checkout', function (req, res, next) {
     currency: "usd",
     source: req.body.stripeToken, // obtained with Stripe.js
     description: "Test Charge"
-  }, function (err, charge) {
+  }, (err, charge) => {
     if (err) {
       req.flash('error', err.message);
       return res.redirect('/checkout');
     }
-    var order = new Order({
-      _id: req.body._id,
-      user: req.user,
-      cart: cart,
-      address: req.body.address,
-      name: req.body.name,
-      paymentId: charge.id
-    });
-    order.save(function (err, result) {
-      req.flash('success', 'Successfully bought product!');
-      req.session.cart = null;
-      res.redirect('/');
+    User.findById(req.session.userId).exec((error, user) => {
+      var order = new Order({
+        user: user._id,
+        cart: cart,
+        address: req.body.address,
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        paymentId: charge.id
+      });
+
+      order.save((err, result) => {
+        finsum = 0;
+        req.flash('success', 'Successfully bought product!');
+        req.session.cart = null;
+        res.redirect('/');
+      });
     });
   });
 });
 
-// router.post('/checkout', (req, res, next) => {
-//   res.send('ebati');
-// });
+// Personal page of each product
+router.get('/product-review', (req, res, next) => {
+  const { query } = url.parse(req.url, true);
+  Product.findOne({ _id: query.id }, (err, docs) => {
+    res.render('shop/product_template_overview.hbs', { products: docs });
+  });
+});
 
-// router.post('/deletePost', (req, res) => {
-//   Product.findOneAndRemove({ '_id': req.body.id }, (err, offer) => {
-//     res.redirect('/shop/dashboard-delete.ejs');
-//   });
-// });
-
-router.post('/deletePost228', (req, res) => {
-  console.log(req.body.idshnic);
-  Product.findOne({ _id: req.body.idshnic }, (err, doc) => {
-    // or simply use
+router.post('/actlikepro', (req, res, next) => {
+  let productId = req.body.identificator;
+  let cart = new Cart(req.session.cart ? req.session.cart : {});
+  let dezabuire = req.body.dezabuire;
+  let dez, sen, but, ram, but_dou;
+  let senzor = req.body.Senzor;
+  let buton = req.body.buton;
+  let ramaInox = req.body.ramaInox;
+  let buton_dublu = req.body.buton_dublu;
+  console.log(dezabuire, senzor, buton_dublu, buton, ramaInox);
+  let culoare_lumina = req.body.radiogroup10;
+  let pretMaximototal = req.body.pretTotalA;
+  Product.findById(productId, (err, product) => {
     if (err) {
-      console.log(err);
+      return res.redirect('/');
     }
-    else if (doc) {
-      doc.remove();
-      res.redirect('/dashboard/deletePost/:page');
+    cart.add(product, product.id);
+
+    if (dezabuire) {
+      product.dezabuireBool = true;
+      dez = true;
+    } else { product.dezabuireBool = false; dez = false; }
+
+    if (senzor) {
+      product.senzorBool = true;
+      sen = true;
     }
+    else {
+      product.senzorBool = false; sen = false;
+    }
+
+    if (buton) {
+      product.butonBool = true;
+      but = true;
+    }
+    else { product.butonBool = false; but = false; }
+
+    if (ramaInox) {
+      product.ramainoxBool = true;
+      ram = true;
+    }
+    else { product.ramainoxBool = false; ram = false; }
+
+    if (buton_dublu) {
+      product.buton_dubluBool = true;
+      but_dou = true;
+    }
+    else { product.buton_dubluBool = false; but_dou = false; }
+    let myquery = { _id: productId };
+    let newvalues = { $set: { dezabuireBool: dez, senzorBool: sen, butonBool: but, ramainoxBool: ram, buton_dubluBool: but_dou } };
+    Product.updateOne(myquery, newvalues, (err, res) => {
+      if (err) throw err;
+      console.log("1 document updated");
+    });
+    let mesaj = cart.items[product.id].message;
+    if (!mesaj) {
+      cart.items[product.id].item.price = parseFloat(pretMaximototal);
+      cart.items[product.id].price = parseFloat(pretMaximototal);
+      cart.totalPrice += parseFloat(cart.items[product.id].item.price);
+      console.log(cart.items[product.id].qty);
+    }
+    console.log(cart.items[product.id].price);
+    console.log(mesaj);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect('/shopping-cart');
   });
-});
+})
 
-// GET route for reading data
+// Get authentification page
 router.get('/auth', isLoggedInFoAuth, (req, res, next) => {
-  res.render('user/index.hbs', { message: req.flash('message') });
+  res.render('user/index.hbs', { message: req.flash('message'), succesMessage: req.flash('success') });
 });
 
-//POST route for updating data
+//Initialize authentificating
 router.post('/authpost', (req, res, next) => {
   // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConf) {
-    var err = new Error('Passwords do not match.');
-    err.status = 400;
-    res.send("passwords dont match");
-    // return next(err);
+    var error = 'Passwords do not match.';
+    req.flash('message', error);
   }
 
-  User.findOne({ email: req.body.email }, function (err, user) {
+  User.findOne({ email: req.body.email }, (err, user) => {
     if (user) {
       var err = 'A user with that email has already registered. Please use a different email..';
       req.flash('message', err);
@@ -188,24 +263,26 @@ router.post('/authpost', (req, res, next) => {
         return next(error);
       } else {
         req.session.userId = user._id;
+        var successmsg = 'Your account was succesfully created';
+        req.flash('success', successmsg);
         res.redirect('/profile');
       }
     });
 
   } else if (req.body.logemail && req.body.logpassword) {
-    User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
+    User.authenticate(req.body.logemail, req.body.logpassword, (error, user) => {
       if (error || !user) {
-        var err = new Error('Wrong email or password.');
-        err.status = 401;
-        return next(err);
+        var error = 'Wrong email or password';
+        req.flash('message', error);
+        res.redirect('/auth')
       } else {
         req.session.userId = user._id;
         res.redirect('/profile');
         if (req.body.logemail === 'root-vladislav@gmail.com') {
           isAdminLoggedIn = true;
         }
+        console.log(isAdminLoggedIn);
         isUserLoggedIn = true;
-        console.log(req.body.logemail === 'root-vladislav@gmail.com');
       }
     });
   } else {
@@ -213,31 +290,31 @@ router.post('/authpost', (req, res, next) => {
     err.status = 400;
     return next(err);
   }
-})
-
-// GET route after registering
-router.get('/profile', isLoggedIn, (req, res, next) => {
-  User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
-        } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-        }
-      }
-    });
 });
 
-// GET for logout logout
+// Get profile page
+router.get('/profile', isLoggedIn, (req, res, next) => {
+  User.findById(req.session.userId).exec((error, user) => {
+    Order.find({ user: user._id }).sort({ _id: -1 }).exec((err, orders) => {
+
+      if (err) {
+        return res.write('Error!');
+      }
+      let cart;
+      orders.forEach((order) => {
+        cart = new Cart(order.cart);
+        order.items = cart.generateArray();
+      });
+      res.render('user/profile.hbs', { orders, user });
+    });
+  });
+});
+
+// Logout from app
 router.get('/logout', isLoggedIn, (req, res, next) => {
   if (req.session) {
     // delete session object
-    req.session.destroy(function (err) {
+    req.session.destroy((err) => {
       if (err) {
         return next(err);
       } else {
@@ -248,27 +325,7 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
   isUserLoggedIn = false;
 });
 
-router.get('/products/:page', (req, res, next) => {
-  var perPage = 9
-  var page = req.params.page || 1
-  Product
-    .find({})
-    .sort({ _id: -1 })
-    .skip((perPage * page) - perPage)
-    .limit(perPage)
-    .exec(function (err, docs) {
-      Product.count().exec(function (err, count) {
-        if (err) return next(err)
-        res.render('products.ejs', {
-          products: docs,
-          current: page,
-          pages: Math.ceil(count / perPage),
-        })
-      })
-    })
-})
-
-
+// Get delete product page
 router.get('/dashboard/deletePost/:page', isAdmin, (req, res, next) => {
   var perPage = 9
   var page = req.params.page || 1
@@ -283,53 +340,268 @@ router.get('/dashboard/deletePost/:page', isAdmin, (req, res, next) => {
         res.render('shop/dashboard-delete.ejs', {
           products: docs,
           current: page,
-          pages: Math.ceil(count / perPage)
+          pages: Math.ceil(count / perPage),
         })
       })
     })
 })
-router.get('/', function (req, res, next) {
-  var successMsg = req.flash('success')[0];
-  res.render('shop/index.hbs', { successMsg: successMsg, noMessage: !successMsg });
-})
 
-// router.post('/filterRequest', function (req, res) {
-//   if (req.body.radioOption === 'radioOption1') {
-//     Product.find({ title: 'best costea' }, (err, docs) => {
-//       const productChunks = [];
-//       const chunkSize = 3;
-//       docs.reverse();
-//       for (var i = 0; i < docs.length; i += chunkSize) {
-//         productChunks.push(docs.slice(i, i + chunkSize));
-//       }
-//       res.render('index.ejs', { title: 'Market', products: productChunks });
-//     });
-//   }
-//   else if (req.body.radioOption === 'radioOption2') {
-//     Product.find({ title: 'costea daun' }, (err, docs) => {
-//       const productChunks = [];
-//       const chunkSize = 3;
-//       docs.reverse();
-//       for (var i = 0; i < docs.length; i += chunkSize) {
-//         productChunks.push(docs.slice(i, i + chunkSize));
-//       }
-//       res.render('index.ejs', { title: 'Market', products: productChunks });
-//     });
-//   }
-// });
+// Initialize delete of a product
+router.post('/deletePost228', (req, res) => {
+  console.log(req.body.idshnic);
+  Product.findOne({ _id: req.body.idshnic }, (err, doc) => {
+    // or simply use
+    if (err) {
+      console.log(err);
+    }
+    else if (doc) {
+      doc.remove();
+      res.redirect('/dashboard/deletePost/:page');
+    }
+  });
+});
 
-/* GET dashboard - add new post. */
+// Get edit product page
+router.get('/dashboard/editPost/:page', isAdmin, (req, res, next) => {
+  var perPage = 9;
+  var page = req.params.page || 1;
+  Product
+    .find({})
+    .sort({ _id: -1 })
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .exec(function (err, docs) {
+      Product.count().exec(function (err, count) {
+        if (err) return next(err)
+        res.render('shop/dashboard-edit.ejs', {
+          products: docs,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+      });
+    });
+});
+
+// initialize edit of a product
+router.post('/editPost228', (req, res) => {
+  let myquery = { _id: req.body.idshnic };
+  let newvalues = { $set: { title: req.body.title, description: req.body.description, price: req.body.price } };
+  Product.updateOne(myquery, newvalues, (err, res) => {
+    if (err) throw err;
+    console.log("1 document updated");
+  });
+  res.redirect('dashboard/editPost/:page')
+});
+
+// Filter data on product page
+router.post('/filterRequest', (req, res) => {
+  let forma = '';
+  if (req.body.radiogroup1 === 'dreptunghiulara') {
+    forma = 'dreptunghiulara';
+  }
+  else if (req.body.radiogroup1 === 'ovala') {
+    forma = 'ovala';
+  }
+  else if (req.body.radiogroup1 === 'patrata') {
+    forma = 'patrata';
+  }
+  else if (req.body.radiogroup1 === 'rotunda') {
+    forma = 'rotunda';
+  }
+  else if (req.body.radiogroup1 === 'asimetrica') {
+    forma = 'asimetrica';
+  }
+
+  let locul = '';
+  if (req.body.radiogroup2 === 'baie') {
+    locul = 'baie';
+  }
+  else if (req.body.radiogroup2 === 'hol') {
+    locul = 'hol';
+  }
+  else if (req.body.radiogroup2 === 'living') {
+    locul = 'living';
+  }
+  else if (req.body.radiogroup2 === 'dormitor') {
+    locul = 'dormitor';
+  }
+  else if (req.body.radiogroup2 === 'Dressing') {
+    locul = 'Dressing';
+  }
+  else if (req.body.radiogroup2 === 'make-up') {
+    locul = 'make-up';
+  }
+  else if (req.body.radiogroup2 === 'spatii_comerciale') {
+    locul = 'spatii_comerciale';
+  }
+
+  let tipul = '';
+  if (req.body.radiogroup3 === 'led') {
+    tipul = 'led';
+  }
+  else if (req.body.radiogroup3 === 'led_sensor_buton') {
+    tipul = 'led_sensor_buton';
+  }
+  else if (req.body.radiogroup3 === 'sensor_mana') {
+    tipul = 'sensor_mana';
+  }
+  else if (req.body.radiogroup3 === 'cu_incalzire') {
+    tipul = 'cu_incalzire';
+  }
+  if (forma && !tipul && !locul) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ oglinda_forma: forma })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+
+  else if (locul && !tipul && !forma) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ loc_amplasare: locul })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+
+  else if (tipul && !locul && !forma) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ oglinda_type: tipul })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+
+  else if (forma && locul && !tipul) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ $or: [{ oglinda_forma: forma }, { loc_amplasare: locul }] })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        console.log(docs.oglinda_forma)
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+
+  else if (forma && !locul && tipul) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ $or: [{ oglinda_forma: forma }, { oglinda_type: tipul }] })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        console.log(docs.oglinda_forma)
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+
+  else if (!forma && locul && tipul) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ $or: [{ oglinda_type: tipul }, { loc_amplasare: locul }] })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        console.log(docs.oglinda_forma)
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+
+  else if (forma && locul && tipul) {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    Product
+      .find({ $or: [{ oglinda_forma: forma }, { loc_amplasare: locul }, { oglinda_type: tipul }] })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        console.log(docs.oglinda_forma)
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  }
+});
+
+// Get new product page
 router.get('/dashboard/newPost', isAdmin, (req, res, next) => {
   res.render('shop/dashboard.hbs');
 });
 
-/* GET dashboard - delete selected post */
-router.get('/dashboard', isAdmin, (req, res, next) => {
-  res.render('shop/dashboard-delete.ejs');
-});
-
-router.post('/addproduct', function (req, res) {
-  upload(req, res, function (err) {
+// add product initialize
+router.post('/addproduct', (req, res) => {
+  upload(req, res, (err) => {
     if (err) {
       return res.end(`Error uploading file: ${err}`);
     }
@@ -337,17 +609,48 @@ router.post('/addproduct', function (req, res) {
       imagePath: req.file.originalname,
       title: req.body.title,
       description: req.body.description,
-      price: req.body.price
+      marime1: req.body.marime1,
+      marime2: req.body.marime2,
+      oglinda_forma: req.body.oglinda_forma,
+      loc_amplasare: req.body.loc_amplasare,
+      oglinda_type: req.body.oglinda_type,
+      price: req.body.price,
+      dezabuireBool: false,
+      butonBool: false,
+      senzorBool: false,
+      ramainoxBool: false,
+      buton_dubluBool: false
     }).save(function (err, doc) {
       if (err) res.json(err);
       else {
-        res.send('Successfully inserted!');
+        res.redirect('/dashboard');
       }
     });
   });
-
-
 });
+
+// Get orders page
+router.get('/dashboard/orders', isAdmin, (req, res, next) => {
+  Order.find({}).sort({ _id: -1 }).exec((err, orders) => {
+
+    if (err) {
+      return res.write('Error!');
+    }
+    let cart;
+    orders.forEach(function (order) {
+      cart = new Cart(order.cart);
+      order.items = cart.generateArray();
+    });
+    res.render('shop/dashboard-orders.hbs', { orders });
+  });
+});
+
+// Get dashboard page
+router.get('/dashboard', isAdmin, (req, res, next) => {
+  res.render('shop/dashboard.hbs');
+});
+
+// save uploaded photo to page files
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/uploads');
@@ -356,33 +659,38 @@ var storage = multer.diskStorage({
     callback(null, file.originalname);
   }
 });
+
+// upload
 var upload = multer({ storage: storage }).single('imagePath');
 
+// export router to app.js
 module.exports = router;
 
+// If user is logged in page redirect you to /auth
 function isLoggedIn(req, res, next) {
   if (isUserLoggedIn) {
     return next();
-  } else if (!isUserLoggedIn) res.redirect('/');
+  } else if (!isUserLoggedIn) res.redirect('/auth');
 }
 
+// If user is logged in page redirect you to /auth
 function isLoggedInCheckout(req, res, next) {
   if (isUserLoggedIn) {
     return next();
   } else if (!isUserLoggedIn) res.redirect('/auth');
 }
 
+// If user is logged in page redirect you to /profile
 function isLoggedInFoAuth(req, res, next) {
   if (!isUserLoggedIn) {
     return next();
   } else if (isUserLoggedIn) res.redirect('/profile');
 }
 
+// If user is logged in page redirect you to /
 function isAdmin(req, res, next) {
   if (isAdminLoggedIn) {
     return next();
   } else if (!isAdminLoggedIn) res.redirect('/');
   console.log(isAdminLoggedIn);
 }
-// root-vladislav@gmail.com
-// rootroot

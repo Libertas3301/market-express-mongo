@@ -1,3 +1,416 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="assets/css/detalii.css">
+<link rel="stylesheet" href="assets/css/all.css">
+<title>Oglinzi.biz</title>
+<style>
+    .pret {
+        width: 234px;
+        height: 56px;
+        background-color: #484848;
+        font-family: "Gordita", sans-serif;
+        font-size: 30px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 0.9;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+        padding-top: 15px;
+        margin-top: 19px;
+    }
+
+    .detalii-button {
+        width: 347px;
+        height: 76px;
+        background-color: #d33123;
+        margin-top: 79px;
+        font-family: "Gordita", sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 3.0;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+        border: none;
+        display: block;
+    }
+
+    .caseta1 {
+        width: 150px !important;
+    }
+
+    .caseta2 {
+        width: 150px !important;
+    }
+
+    .clicked1 {
+        background-color: rgb(21, 131, 21);
+    }
+
+    .clickedblbl {
+        visibility: hidden;
+    }
+
+    .detalii>div:nth-child(2) {
+        margin: 0 auto;
+    }
+</style>
+<div class="not-available-error">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h1>Sorry, your device is not supported</h1>
+    <h2>But, don't worry ;) Try using a device with a screen wider than 320px</h2>
+    <i class="fas fa-tablet-alt"></i>
+</div>
+<header>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/">Acasa<i class="fas fa-chevron-right"></i></i></a>
+        <a href="/products/1">Oglinzi<i class="fas fa-chevron-right"></i></a>
+        <a href="/#despre">Despre noi<i class="fas fa-chevron-right"></i></a>
+        <a href="/contacts">Contacte<i class="fas fa-chevron-right"></i></a>
+    </div>
+    <nav>
+        <p class="logo">
+            <a href="/">oglinzi<span class="biz">.biz</span></a>
+            <span onclick="openNav(80)" class="burger">☰
+            </span>
+        </p>
+        <div>
+            <ul class="nav-list">
+                <li><a href="/">Acasa</a></li>
+                <li><a href="/products/1">Oglinzi</a></li>
+                <li><a href="/#despre">Despre noi</a></li>
+                <li><a href="/contacts">Contacte</a></li>
+            </ul>
+            <a href="/shopping-cart">
+                <img class="nav-icon" width="21" height="27" src="assets/img/shopping-bag-black.svg" alt="" /></a>
+
+            <a href="/profile">
+                <img class="nav-icon" width="27" height="27" src="assets/img/account-black.svg" alt="" /></a>
+            <div class="dropdown">
+                <span>RO</span>
+                <div class="dropdown-content">
+                    <p><a href="/">RO</a></p>
+                    <p><a href="indexrus.html">RU</a></p>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+</header>
+<form class="detalii" action="/actlikepro" method="POST">
+    <div class="first-column">
+        <img class="big-image" src="/uploads/{{ products.imagePath }}" alt="">
+    </div>
+    <div>
+        <p class="denumire">
+            Oglinda 100/80 sipla cablu
+        </p>
+        <p class="pret"><span name="">{{ products.price }}</span>.00$</p>
+        <p class="pret" style="display:none;"><input type="text" name="pretTotalA" value="{{ products.price }}">.00$</p>
+        <hr class="detalii-stick">
+        <p class="dimensiuni">{{ products.description }}</p>
+        <p class="inaltime-latime">inaltime mm x latime mm</p>
+        <input type="number" class="caseta1" value="{{products.marime1}}">
+        <span class="x">X</span>
+        <input type="number" class="caseta2" value="{{products.marime2}}">
+        <div class="caracteristici-grid">
+            <div>
+                <p class="caracteristici">
+                    Dezaburire
+                </p>
+                <label class="switch">
+                    <input type="checkbox" class="dezabuire" name="dezabuire" value="dezabuire">
+                    <span class="slider"><span class="checked">&#x2714;</span>
+                        <span class="cancel">&#10006;</span>
+                </label>
+                <p class="caracteristici">
+                    Senzor de miscare
+                </p>
+                <label class="switch">
+                    <input type="checkbox" name="Senzor" value="Senzor">
+                    <span class="slider"><span class="checked">&#x2714;</span>
+                        <span class="cancel">&#10006;</span>
+                </label>
+                <p class="caracteristici">
+                    Buton touch
+                </p>
+                <label class="switch">
+                    <input type="checkbox" name="buton" value="buton">
+                    <span class="slider"><span class="checked">&#x2714;</span>
+                        <span class="cancel">&#10006;</span>
+                </label>
+            </div>
+            <div>
+                <p class="caracteristici">
+                    Rama de inox
+                </p>
+                <label class="switch">
+                    <input type="checkbox" name="ramaInox" value="ramaInox">
+                    <span class="slider"><span class="checked">&#x2714;</span>
+                        <span class="cancel">&#10006;</span>
+                </label>
+                <p class="caracteristici">
+                    Buton touch dublu
+                </p>
+                <label class="switch">
+                    <input type="checkbox" name="buton_dublu" value="buton_dublu">
+                    <span class="slider"><span class="checked">&#x2714;</span>
+                        <span class="cancel">&#10006;</span>
+                </label>
+                <p class="caracteristici">
+                    Culoarea luminii
+                </p>
+                <div class="radio">
+                    <input type="radio" name="radiogroup10" id="rv1" value="neutra">
+                    <label for="rv1">Neutra</label>
+                    <input type="radio" name="radiogroup10" id="rv2" value="calda">
+                    <label for="rv2">Calda</label>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="identificator" value="{{ products._id }}">
+        <button type="submit" class="detalii-button clicked1 clickedbl2">informatie aditionala</button>
+    </div>
+</form>
+<footer>
+    <div>
+        <div>
+            <p class="logo2"><a href="/">oglinzi<span class="biz">.biz</span></a></p>
+            <p class="footer-text">
+                Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si Romania Cu
+                senzor de aprindere garanție 1 an. Dimensiuni la comanda
+            </p>
+        </div>
+        <div>
+            <ul class="nav-list2">
+                <li><a href="/">Acasa</a></li>
+                <li><a href="/products/1">Oglinzi</a></li>
+                <li><a href="/#despre">Despre noi</a></li>
+                <li><a href="/contacts">Contacte</a></li>
+            </ul>
+        </div>
+        <div class="third-column">
+            <p class="footer-title">
+                Telefon
+            </p>
+            <p class="footer-subtitle">
+                +373 603 77771
+            </p>
+            <br>
+            <p class="footer-title">
+                Email
+            </p>
+            <p class="footer-subtitle">
+                oglinzibiz@gmail.com
+            </p>
+            <br>
+            <p class="footer-title">
+                Oficiu
+            </p>
+            <p class="footer-subtitle">
+                Chisinau, <br> str Tudor Vladimirescu 3
+            </p>
+            <br>
+            <a href=""><img width="36" height="36" src="assets/img/facebook.svg" alt="error"></a>
+            <a href=""><img class="instagram" width="35" height="35" src="assets/img/instagram2.svg" alt="error"></a>
+        </div>
+    </div>
+    <div class="footer-stick-container">
+        <hr class="footer-stick">
+    </div>
+    <p class="copyright">
+        Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+    </p>
+</footer>
+<script src="assets/js/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").prop("checked", false);
+        };
+
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(2) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(2) > input").prop("checked", false);
+        };
+
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").prop("checked", false);
+        };
+
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").prop("checked", false);
+        };
+
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").prop("checked", false);
+        };
+    });
+
+    var pret;
+    setInterval(() => {
+        pret = $('.pret>span').text();
+    }, 100);
+    var counter = 0;
+    var counter2 = 0;
+    var counter3 = 0;
+    var counter4 = 0;
+    var counter5 = 0;
+
+    $(".caracteristici-grid > div:nth-child(1) > label:nth-child(2) > input").click(function () {
+        counter++;
+        if (counter == 1) {
+            $('.pret>span').text(parseFloat(pret) + 32);
+            $('.pret>input').val(parseFloat(pret) + 32);
+        } else if (counter == 2) {
+            $('.pret>span').text(parseFloat(pret) - 32);
+            $('.pret>input').val(parseFloat(pret) - 32);
+            counter = 0;
+        }
+    });
+
+    $(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").click(function () {
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").prop("checked", false);
+            pret = pret - 54;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter3 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").prop("checked", false);
+            pret = pret - 74;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter4 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").prop("checked", false);
+            pret = pret - 158;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter5 = 0;
+        }
+        counter2++;
+        if (counter2 == 1) {
+            counter2++;
+            $('.pret>span').text(parseFloat(pret) + 54);
+            $('.pret>input').val(parseFloat(pret) + 54);
+        } else if (counter2 == 3) {
+            $('.pret>span').text(parseFloat(pret) - 54);
+            $('.pret>input').val(parseFloat(pret) - 54);
+            counter2 = 0;
+        }
+    });
+
+    $(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").click(function () {
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").prop("checked", false);
+            pret = pret - 54;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter2 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").prop("checked", false);
+            pret = pret - 74;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter4 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").prop("checked", false);
+            pret = pret - 158;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter5 = 0;
+        }
+        counter3++;
+        if (counter3 == 1) {
+            counter3++;
+            $('.pret>span').text(parseFloat(pret) + 54);
+            $('.pret>input').val(parseFloat(pret) + 54);
+        } else if (counter3 == 3) {
+            $('.pret>span').text(parseFloat(pret) - 54);
+            $('.pret>input').val(parseFloat(pret) - 54);
+            counter3 = 0;
+        }
+    });
+
+    $(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").click(function () {
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").prop("checked", false);
+            pret = pret - 54;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter2 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").prop("checked", false);
+            pret = pret - 54;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter3 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").prop("checked", false);
+            pret = pret - 158;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter5 = 0;
+        }
+        counter4++;
+        if (counter4 == 1) {
+            counter4++;
+            $('.pret>span').text(parseFloat(pret) + 74);
+            $('.pret>input').val(parseFloat(pret) + 74);
+        } else if (counter4 == 3) {
+            $('.pret>span').text(parseFloat(pret) - 74);
+            $('.pret>input').val(parseFloat(pret) - 74);
+            counter4 = 0;
+        }
+    });
+
+    $(".caracteristici-grid > div:nth-child(2) > label:nth-child(4) > input").click(function () {
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(4) > input").prop("checked", false);
+            pret = pret - 54;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter2 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(1) > label:nth-child(6) > input").prop("checked", false);
+            pret = pret - 54;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter3 = 0;
+        }
+        if ($(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").is(':checked')) {
+            $(".caracteristici-grid > div:nth-child(2) > label:nth-child(2) > input").prop("checked", false);
+            pret = pret - 74;
+            $('.pret>span').text(pret);
+            $('.pret>input').val(pret);
+            counter4 = 0;
+        }
+        counter5++;
+        if (counter5 == 1) {
+            counter5++;
+            $('.pret>span').text(parseFloat(pret) + 158);
+            $('.pret>input').val(parseFloat(pret) + 158);
+        } else if (counter5 == 3) {
+            $('.pret>span').text(parseFloat(pret) - 158);
+            $('.pret>input').val(parseFloat(pret) - 158);
+            counter5 = 0;
+        }
+    });
+</script>
 <h2 class="product__name">{{ products.title }}</h2>
 
 <a href="#" class="product__link">
@@ -9,3 +422,4 @@
     {{ products.description }}
 </p>
 <a href="/add-to-cart/{{products._id}}" class="btn btn-success pull-right" role="button">add to cart</a>
+<script src="assets/js/sideBar.js"></script>

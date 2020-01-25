@@ -1,94 +1,504 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
-<html>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="assets/css/signup.css" />
+<link rel="stylesheet" href="assets/css/all.css" />
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
-    body {
-        background-color: blue;
+    .input-icon {
+        width: 27px;
+        height: 27px;
+        margin-left: -27px;
+        background-color: white;
+    }
+
+    ::placeholder {
+        color: black !important;
+    }
+
+    .alert {
+        background-color: yellow;
+        padding: 10px;
+        width: 300px;
+        height: auto;
+        position: relative;
+        top: -50px;
+        left: calc(50% - 300px / 2);
+    }
+
+    .alert-register {
+        background-color: yellow;
+        padding: 25px;
+        width: 542px;
+        height: auto;
+        top: 94px;
+        left: calc(50% - 542px/ 2);
+        z-index: 124354;
+        position: fixed;
+    }
+
+    .alert-succes {
+        background-color: green;
+        padding: 25px;
+        width: 542px;
+        height: auto;
+        top: 94px;
+        left: calc(50% - 542px/ 2);
+        z-index: 124354;
+        position: fixed;
+    }
+
+    @media screen and (max-width: 1640px) and (min-width: 300px) {
+        .register-responsive .container {
+            text-align: center;
+            display: block !important;
+        }
+
+        .email {
+            margin-left: 0;
+        }
+
+        .parola {
+            margin-left: 0;
+        }
+
+        .input-icon {
+            margin-left: -30px;
+        }
+
+        .register-responsive .sign-in-button,
+        .register-responsive .sign-up-button {
+            margin-left: auto;
+            margin-top: 100px;
+        }
+
+        .register-responsive .sign-up,
+        .sign-up {
+            font-family: "Gordita", sans-serif;
+            font-size: 40px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #d33123;
+            z-index: 1;
+            margin-top: 63px;
+            margin-left: 100px;
+        }
+
+        .nume {
+            margin-left: 0;
+        }
+
+        .register-responsive .sign-up,
+        .sign-up {
+            margin-left: 0;
+        }
+    }
+
+    #log_in {
+        cursor: pointer;
+    }
+
+    #sign_up {
+        cursor: pointer;
     }
 </style>
-
-<head>
-    <title>Register Login with Authentication</title>
-    <!--Custom Theme files-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords"
-        content="Register Login Widget template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login Signup Responsive web template, SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script
-        type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Custom Theme files -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!--web-fonts-->
-    <link href='//fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css'>
-    <!--//web-fonts-->
-</head>
+<title>Oglinzi.biz</title>
 
 <body>
-    <h1>Test Authentication 🚀 </h1>
-    <!-- main -->
-    <div class="main">
-        <div class="w3">
-            <div class="signin-form profile">
-                <h3>Login</h3>
-                {{#if message}}
-                <div class="alert alert-danger">{{message}}</div>
-                {{/if}}
-                <div class="login-form">
-                    <form action="/authpost" method="post">
-                        <input type="text" name="logemail" placeholder="E-mail" required="">
-                        <input type="password" name="logpassword" placeholder="Password" required="">
-                        <div class="tp">
-                            <input type="submit" value="LOGIN NOW">
-                        </div>
+    <div class="not-available-error">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h1>Sorry, your device is not supported</h1>
+        <h2>But, don't worry ;) Try using a device with a screen wider than 320px</h2>
+        <i class="fas fa-tablet-alt"></i>
+    </div>
+    <header>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeNav()">×</a>
+            <a href="/">Acasa<i class="fas fa-chevron-right"></i></i></a>
+            <a href="/products/1">Oglinzi<i class="fas fa-chevron-right"></i></a>
+            <a href="/#despre">Despre noi<i class="fas fa-chevron-right"></i></a>
+            <a href="/contacts">Contacte<i class="fas fa-chevron-right"></i></a>
+        </div>
+        <nav>
+            <p class="logo">
+                <a href="/products/1">oglinzi<span class="biz">.biz</span></a>
+                <span onclick="openNav(80)" class="burger">☰
+                </span>
+            </p>
+            <div>
+                <ul class="nav-list">
+                    <li><a href="/">Acasa</a></li>
+                    <li><a href="/products/1">Oglinzi</a></li>
+                    <li><a href="/#despre">Despre noi</a></li>
+                    <li><a href="/contacts">Contacte</a></li>
+                </ul>
+                <a href="/shopping-cart">
+                    <img class="nav-icon" width="21" height="27" src="assets/img/shopping-bag-black.svg" alt="" /></a>
+
+                <a href="/profile">
+                    <img class="nav-icon" width="27" height="27" src="assets/img/account-black.svg" alt="" /></a>
+                <div class="dropdown">
+                    <span>RO</span>
+                    <div class="dropdown-content">
+                        <p><a href="/">RO</a></p>
+                        <p><a href="#">RU</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+
+    <section class="register-responsive">
+        {{#if message}}
+        <div class="alert alert-danger">{{message}}</div>
+        {{/if}}
+
+        {{#if succesMessage}}
+        <div class="alert-succes">{{succesMessage}}</div>
+        {{/if}}
+        <div class="register-buttons">
+            <p id="sign_up" class="sign-up">
+                SIGN UP
+            </p>
+            <p id="log_in" class="sign-up">
+                LOG IN
+            </p>
+        </div>
+        <div class="container">
+            <div class="sign-up">
+                <form id="sign-up" action="/authpost" method="POST">
+                    <input class="nume" type="text" placeholder="Nume" name="username"><img class="input-icon"
+                        src="assets/img/account-black.svg" alt="">
+                    <br>
+                    <input class="email" placeholder="Email" type="email" name="email"><img class="input-icon"
+                        src="assets/img/black-back-closed-envelope-shape.svg" alt="">
+                    <br>
+                    <input class="parola" placeholder="Password" type="password" name="password"><img class="input-icon"
+                        src="assets/img/lock.svg" alt="">
+                    <br>
+                    <input class="parola" placeholder="Password" type="password" name="passwordConf"><img
+                        class="input-icon" src="assets/img/lock.svg" alt="">
+                    <br>
+                    <button class="sign-up-button">SIGN UP</button>
+                </form>
+            </div>
+            <div class="log-in">
+                <form id="log-in" action="/authpost" method="POST">
+
+                    <input class="email" placeholder="Email" type="email" name="logemail" /><img class="input-icon"
+                        src="assets/img/account-black.svg" alt="" /> <br />
+                    <input class="parola" placeholder="Password" type="password" name="logpassword" /><img
+                        class="input-icon" src="assets/img/black-back-closed-envelope-shape.svg" alt="">
+                    <br />
+                    <button class="sign-up-button">LOG IN</button>
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+    </section>
+    <section class="register">
+        {{#if message}}
+        <div class="alert-register alert-danger">{{message}}</div>
+        {{/if}}
+        <a href="index.html">
+            <div class="close">
+                <hr class="left" />
+                <hr class="right" />
+            </div>
+        </a>
+        <div class="register-grid">
+            <div>
+                <p class="sign-up">
+                    LOG IN
+                </p>
+                <form id="log-in" action="/authpost" method="POST">
+                    <input class="email" placeholder="Email" type="email" name="logemail" /> <br />
+                    <input class="parola" placeholder="Password" type="password" name="logpassword" />
+                    <br />
+                    <button type="submit" class="sign-up-button">LOG IN</button>
+                </form>
+                <p class="ai-cont">
+                    Ai un cont deja?
+                </p>
+                <p class="under-ai-cont">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore magna aliqua.
+                </p>
+                <button class="ai-cont-button">LOG IN</button>
+            </div>
+            <div>
+                <p class="ai-cont">
+                    Nu ai cont?
+                </p>
+                <p class="under-ai-cont">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore magna aliqua.
+                </p>
+                <button class="ai-cont-button">SIGN UP</button>
+                <div class="white-part">
+                    <p class="sign-up">
+                        SIGN UP
+                    </p>
+                    <form id="sign-up" action="/authpost" method="post">
+                        <input class="nume" placeholder="username" type="text" name="username" /><img class="input-icon"
+                            src="assets/img/account-black.svg" alt="" />
+                        <br />
+                        <input class="email" placeholder="Email" type="email" name="email" /><img class="input-icon"
+                            src="assets/img/black-back-closed-envelope-shape.svg" alt="" />
+                        <br />
+                        <input class="parola" placeholder="Password" type="password" name="password" /><img
+                            class="input-icon" src="assets/img/lock.svg" alt="" />
+                        <br />
+                        <input class="parola" placeholder="Password" type="password" name="passwordConf" /><img
+                            class="input-icon" src="assets/img/lock.svg" alt="" />
+                        <br />
+                        <button type="submit" class="sign-up-button">SIGN UP</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="agile">
-            <div class="signin-form profile">
-                <h3>Register</h3>
-
-                <div class="login-form">
-                    <form id="login" action="/authpost" method="post"
-                        onsubmit="event.preventDefault(); validateMyForm();">
-                        <input type="text" name="email" placeholder="E-mail" required="">
-                        <input type="text" name="username" placeholder="Username" required="">
-                        <input type="password" name="password" placeholder="Password" id="password" required="">
-                        <input type="password" name="passwordConf" placeholder="Confirm Password" id="password_conf"
-                            required="">
-                        <input type="submit" value="REGISTER">
-                    </form>
-                </div>
-                <p><a href="#"> By clicking register, I agree to your terms</a></p>
+    </section>
+    <footer>
+        <div>
+            <div>
+                <p class="logo2">
+                    <a href="/">oglinzi<span class="biz">.biz</span></a>
+                </p>
+                <p class="footer-text">
+                    Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si
+                    Romania
+                    Cu senzor de aprindere garanție 1 an. Dimensiuni la comanda
+                </p>
+            </div>
+            <div>
+                <ul class="nav-list2">
+                    <li><a href="/">Acasa</a></li>
+                    <li><a href="/products/1">Oglinzi</a></li>
+                    <li><a href="/#despre">Despre noi</a></li>
+                    <li><a href="/contacts">Contacte</a></li>
+                </ul>
+            </div>
+            <div class="third-column">
+                <p class="footer-title">
+                    Telefon
+                </p>
+                <p class="footer-subtitle">
+                    +373 603 77771
+                </p>
+                <br />
+                <p class="footer-title">
+                    Email
+                </p>
+                <p class="footer-subtitle">
+                    oglinzibiz@gmail.com
+                </p>
+                <br />
+                <p class="footer-title">
+                    Oficiu
+                </p>
+                <p class="footer-subtitle">
+                    Chisinau, <br /> str Tudor Vladimirescu 3
+                </p>
+                <br />
+                <a href="#"><img width="36" height="36" src="assets/img/facebook.svg" alt="error" /></a>
+                <a href="#"><img class="instagram" width="35" height="35" src="assets/img/instagram2.svg"
+                        alt="error" /></a>
             </div>
         </div>
-        <div class="clear"></div>
-        <!--//signin-form-->
-    </div>
-    <div class="copyright">
-        <p> &copy; 2016 Register Login Widget . All rights reserved | Design by <a href="http://w3layouts.com/"
-                target="_blank">W3layouts</a></p>
-    </div>
+        <div class="footer-stick-container">
+            <hr class="footer-stick" />
+        </div>
+        <p class="copyright">
+            Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+        </p>
+    </footer>
+    <script src="assets/js/jquery.js"></script>
+    <script>
+        $(function () {
+            $(".register-grid>:first-child>.ai-cont-button").click(function () {
+                $(".register-grid>:last-child>.white-part").addClass("anim");
+                $(".register-grid>:last-child>.white-part").removeClass(
+                    "anim-inverse"
+                );
+                $(".register-grid>:last-child>.white-part>.sign-up").css(
+                    "display",
+                    "none"
+                );
+                $(".register-grid>:last-child>.white-part>#sign-up").css(
+                    "display",
+                    "none"
+                );
+                $(".register-grid>:first-child").css("justify-self", "center");
+                $(".register-grid>:first-child>.ai-cont").css("display", "none");
+                $(".register-grid>:first-child>.under-ai-cont").css(
+                    "display",
+                    "none"
+                );
+                $(".register-grid>:first-child>.ai-cont-button").css(
+                    "display",
+                    "none"
+                );
+                $(".register-grid>:first-child>.sign-up, #log-in").css({
+                    display: "block",
+                    animation: "appear",
+                    "animation-duration": "1s"
+                });
+                $(".register-grid>:last-child>.white-part").css("z-index", "-1");
+            });
 
-    <script type="text/javascript">
-        var passWordField = document.getElementById('password')
-        var passWordConfirmField = document.getElementById('password_conf')
-        var form = document.getElementById('login')
-        function validateMyForm() {
-            if (passWordField.value != passWordConfirmField.value) {
-                alert("Passwords do not match. Please try again.");
-            } else {
-                form.submit()
+            $(".register-grid>:last-child>.ai-cont-button").click(function () {
+                $(".register-grid>:last-child>.white-part").addClass("anim-inverse");
+                $(".register-grid>:last-child>.white-part").removeClass("anim");
+                $(".register-grid>:last-child>.white-part>.sign-up").css(
+                    "display",
+                    "block"
+                );
+                $(".register-grid>:last-child>.white-part>#sign-up").css(
+                    "display",
+                    "block"
+                );
+                $(".register-grid>:first-child").css("justify-self", "center");
+                $(".register-grid>:first-child>.ai-cont").css("display", "block");
+                $(".register-grid>:first-child>.under-ai-cont").css(
+                    "display",
+                    "block"
+                );
+                $(".register-grid>:first-child>.ai-cont-button").css(
+                    "display",
+                    "block"
+                );
+                $(".register-grid>:first-child>.sign-up, #log-in").css(
+                    "display",
+                    "none"
+                );
+                $(".register-grid>:last-child>#sign-up").css({
+                    display: "block",
+                    animation: "appear",
+                    "animation-duration": "1s"
+                });
+                $(".register-grid>:last-child>.white-part").css("z-index", "1");
+                $(".register-grid>:last-child>.sign-up").css({
+                    display: "block",
+                    animation: "appear",
+                    "animation-duration": "1s"
+                });
+            });
+        });
+    </script>
+    <script src="assets/js/sideBar.js"></script>
+    <script src="assets/js/jquery.js"></script>
+
+    <script>
+        /*Vladimir's effects, in case it doesn't work WRITE ME A PM */
+        $(document).ready(function () {
+
+            let SignInBtn = $('.register-responsive #sign_up');
+            let LogInBtn = $('.register-responsive #log_in');
+            let SignUp_block = $('.register-responsive .container .sign-up');
+            let LogIn_block = $('.register-responsive .container .log-in');
+
+            var $window = $(window);
+            var $window_width = $window.width();
+
+
+
+            SignInBtn.click(function () {
+
+                // SignUp_block.css("display", "block");
+                // LogIn_block.hide();
+                SignUp_block.css('display', 'block')
+                SignUp_block.css('animation-name', 'showForm');
+                SignUp_block.css('animation-duration', '1s');
+                SignUp_block.css('animation-iteration-count', '1');
+
+
+                if ($window_width > 768) {
+                    SignInBtn.css({
+                        'border-bottom': '1px solid #d33123',
+                        'font-size': '50px'
+                    })
+
+                    LogInBtn.css({
+                        'border-bottom': 'unset',
+                        'font-size': '40px'
+                    })
+                } else {
+                    SignInBtn.css({
+                        'border-bottom': '1px solid #d33123',
+                        'font-size': '20px'
+                    })
+
+                    LogInBtn.css({
+                        'border-bottom': 'unset',
+                        'font-size': '20px'
+                    })
+                }
+                LogIn_block.css('animation-name', 'fadeForm');
+                LogIn_block.css('animation-duration', '1s');
+                LogIn_block.css('animation-iteration-count', '1');
+                LogIn_block.css('display', 'none')
+
+
+
+            });
+
+            LogInBtn.click(function () {
+
+
+
+                // SignUp_block.css('animation-name', 'fadeForm');
+                // SignUp_block.css('animation-duration', '1s');
+                // SignUp_block.css('animation-iteration-count', '1');
+                // SignUp_block.hide();
+
+                /*animatiile showForm si fadeForm sunt declarate in CSS file */
+                LogIn_block.css('display', 'block')
+                LogIn_block.css('animation-name', 'showForm');
+                LogIn_block.css('animation-duration', '1s');
+                LogIn_block.css('animation-iteration-count', '1');
+
+                SignUp_block.css('animation-name', 'fadeForm');
+                SignUp_block.css('animation-duration', '1s');
+                SignUp_block.css('animation-iteration-count', '1');
+                SignUp_block.hide();
+
+                /*IN CAZ CA SE MODIFICA MEDIA QUERY DIN CSS FILE, MODIFICA SI AICI VALOAREA 768*/
+                /*Daca este apasat vreun buton, modificam stilurile butonului selectat */
+                if ($window_width > 768) {
+                    LogInBtn.css({
+                        'border-bottom': '1px solid #d33123',
+                        'font-size': '50px'
+                    })
+
+                    SignInBtn.css({
+                        'border-bottom': 'unset',
+                        'font-size': '40px'
+                    })
+                } else {
+                    LogInBtn.css({
+                        'border-bottom': '1px solid #d33123',
+                        'font-size': '20px'
+                    })
+
+                    SignInBtn.css({
+                        'border-bottom': 'unset',
+                        'font-size': '20px'
+                    })
+                }
             }
-        }
+
+            )
+        });
     </script>
 
 </body>
-
-</html>

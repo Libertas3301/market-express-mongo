@@ -1,0 +1,211 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="assets/css/contacte.css">
+<link rel="stylesheet" href="assets/css/all.css">
+<style>
+    .nav-list2 {
+        text-align: center;
+    }
+
+    nav>div:nth-child(2) {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .dropdown-content2 {
+        width: 80px;
+    }
+
+    .dropdown-content2>p:nth-child(1)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: left;
+        color: white;
+        position: relative;
+        top: -6px;
+    }
+
+    .dropdown-content2>p:nth-child(3)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: center;
+        color: white;
+        position: relative;
+        top: 6px;
+    }
+
+    nav>div>.dropdown>.nav-icon {
+        width: 40px;
+    }
+
+    .contacte {
+        width: 93%;
+        height: auto;
+    }
+</style>
+<title>Oglinzi.biz</title>
+<div class="not-available-error">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h1>Sorry, your device is not supported</h1>
+    <h2>But, don't worry ! Try using a device with a screen wider than 320px</h2>
+    <i class="fas fa-tablet-alt"></i>
+</div>
+<header>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/">Acasa<i class="fas fa-chevron-right"></i></i></a>
+        <a href="/products/1">Oglinzi<i class="fas fa-chevron-right"></i></a>
+        <a href="/#despre">Despre noi<i class="fas fa-chevron-right"></i></a>
+        <a href="/contacts">Contacte<i class="fas fa-chevron-right"></i></a>
+    </div>
+    <nav>
+        <p class="logo">
+            <a href="/">oglinzi<span class="biz">.biz</span></a>
+            <span onclick="openNav(80)" class="burger">☰
+            </span>
+        </p>
+        <div>
+            <ul class="nav-list">
+                <li><a href="/">Acasa</a></li>
+                <li><a href="/products/1">Oglinzi</a></li>
+                <li><a href="/#despre">Despre noi</a></li>
+                <li><a href="/contacts">Contacte</a></li>
+            </ul>
+            <a href="/shopping-cart">
+                <img class="nav-icon" width="21" height="27" src="assets/img/shopping-bag-black.svg" alt="" /></a>
+
+            <div class="dropdown">
+                <img class="nav-icon" width="21" height="27" src="assets/img/account-black.svg" alt="" />
+                <div class="dropdown-content2 dropdown-content">
+                    <p><a href="/profile">
+                            Profile</a></p>
+                    <hr>
+                    <p><a href="/logout">
+                            Logout</a></p>
+                </div>
+            </div>
+            <div class="dropdown">
+                <span>RO</span>
+                <div class="dropdown-content">
+                    <p><a href="index.html">RO</a></p>
+                    <p><a href="indexrus.html">RU</a></p>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+</header>
+
+<section class="contacte">
+    <div>
+        <a href="index.html">
+            <div class="close">
+                <hr class="left">
+                <hr class="right">
+            </div>
+        </a>
+        <hr class="contact-stick">
+        <p class="near-contacte">Contacte</p>
+        <div class="info">
+            <p class="footer-title">
+                Telefon
+            </p>
+            <p class="footer-subtitle">
+                +373 603 77771
+            </p>
+            <br>
+            <p class="footer-title">
+                Email
+            </p>
+            <p class="footer-subtitle">
+                oglinzibiz@gmail.com
+            </p>
+            <br>
+            <p class="footer-title">
+                Oficiu
+            </p>
+            <p class="footer-subtitle">
+                Chisinau, <br> str Tudor Vladimirescu 3
+            </p>
+        </div>
+        <hr class="mesaj-stick">
+        <p class="mesaj">Lasati un mesaj</p>
+        <form id="forma" action="" method="POST">
+            <input type="text" maxlength="100" required placeholder="Nume" class="nume">
+            <input type="text" maxlength="100" required placeholder="Telefon" class="nr">
+            <input type="email" maxlength="100" required placeholder="Email" class="email">
+            <textarea name="mesaj" maxlength="5000" required placeholder="mesaj" id="" cols="57"
+                rows="10"></textarea><br>
+            <button type="submit" class="contact-button">PLASEAZA</button>
+        </form>
+    </div>
+    <div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.237661508989!2d28.859372215166555!3d47.03556707915096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97c5bb1e3f0b7%3A0x99134eeb6653d796!2z0KLRg9C00L7RgCDQktC70LDQtNC40LzQuNGA0LXRgdC60YMgMywgU3RyYWRhIFR1ZG9yIFZsYWRpbWlyZXNjdSAzLCBDaGnImWluxIN1LCDQnNC-0LvQtNCw0LLQuNGP!5e0!3m2!1sru!2s!4v1578684814013!5m2!1sru!2s"
+            frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+    </div>
+</section>
+
+<footer>
+
+    <div>
+        <div>
+            <p class="logo2"><a href="index.html">oglinzi<span class="biz">.biz</span></a></p>
+            <p class="footer-text">
+                Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si Romania Cu
+                senzor de aprindere garanție 1 an. Dimensiuni la comanda
+            </p>
+        </div>
+        <div>
+            <ul class="nav-list2">
+                <li><a href="index.html">Acasa</a></li>
+                <li><a href="oglinzi.html">Oglinzi</a></li>
+                <li><a href="index.html#despre">Despre noi</a></li>
+                <li><a href="contacte.html">Contacte</a></li>
+            </ul>
+        </div>
+        <div class="third-column">
+            <p class="footer-title">
+                Telefon
+            </p>
+            <p class="footer-subtitle">
+                +373 603 77771
+            </p>
+            <br>
+            <p class="footer-title">
+                Email
+            </p>
+            <p class="footer-subtitle">
+                oglinzibiz@gmail.com
+            </p>
+            <br>
+            <p class="footer-title">
+                Oficiu
+            </p>
+            <p class="footer-subtitle">
+                Chisinau, <br> str Tudor Vladimirescu 3
+            </p>
+            <br>
+            <a href=""><img width="36" height="36" src="assets/img/facebook.svg" alt="error"></a>
+            <a href=""><img class="instagram" width="35" height="35" src="assets/img/instagram2.svg" alt="error"></a>
+        </div>
+    </div>
+    <div class="footer-stick-container">
+        <hr class="footer-stick">
+    </div>
+    <p class="copyright">
+        Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+    </p>
+</footer>
+<script src="assets/js/sideBar.js"></script>

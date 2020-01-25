@@ -12,51 +12,175 @@
         div.preview-images>img {
             width: 30%;
         }
+
+        input:not(.button) {
+            width: 100%;
+        }
+
+        .fisiserIncarca {
+            position: relative;
+        }
+
+        main.l-main .content-wrapper .page-content {
+            color: black !important;
+        }
+
+        main.l-main .page-title {
+            color: black !important;
+        }
+
+        ::placeholder {
+            color: black !important;
+            opacity: .5;
+        }
+
+        .descriptioninp {
+            width: 100%;
+            resize: none;
+        }
     </style>
 </head>
 
 <body>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
-    <form action="/addproduct" method="POST" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col s12">
-                <div class="file-field input-field">
-                    <div class="btn grey">
-                        <input type="file" name="imagePath" required>
+    <body class="sidebar-is-reduced">
+        <header class="l-header">
+            <div class="l-header__inner clearfix">
+                <div class="c-header-icon js-hamburger">
+                    <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span
+                            class="bar-bot"></span></div>
+                </div>
+                <div class="c-search">
+                    <input class="c-search__input u-input" placeholder="Search..." type="text" />
+                </div>
+                <div class="header-icons-group">
+                    <div class="c-header-icon basket"><a href="/dashboard/orders"><i
+                                class="fa fa-shopping-basket"></i></a>
                     </div>
+                    <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
                 </div>
             </div>
+        </header>
+        <div class="l-sidebar">
+            <div class="logo">
+                <div class="logo__txt">D</div>
+            </div>
+            <div class="l-sidebar__content">
+                <nav class="c-menu js-menu">
+                    <ul class="u-list">
+                        <a href="/dashboard/newPost">
+                            <li class="c-menu__item is-active" data-toggle="tooltip" title="Flights">
+                                <div class="c-menu__item__inner"><i class="far fa-plus-square"></i>
+                                    <div class="c-menu-item__title"><span>Adauga produs nou</span></div>
+                                </div>
+                            </li>
+                        </a>
+                        <a href="/dashboard/editPost/1">
+                            <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Modules">
+                                <div class="c-menu__item__inner"><i class="fas fa-edit"></i>
+                                    <div class="c-menu-item__title"><span>Editeaza produs</span></div>
+                                </div>
+                            </li>
+                        </a>
+                        <a href="/dashboard/deletePost/1">
+                            <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Statistics">
+                                <div class="c-menu__item__inner"><i class="fas fa-trash"></i>
+                                    <div class="c-menu-item__title"><span>Sterge produs</span></div>
+                                </div>
+                            </li>
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <input type="text" name="title" placeholder="Enter title..." required>
-        <input type="text" name="description" placeholder="Enter description..." required>
-        <input type="number" name="price" placeholder="Enter price..." required>
-        <input type="submit" value="Add data">
-    </form>
+        <main class="l-main">
+            <div class="content-wrapper content-wrapper--with-bg">
+                <h1 class="page-title">ADAUGA PRODUS NOU</h1>
+                <div class="page-content">
+                    <form action="/addproduct" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                TITLU <br><input type="text" name="title" placeholder="Enter title..." required>
+                                DESCRIERE <br><textarea type="text" class="descriptioninp" name="description"
+                                    placeholder="Enter description..." rows="6" required></textarea>
+                                <div style="margin: 10px 0px 10px 0">
+                                    MARIMI <br>
+                                    marime 1<input type="number" name="marime1" placeholder="Marimea 1..."
+                                        style="width: 10%; margin-left: 10px; margin-right: 10px" required>
+                                    marime 2 <input type="number" name="marime2" placeholder="Marimea 2..."
+                                        style="width: 10%; margin-left: 10px; margin-right: 10px" required> <br>
+                                    Pret <br><input type="number" name="price" placeholder="Enter price..." required>
+                                </div>
+                                <div class="file-field input-field" style="margin: 10px 0px 20px 0">
+                                    Forma oglinzii
+                                    <select type="select" name="oglinda_forma" placeholder="Enter price..." required
+                                        style="color: black; margin-left: 10px;  margin-right: 10px;">
+                                        <option>dreptunghiulara</option>
+                                        <option>ovala</option>
+                                        <option>patrata</option>
+                                        <option>rotunda</option>
+                                        <option>asimetrica</option>
+                                    </select>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            let imagesPreview = function (input, placeToInsertImagePreview) {
-                if (input.files) {
-                    let filesAmount = input.files.length;
-                    for (i = 0; i < filesAmount; i++) {
-                        let reader = new FileReader();
-                        reader.onload = function (event) {
-                            $($.parseHTML("<img>"))
-                                .attr("src", event.target.result)
-                                .appendTo(placeToInsertImagePreview);
-                        };
-                        reader.readAsDataURL(input.files[i]);
+                                    Locul de amplasare
+                                    <select type="select" name="loc_amplasare" placeholder="Enter price..." required
+                                        style="color: black; margin-left: 10px; margin-right: 10px;">
+                                        <option>baie</option>
+                                        <option>hol</option>
+                                        <option>living</option>
+                                        <option>dormitor</option>
+                                        <option>Dressing</option>
+                                        <option>make-up</option>
+                                        <option>spatii_comerciale</option>
+                                    </select>
+
+                                    Tipul oglinzii
+                                    <select type="select" name="oglinda_type" placeholder="Enter price..." required
+                                        style="color: black;margin-left: 10px;  margin-right: 10px;">
+                                        <option>led</option>
+                                        <option>led_sensor_buton</option>
+                                        <option>sensor_mana</option>
+                                        <option>cu_incalzire</option>
+                                    </select>
+                                </div>
+                                <div class="btn grey" style="margin-bottom: 20px;">
+                                    <input type="file" name="imagePath" required class="fisiserIncarca">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="Add data" class="button">
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="/js/dashboard.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                let imagesPreview = function (input, placeToInsertImagePreview) {
+                    if (input.files) {
+                        let filesAmount = input.files.length;
+                        for (i = 0; i < filesAmount; i++) {
+                            let reader = new FileReader();
+                            reader.onload = function (event) {
+                                $($.parseHTML("<img>"))
+                                    .attr("src", event.target.result)
+                                    .appendTo(placeToInsertImagePreview);
+                            };
+                            reader.readAsDataURL(input.files[i]);
+                        }
                     }
-                }
-            };
-            $("#input-files").on("change", function () {
-                imagesPreview(this, "div.preview-images");
+                };
+                $("#input-files").on("change", function () {
+                    imagesPreview(this, "div.preview-images");
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
 </body>

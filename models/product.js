@@ -13,6 +13,31 @@ const productadd = new Schema({
         required: true
     },
 
+    marime1: {
+        type: String,
+        required: true
+    },
+
+    marime2: {
+        type: String,
+        required: true
+    },
+
+    oglinda_forma: {
+        type: String,
+        required: true
+    },
+
+    loc_amplasare: {
+        type: String,
+        required: true
+    },
+
+    oglinda_type: {
+        type: String,
+        required: true
+    },
+
     description: {
         type: String,
         required: true
@@ -21,6 +46,21 @@ const productadd = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    dezabuireBool: {
+        type: Boolean,
+    },
+    butonBool: {
+        type: Boolean,
+    },
+    senzorBool: {
+        type: Boolean,
+    },
+    ramainoxBool: {
+        type: Boolean,
+    },
+    buton_dubluBool: {
+        type: Boolean,
     }
 });
 

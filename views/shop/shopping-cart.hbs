@@ -1,40 +1,350 @@
-{{# if products }}
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <ul class="list-group">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="assets/css/cart.css" />
+<link rel="stylesheet" href="assets/css/all.css" />
+<style>
+    .pret-total {
+        position: relative;
+        left: 515px;
+    }
+
+    .mainContainer {
+        max-width: 1920px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .burger {
+        display: none;
+    }
+
+    @media screen and (max-width: 1510px) and (min-width: 0) {
+        .burger {
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 1700px) and (min-width: 1130px) {
+        .mainContainer {
+            max-width: 1700px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+    }
+
+    @media screen and (max-width: 500px) and (min-width: 200px) {
+        .cart i[class] {
+            font-size: 4em;
+            color: white;
+            margin: auto 0;
+            margin-top: 80px;
+            margin-left: -51px !important;
+            position: relative;
+            top: 402px !important;
+        }
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 300px) {
+        .cart i[class] {
+            font-size: 4em;
+            color: white;
+            margin: auto 0;
+            margin-top: 80px;
+            margin-left: -51px !important;
+            position: relative;
+            top: 483px;
+        }
+    }
+
+    @media screen and (max-width: 1130px) and (min-width: 300px) {
+        .mainContainer {
+            max-width: 1130px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .pret-total {
+            position: relative;
+            left: 0 !important;
+            width: 287px;
+            margin: 0 auto;
+        }
+    }
+
+    .product-info>* {
+        margin-left: 40px;
+        width: 193px;
+    }
+
+    .product-info {
+        margin-left: 0;
+        margin: 0 auto;
+    }
+
+    .cart i[class] {
+        font-size: 4em;
+        color: white;
+        margin: auto 0;
+        margin-top: 80px;
+        margin-left: -100px;
+    }
+
+    nav>div>.dropdown>.nav-icon {
+        width: 40px;
+    }
+
+    .dropdown-content2 {
+        width: 105px !important;
+    }
+
+    .dropdown-content2>p:nth-child(1)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: left;
+        color: white;
+        position: relative;
+        top: -6px;
+    }
+
+    .dropdown-content2>p:nth-child(3)>a {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: center;
+        color: white;
+        position: relative;
+        top: 6px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #484848;
+        width: 65px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        z-index: 1;
+    }
+
+    .dropdown>span {
+        font-family: "Montserrat", sans-serif;
+        font-size: 25px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #484848;
+        position: relative;
+        top: -4px;
+    }
+</style>
+<div class="not-available-error">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h1>Sorry, your device is not supported</h1>
+    <h2>
+        But, don't worry ;) Try using a device with a screen wider than 320px
+    </h2>
+    <i class="fas fa-tablet-alt"></i>
+</div>
+<div>
+    <div class="mainContainer">
+        <header>
+            <!-- <video class="video" src="assets/video/header.mp4" autoplay="autoplay" loop></video> -->
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeNav()">×</a>
+                <a href="/">Acasa <i class="fas fa-chevron-right"></i></a>
+                <a href="/products/1">Oglinzi <i class="fas fa-chevron-right"></i></a>
+                <a href="/#despre">Despre noi<i class="fas fa-chevron-right"></i></a>
+                <a href="/contacts">Contacte<i class="fas fa-chevron-right"></i></a>
+            </div>
+            <nav>
+                <p class="logo">
+                    <a href="/">oglinzi<span class="biz">.biz</span></a>
+                    <span onclick="openNav(80)" class="burger"><i class="fas fa-bars"></i></span>
+                </p>
+                <div>
+                    <ul class="nav-list">
+                        <li><a href="/">Acasa</a></li>
+                        <li><a href="/products/1">Oglinzi</a></li>
+                        <li><a href="/#despre">Despre noi</a></li>
+                        <li><a href="/contacts">Contacte</a></li>
+                    </ul>
+                    <a href="/shopping-cart">
+                        <img class="nav-icon" width="21" height="27" src="assets/img/shopping-bag-black.svg"
+                            alt="" /></a>
+
+                    <div class="dropdown">
+                        <img class="nav-icon" width="27" height="27" src="assets/img/account-black.svg" alt="" />
+                        <div class="dropdown-content2 dropdown-content">
+                            <p><a href="/profile">
+                                    Profile</a></p>
+                            <hr>
+                            <p><a href="/logout">
+                                    Logout</a></p>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <span>RO</span>
+                        <div class="dropdown-content">
+                            <p><a href="index.html">RO</a></p>
+                            <p><a href="indexrus.html">RU</a></p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <section class="cart-list">
+            <a href="/">
+                <div class="close">
+                    <hr class="left" />
+                    <hr class="right" />
+                </div>
+            </a>
+            <hr class="cosul-stick" />
+            <p class="cosul">Cosul de cumparaturi</p>
+            <br />
             {{# each products }}
-            <li class="list-group-item">
-                <span class="badge">{{ this.qty }}</span>
-                <strong>{{ this.item.title }}</strong>
-                <span class="label label-success">${{ this.price }}</span>
-                <div class="btn-group">
-                    <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="/reduce/{{this.item._id}}">Reduce by 1</a></li>
-                        <li><a href="/remove/{{this.item._id}}">Remove All</a></li>
+            <div class="cart">
+                <img class="cart-image" width="200" height="152" style="position: relative; left: 50px;"
+                    src="/uploads/{{ this.item.imagePath }}" alt="" />
+
+                <div class="product-info">
+                    <div>
+                        <p class="denumire-oglinda">{{ this.item.title }}</p>
+                        <p class="inaltime-latime-caracteristica">
+                            Inaltime: <span class="marime">{{this.item.marime1}}mm</span>
+                        </p>
+                        <p class="inaltime-latime-caracteristica">
+                            Latime: <span class="marime">{{this.item.marime2}}mm</span>
+                        </p>
+                    </div>
+                    <div>
+                        <div class="pret-pentru1"><span>{{this.item.price}}</span>.00$</div>
+                        {{#if this.item.dezabuireBool}}
+                        <p class="inaltime-latime-caracteristica">
+                            Dezabuire (32$)
+                        </p>
+                        {{/if}}
+
+                        {{#if this.item.senzorBool}}
+                        <p class="inaltime-latime-caracteristica">
+                            Senzor de miscare (54$)
+                        </p>
+                        {{/if}}
+                    </div>
+                    <div>
+                        {{#if this.item.butonBool}}
+                        <p class="inaltime-latime-caracteristica">
+                            Buton touch (54$)
+                        </p>
+                        {{/if}}
+
+                        {{#if this.item.ramainoxBool}}
+                        <p class="inaltime-latime-caracteristica">
+                            Rama de inox (74$)
+                        </p>
+                        {{/if}}
+
+                        {{#if this.item.buton_dubluBool}}
+                        <p class="inaltime-latime-caracteristica">
+                            Buton Dublu (158$)
+                        </p>
+                        {{/if}}
+                    </div>
+                    <div>
+                        <a href="/reduce/{{this.item._id}}">
+                            <div class="minus"><span>-</span></div>
+                        </a>
+                        <div class="caseta"><span>{{ this.qty }}</span></div>
+                        <a href="/addprod/{{this.item._id}}">
+                            <div class="plus"><span>+</span></div>
+                        </a>
+                    </div>
+                    <!-- <div class="inchide">
+                    <hr class="left" />
+                    <hr class="right" />
+                </div> -->
+
+
+                </div>
+
+
+                <a href="/remove/{{this.item._id}}"><i class="fas fa-times"></i></a>
+            </div>
+            {{/each}}
+
+            <p class="pret-total"><span>Pret total {{totalPrice}}</span>$</p>
+            <hr class="product-separation-bar" />
+
+            <a href="/checkout"><button class="cart-button">Finalizeaza comanda</button></a>
+        </section>
+        <footer>
+            <div>
+                <div>
+                    <p class="logo2">
+                        <a href="index.html">oglinzi<span class="biz">.biz</span></a>
+                    </p>
+                    <p class="footer-text">
+                        Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si
+                        Romania Cu
+                        senzor de aprindere garanție 1 an. Dimensiuni la comanda
+                    </p>
+                </div>
+                <div>
+                    <ul class="nav-list2">
+                        <li><a href="index.html">Acasa</a></li>
+                        <li><a href="oglinzi.html">Oglinzi</a></li>
+                        <li><a href="index.html#despre">Despre noi</a></li>
+                        <li><a href="contacte.html">Contacte</a></li>
                     </ul>
                 </div>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <strong>Total: {{ totalPrice }}</strong>
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
-    </div>
-</div>
-{{ else }}
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <h2>No Items in Cart</h2>
-    </div>
-</div>
-{{/if}}
+                <div class="third-column">
+                    <p class="footer-title">
+                        Telefon
+                    </p>
+                    <p class="footer-subtitle">
+                        +373 603 77771
+                    </p>
+                    <br />
+                    <p class="footer-title">
+                        Email
+                    </p>
+                    <p class="footer-subtitle">
+                        oglinzibiz@gmail.com
+                    </p>
+                    <br />
+                    <p class="footer-title">
+                        Oficiu
+                    </p>
+                    <p class="footer-subtitle">
+                        Chisinau, <br /> str Tudor Vladimirescu 3
+                    </p>
+                    <br />
+                    <a href=""><img width="36" height="36" src="assets/img/facebook.svg" alt="error" /></a>
+                    <a href=""><img class="instagram" width="35" height="35" src="assets/img/instagram2.svg"
+                            alt="error" /></a>
+                </div>
+            </div>
+            <div class="footer-stick-container">
+                <hr class="footer-stick" />
+            </div>
+            <p class="copyright">
+                Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+            </p>
+        </footer>
+        <script src="assets/js/sideBar.js"></script>
+        </script>

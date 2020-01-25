@@ -1,0 +1,283 @@
+.subContainer .cardNum:after,
+.subContainer .date:after,
+.subContainer .ccv:after {
+  position: absolute;
+  top: -25px;
+  font-family: "Roboto", sans-serif;
+  left: 0;
+  color: rgba(142, 190, 255, 0.9);
+  font-size: 13px;
+}
+
+.subContainer .date p,
+.subContainer .ccv p {
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: lighter;
+  text-align: center;
+  padding: 4px 20px;
+  padding-right: 25px;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 600px;
+  top: 274px;
+  left: calc(50% - 600px / 2);
+  height: 400px;
+  background: #fff;
+  box-shadow: 0px 0px 40px 1px #eee;
+  -webkit-transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  grid-template-areas: "mGrid card";
+  min-height: 0;
+  min-width: 0;
+  border-radius: 9px;
+  z-index: 7;
+}
+
+.mGrid {
+  grid-area: mGrid;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  overflow: hidden;
+  justify-content: center;
+  margin-top: 15px;
+  margin-left: -10px;
+}
+
+.total {
+  padding-top: 50px;
+  align-self: end;
+}
+.total p {
+  text-align: center;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #808eab;
+  letter-spacing: 0.15rem;
+}
+.total p:last-child {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0b82f8;
+  padding-top: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+.detail {
+  font-family: "Roboto", sans-serif;
+  align-self: start;
+  display: grid;
+  margin-top: 32px;
+  grid-template-rows: repeat(3, 1fr);
+}
+.detail p {
+  text-align: center;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #808eab;
+  letter-spacing: 0.15rem;
+  margin-bottom: 10px;
+}
+.detail ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-family: "Roboto", sans-serif;
+  justify-content: center;
+  align-content: start;
+}
+.detail ul li {
+  display: inline-block;
+  color: #515860;
+  text-align: left;
+  font-size: 15px;
+}
+.detail ul li:last-child {
+  text-align: right;
+  color: #0b82f8;
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  display: block;
+  justify-self: center;
+  align-self: center;
+  font-family: "Open Sans", sans-serif;
+  background: #ffffff;
+  color: #0b82f8;
+  border: 1px solid #0b82f8;
+  text-transform: uppercase;
+  font-size: 0.97rem;
+  opacity: 0.8;
+  font-weight: lighter;
+  padding: 7px 40px;
+  border-radius: 1.6rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s linear;
+}
+button:hover {
+  transition: all 0.2s linear;
+  background: #0b82f8;
+  color: #fff;
+}
+
+.subContainer {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 270px;
+  width: 400px;
+  border-radius: 9px;
+  font-family: "Roboto", sans-serif;
+  bottom: 0;
+  color: #fff;
+  min-height: 0;
+  min-width: 0;
+  background: #1f8fff;
+  box-shadow: -10px 10px 60px 10px #adb7c4;
+  grid-area: card;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: "name name  . . . visa visa " "cardNum cardNum cardNum cardNum cardNum . ." " date date date date . ccv ccv ";
+}
+.subContainer p,
+.subContainer .visaCont,
+.subContainer .cardNum,
+.subContainer .date,
+.subContainer .ccv {
+  margin-left: 35px;
+  margin-top: -25px;
+}
+.subContainer p {
+  padding-top: 25px;
+  font-weight: 600;
+  grid-area: name;
+  margin-top: 0px;
+}
+.subContainer .visaCont {
+  display: grid;
+  grid-area: visa;
+  overflow: hidden;
+  margin: 0;
+  justify-self: center;
+  align-self: center;
+}
+.subContainer .visaCont svg {
+  height: 50px;
+  width: 100px;
+}
+.subContainer .cardNum {
+  position: relative;
+  grid-area: cardNum;
+  background: #3799ff;
+  align-self: center;
+  padding: 7px 5px;
+  font-size: 19px;
+}
+.subContainer .date:after {
+  width: 155px;
+  content: "luna si anul expirarii";
+}
+.date {
+  width: 6px;
+  height: 12px;
+}
+.datepara1 {
+  width: 66px;
+  position: relative;
+  top: 2px;
+  text-align: center;
+}
+.ccv {
+  position: relative;
+  top: 4px;
+}
+.ccv > input {
+  width: 66px;
+  position: relative;
+  text-align: center;
+}
+.datepara2 {
+  position: relative;
+  top: -17px;
+  width: 66px;
+  left: 80px;
+  text-align: center;
+}
+.subContainer .cardNum:after {
+  content: "Numarul cardului de credit";
+}
+.subContainer .cardNum ul {
+  list-style-type: none;
+  text-align: center;
+}
+.subContainer .cardNum ul li {
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  margin: 0 auto;
+  letter-spacing: 1px;
+}
+.subContainer .cardNum ul li:last-child {
+  text-align: right;
+}
+.subContainer .date {
+  position: relative;
+  grid-area: date;
+  background: #3799ff;
+  align-self: center;
+  justify-self: left;
+}
+.subContainer .date:after {
+  content: "Data si luna expirarii";
+}
+.subContainer .ccv {
+  position: relative;
+  grid-area: ccv;
+  align-self: center;
+  justify-self: left;
+  background: #3799ff;
+  margin-left: 0;
+}
+.subContainer .ccv:after {
+  content: "CCV";
+}
+.subContainer .ccv p {
+  padding: 4px 12px;
+  letter-spacing: 1px;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  color: white;
+  background-color: #3799ff;
+  border: none;
+}

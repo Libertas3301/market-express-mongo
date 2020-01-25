@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="/stylesheets/dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+<body class="sidebar-is-reduced">
+    <header class="l-header">
+        <div class="l-header__inner clearfix">
+            <div class="c-header-icon js-hamburger">
+                <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span
+                        class="bar-bot"></span></div>
+            </div>
+            <div class="c-search">
+                <input class="c-search__input u-input" placeholder="Search..." type="text" />
+            </div>
+            <div class="header-icons-group">
+                <div class="c-header-icon basket"><a href="/dashboard/orders"><i class="fa fa-shopping-basket"></i></a>
+                </div>
+                <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
+            </div>
+        </div>
+    </header>
+    <div class="l-sidebar">
+        <div class="logo">
+            <div class="logo__txt">D</div>
+        </div>
+        <div class="l-sidebar__content">
+            <nav class="c-menu js-menu">
+                <ul class="u-list">
+                    <a href="/dashboard/newPost">
+                        <li class="c-menu__item" data-toggle="tooltip" title="Flights">
+                            <div class="c-menu__item__inner"><i class="far fa-plus-square"></i>
+                                <div class="c-menu-item__title"><span>Adauga produs nou</span></div>
+                            </div>
+                        </li>
+                    </a>
+                    <a href="/dashboard/editPost/1">
+                        <li class="c-menu__item" data-toggle="tooltip" title="Modules">
+                            <div class="c-menu__item__inner"><i class="fas fa-edit"></i>
+                                <div class="c-menu-item__title"><span>Editeaza produs</span></div>
+                            </div>
+                        </li>
+                    </a>
+                    <a href="/dashboard/deletePost/1">
+                        <li class="c-menu__item" data-toggle="tooltip" title="Statistics">
+                            <div class="c-menu__item__inner"><i class="fas fa-trash"></i>
+                                <div class="c-menu-item__title"><span>Sterge produs</span></div>
+                            </div>
+                        </li>
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <main class="l-main">
+        <div class="content-wrapper content-wrapper--with-bg">
+            <h1 class="page-title">CERERILE PRIMITE</h1>
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2>Orders</h2>
+                        {{# each orders }}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {{# each this }}
+                                {{# if address }}
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        {{this.address}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        {{this.name}}
+                                    </li>
+                                </ul>
+                                {{/if}}
+                                {{/each}}
+                                <ul class="list-group">
+                                    {{# each this.items }}
+                                    <li class="list-group-item">
+                                        <span class="badge">{{ this.price }}</span>
+                                        {{ this.item.title }} | {{ this.qty }} Units
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                            <div class="panel-footer">
+                                <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/js/dashboard.js"></script>
+</body>
