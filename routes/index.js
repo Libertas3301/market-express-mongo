@@ -233,17 +233,17 @@ router.get('/auth', isLoggedInFoAuth, (req, res, next) => {
 
 //Initialize authentificating
 router.post('/authpost', (req, res, next) => {
-  // confirm that user typed same password twice
-  if (req.body.password !== req.body.passwordConf) {
-    var err = 'Passwords do not match.';
-    req.flash('message', err);
-    res.redirect('back');
-    res.redirect('/auth');
-  }
-
   User.findOne({ email: req.body.email }, (err, user) => {
-    if (user) {
+    if (req.body.password !== req.body.passwordConf) {
+      var err = 'Passwords do not match.';
+      req.flash('message', err);
+      res.redirect('/auth');
+    } else if (user) {
       var err = 'A user with that email has already registered. Please use a different email..';
+      req.flash('message', err);
+      res.redirect('/auth');
+    } else if (user && req.body.password !== req.body.passwordConf) {
+      var err = 'Utilizator cu acest email este deja inregistrat || Parolele nu coincid';
       req.flash('message', err);
       res.redirect('/auth');
     }

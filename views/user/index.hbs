@@ -229,16 +229,16 @@
                     {{#if message}}
                     <div class="alert alert-danger">{{message}}</div>
                     {{/if}}
-                    <input class="nume" type="text" placeholder="Nume" name="username"><img class="input-icon"
+                    <input class="nume" type="text" placeholder="Nume" name="username" required><img class="input-icon"
                         src="assets/img/account-black.svg" alt="">
                     <br>
-                    <input class="email" placeholder="Email" type="email" name="email"><img class="input-icon"
+                    <input class="email" placeholder="Email" type="email" name="email" required><img class="input-icon"
                         src="assets/img/black-back-closed-envelope-shape.svg" alt="">
                     <br>
-                    <input class="parola" placeholder="Password" type="password" name="password"><img class="input-icon"
-                        src="assets/img/lock.svg" alt="">
+                    <input class="parola" placeholder="Password" type="password" name="password" required><img
+                        class="input-icon" src="assets/img/lock.svg" alt="">
                     <br>
-                    <input class="parola" placeholder="Password" type="password" name="passwordConf"><img
+                    <input class="parola" placeholder="Password" type="password" name="passwordConf" required><img
                         class="input-icon" src="assets/img/lock.svg" alt="">
                     <br>
                     <button class="sign-up-button">SIGN UP</button>
@@ -254,9 +254,9 @@
                     <div class="alert-succes">{{message2}}</div>
                     {{/if}}
 
-                    <input class="email" placeholder="Email" type="email" name="logemail" /><img class="input-icon"
-                        src="assets/img/account-black.svg" alt="" /> <br />
-                    <input class="parola" placeholder="Password" type="password" name="logpassword" /><img
+                    <input class="email" placeholder="Email" type="email" name="logemail" required /><img
+                        class="input-icon" src="assets/img/account-black.svg" alt="" /> <br />
+                    <input class="parola" placeholder="Password" type="password" name="logpassword" required /><img
                         class="input-icon" src="assets/img/black-back-closed-envelope-shape.svg" alt="">
                     <br />
                     <button class="sign-up-button">LOG IN</button>
@@ -283,8 +283,8 @@
                     {{#if message}}
                     <div class="alert-register alert-danger alert-reg2">{{message}}</div>
                     {{/if}}
-                    <input class="email" placeholder="Email" type="email" name="logemail" /> <br />
-                    <input class="parola" placeholder="Password" type="password" name="logpassword" />
+                    <input class="email" placeholder="Email" type="email" name="logemail" required /> <br />
+                    <input class="parola" placeholder="Password" type="password" name="logpassword" required />
                     <br />
                     <button type="submit" class="sign-up-button">LOG IN</button>
                 </form>
@@ -316,16 +316,16 @@
                         {{#if message}}
                         <div class="alert-register alert-danger">{{message}}</div>
                         {{/if}}
-                        <input class="nume" placeholder="username" type="text" name="username" /><img class="input-icon"
-                            src="assets/img/account-black.svg" alt="" />
+                        <input class="nume" placeholder="username" type="text" name="username" required /><img
+                            class="input-icon" src="assets/img/account-black.svg" alt="" />
                         <br />
-                        <input class="email" placeholder="Email" type="email" name="email" /><img class="input-icon"
-                            src="assets/img/black-back-closed-envelope-shape.svg" alt="" />
+                        <input class="email" placeholder="Email" type="email" name="email" required /><img
+                            class="input-icon" src="assets/img/black-back-closed-envelope-shape.svg" alt="" />
                         <br />
-                        <input class="parola" placeholder="Password" type="password" name="password" /><img
+                        <input class="parola" placeholder="Password" type="password" name="password" required /><img
                             class="input-icon" src="assets/img/lock.svg" alt="" />
                         <br />
-                        <input class="parola" placeholder="Password" type="password" name="passwordConf" /><img
+                        <input class="parola" placeholder="Password" type="password" name="passwordConf" required /><img
                             class="input-icon" src="assets/img/lock.svg" alt="" />
                         <br />
                         <button type="submit" class="sign-up-button">SIGN UP</button>
