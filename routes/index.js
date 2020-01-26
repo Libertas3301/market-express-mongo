@@ -306,7 +306,7 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
         order.items = cart.generateArray();
       });
       res.render('user/profile.hbs', { orders, user });
-    }).then().catch();
+    })
   });
 });
 
