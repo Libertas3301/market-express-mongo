@@ -228,15 +228,17 @@ router.post('/actlikepro', (req, res, next) => {
 
 // Get authentification page
 router.get('/auth', isLoggedInFoAuth, (req, res, next) => {
-  res.render('user/index.hbs', { message: req.flash('message'), succesMessage: req.flash('success') });
+  res.render('user/index.hbs', { message: req.flash('message'), message2: req.flash('message2') });
 });
 
 //Initialize authentificating
 router.post('/authpost', (req, res, next) => {
   // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConf) {
-    var error = 'Passwords do not match.';
-    req.flash('message', error);
+    var err = 'Passwords do not match.';
+    req.flash('message', err);
+    res.redirect('back');
+    res.redirect('back');
   }
 
   User.findOne({ email: req.body.email }, (err, user) => {
@@ -263,8 +265,8 @@ router.post('/authpost', (req, res, next) => {
         return next(error);
       } else {
         req.session.userId = user._id;
-        var successmsg = 'Your account was succesfully created';
-        req.flash('success', successmsg);
+        var err = 'Your account was succesfully created';
+        req.flash('message2', err);
         res.redirect('/profile');
       }
     });
@@ -281,7 +283,6 @@ router.post('/authpost', (req, res, next) => {
         if (req.body.logemail === 'root-vladislav@gmail.com') {
           isAdminLoggedIn = true;
         }
-        console.log(isAdminLoggedIn);
         isUserLoggedIn = true;
       }
     });
@@ -398,60 +399,60 @@ router.post('/editPost228', (req, res) => {
 // Filter data on product page
 router.post('/filterRequest', (req, res) => {
   let forma = '';
-  if (req.body.radiogroup1 === 'dreptunghiulara') {
+  if (req.body.radiogroup1 === 'dreptunghiulara' || req.body.forma_oglinda === 'dreptunghiulara') {
     forma = 'dreptunghiulara';
   }
-  else if (req.body.radiogroup1 === 'ovala') {
+  else if (req.body.radiogroup1 === 'ovala' || req.body.forma_oglinda === 'ovala') {
     forma = 'ovala';
   }
-  else if (req.body.radiogroup1 === 'patrata') {
+  else if (req.body.radiogroup1 === 'patrata' || req.body.forma_oglinda === 'patrata') {
     forma = 'patrata';
   }
-  else if (req.body.radiogroup1 === 'rotunda') {
+  else if (req.body.radiogroup1 === 'rotunda' || req.body.forma_oglinda === 'rotunda') {
     forma = 'rotunda';
   }
-  else if (req.body.radiogroup1 === 'asimetrica') {
+  else if (req.body.radiogroup1 === 'asimetrica' || req.body.forma_oglinda === 'asimetrica') {
     forma = 'asimetrica';
   }
 
   let locul = '';
-  if (req.body.radiogroup2 === 'baie') {
+  if (req.body.radiogroup2 === 'baie' || req.body.loc_amplasare === 'baie') {
     locul = 'baie';
   }
-  else if (req.body.radiogroup2 === 'hol') {
+  else if (req.body.radiogroup2 === 'hol' || req.body.loc_amplasare === 'hol') {
     locul = 'hol';
   }
-  else if (req.body.radiogroup2 === 'living') {
+  else if (req.body.radiogroup2 === 'living' || req.body.loc_amplasare === 'living') {
     locul = 'living';
   }
-  else if (req.body.radiogroup2 === 'dormitor') {
+  else if (req.body.radiogroup2 === 'dormitor' || req.body.loc_amplasare === 'dormitor') {
     locul = 'dormitor';
   }
-  else if (req.body.radiogroup2 === 'Dressing') {
+  else if (req.body.radiogroup2 === 'Dressing' || req.body.loc_amplasare === 'Dressing') {
     locul = 'Dressing';
   }
-  else if (req.body.radiogroup2 === 'make-up') {
+  else if (req.body.radiogroup2 === 'make-up' || req.body.loc_amplasare === 'make-up') {
     locul = 'make-up';
   }
-  else if (req.body.radiogroup2 === 'spatii_comerciale') {
+  else if (req.body.radiogroup2 === 'spatii_comerciale' || req.body.loc_amplasare === 'spatii_comerciale') {
     locul = 'spatii_comerciale';
   }
 
   let tipul = '';
-  if (req.body.radiogroup3 === 'led') {
+  if (req.body.radiogroup3 === 'led' || req.body.tip_oglinda === 'led') {
     tipul = 'led';
   }
-  else if (req.body.radiogroup3 === 'led_sensor_buton') {
+  else if (req.body.radiogroup3 === 'led_sensor_buton' || req.body.tip_oglinda === 'led_sensor_buton') {
     tipul = 'led_sensor_buton';
   }
-  else if (req.body.radiogroup3 === 'sensor_mana') {
+  else if (req.body.radiogroup3 === 'sensor_mana' || req.body.tip_oglinda === 'sensor_mana') {
     tipul = 'sensor_mana';
   }
-  else if (req.body.radiogroup3 === 'cu_incalzire') {
+  else if (req.body.radiogroup3 === 'cu_incalzire' || req.body.tip_oglinda === 'cu_incalzire') {
     tipul = 'cu_incalzire';
   }
   if (forma && !tipul && !locul) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ oglinda_forma: forma })
@@ -471,7 +472,7 @@ router.post('/filterRequest', (req, res) => {
   }
 
   else if (locul && !tipul && !forma) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ loc_amplasare: locul })
@@ -491,7 +492,7 @@ router.post('/filterRequest', (req, res) => {
   }
 
   else if (tipul && !locul && !forma) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ oglinda_type: tipul })
@@ -511,7 +512,7 @@ router.post('/filterRequest', (req, res) => {
   }
 
   else if (forma && locul && !tipul) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ $or: [{ oglinda_forma: forma }, { loc_amplasare: locul }] })
@@ -532,7 +533,7 @@ router.post('/filterRequest', (req, res) => {
   }
 
   else if (forma && !locul && tipul) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ $or: [{ oglinda_forma: forma }, { oglinda_type: tipul }] })
@@ -553,7 +554,7 @@ router.post('/filterRequest', (req, res) => {
   }
 
   else if (!forma && locul && tipul) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ $or: [{ oglinda_type: tipul }, { loc_amplasare: locul }] })
@@ -574,10 +575,30 @@ router.post('/filterRequest', (req, res) => {
   }
 
   else if (forma && locul && tipul) {
-    var perPage = 9;
+    var perPage = 6;
     var page = req.params.page || 1;
     Product
       .find({ $or: [{ oglinda_forma: forma }, { loc_amplasare: locul }, { oglinda_type: tipul }] })
+      .sort({ _id: -1 })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec(function (err, docs) {
+        console.log(docs.oglinda_forma)
+        Product.count().exec(function (err, count) {
+          if (err) return next(err)
+          res.render('shop/products.ejs', {
+            products: docs,
+            current: page,
+            current: page,
+            pages: Math.ceil(count / perPage),
+          });
+        });
+      });
+  } else {
+    var perPage = 6;
+    var page = req.params.page || 1;
+    Product
+      .find({})
       .sort({ _id: -1 })
       .skip((perPage * page) - perPage)
       .limit(perPage)

@@ -360,79 +360,79 @@
                 <div class="dropdown">
                     <span>RO</span>
                     <div class="dropdown-content">
-                        <p><a href="index.html">RO</a></p>
-                        <p><a href="indexrus.html">RU</a></p>
+                        <p><a href="/">RO</a></p>
+                        <p><a href="#">RU</a></p>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div id="mySideFilters" class="sideFilter">
+    <form action="/filterRequest" method="POST" id="mySideFilters" class="sideFilter">
         <a href="javascript:void(0)" style="font-weight: bold;" class="closebtn" onclick="closeFilter()">×</a>
         <div style="margin-top: 33px;">
             <hr class="filtre-stick" />
             <p class="filtre-text">Filtre</p>
         </div>
         <h1>Forma oglinzii</h1>
-        <label for="">
-            <input type="radio" name="forma_oglinda" id="" value="dreptunghiulara" checked />
+        <label for="dreptunghiulara">
+            <input id="dreptunghiulara" type="radio" name="forma_oglinda" id="" value="dreptunghiulara" />
             Dreptunghiulară</label>
-        <label for="">
-            <input type="radio" name="forma_oglinda" id="" value="ovala" />
+        <label for="ovala">
+            <input id="ovala" type="radio" name="forma_oglinda" id="" value="ovala" />
             Ovală</label>
 
-        <label for="">
-            <input type="radio" name="forma_oglinda" id="" value="patrata" />
+        <label for="patrata">
+            <input id="patrata" type="radio" name="forma_oglinda" id="" value="patrata" />
             Pătrată</label>
 
-        <label for="">
-            <input type="radio" name="forma_oglinda" id="" value="rotunda" />
+        <label for="rotunda">
+            <input id="rotunda" type="radio" name="forma_oglinda" id="" value="rotunda" />
             Rotundă</label>
 
-        <label for="">
-            <input type="radio" name="forma_oglinda" id="" value="asimetrica" />
+        <label for="asimetrica">
+            <input id="asimetrica" type="radio" name="forma_oglinda" id="" value="asimetrica" />
             Asimetrică</label>
 
         <h1>Locul de amplasare</h1>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="baie" checked />
+        <label for="baie">
+            <input id="baie" type="radio" name="loc_amplasare" id="" value="baie" />
             Baie</label>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="hol" checked />
+        <label for="hol">
+            <input id="hol" type="radio" name="loc_amplasare" id="" value="hol" />
             Hol</label>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="living" checked />
+        <label for="living">
+            <input id="living" type="radio" name="loc_amplasare" id="" value="living" />
             Living</label>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="dormitor" checked />
+        <label for="dormitor">
+            <input id="dormitor" type="radio" name="loc_amplasare" id="" value="dormitor" />
             Dormitor</label>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="Dressing" checked />
+        <label for="Dressing">
+            <input id="Dressing" type="radio" name="loc_amplasare" id="" value="Dressing" />
             Dressing</label>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="make-up" checked />
+        <label for="make-up">
+            <input id="make-up" type="radio" name="loc_amplasare" id="" value="make-up" />
             Make-up</label>
-        <label for="">
-            <input type="radio" name="loc_amplasare" id="" value="spatii_comerciale" checked />
+        <label for="spatii_comerciale">
+            <input id="spatii_comerciale" type="radio" name="loc_amplasare" id="" value="spatii_comerciale" />
             Spații comerciale</label>
 
         <h1>Tipul oglinzii</h1>
-        <label for="">
-            <input type="radio" name="tip_oglinda" id="" value="led" checked />
+        <label for="led">
+            <input id="led" type="radio" name="tip_oglinda" id="" value="led" />
             Oglinzi led</label>
-        <label for="">
-            <input type="radio" name="tip_oglinda" id="" value="led_sensor_buton" checked />
+        <label for="led_sensor_buton">
+            <input id="led_sensor_buton" type="radio" name="tip_oglinda" id="" value="led_sensor_buton" />
             Oglinzi led sensor buton</label>
-        <label for="">
-            <input type="radio" name="tip_oglinda" id="" value="sensor_mana" checked />
+        <label for="sensor_mana">
+            <input id="sensor_mana" type="radio" name="tip_oglinda" id="" value="sensor_mana" />
             Oglinzi sensor mana</label>
-        <label for="">
-            <input type="radio" name="tip_oglinda" id="" value="cu_incalzire" checked />
+        <label for="cu_incalzire">
+            <input id="cu_incalzire" type="radio" name="tip_oglinda" id="" value="cu_incalzire" />
             Oglinzi cu incalzire</label>
         <input type="submit" value="Filtreaza" style="background-color: #252525;margin-top: 10px;margin-left: 28px;" />
-        <input type="reset" value="Anulare" style="margin-top: -47px;margin-left: 182px;
-    " />
-    </div>
+        <a href="/products/1"><input type="submit" value="Anulare"
+                style="margin-top: -87px;margin-left: 125px; background-color: #d33123;" /></a>
+    </form>
 
     <div class="filter-toggle-button">
         <div>
@@ -511,27 +511,27 @@
                     <input type="radio" name="radiogroup3" id="rv4" value="cu_incalzire" />
                     <label for="rv4">cu_incalzire</label> <br />
                 </div>
-                <input type="reset" value="Anulare" />
-                <input type="submit" value="Filtreaza" />
+                <a href="/products/1"><input type="submit" value="Anulare" style="background-color: #d33123;" /></a>
+                <input type="submit" value="Filtreaza"" />
             </form>
         </div>
-        <div class="mirror-choose">
-            <% for (var i = 0; i < products.length; i++) { %>
-            <div>
-                <img src="/uploads/<%= products[i].imagePath %>" style="width: 399px; height: 265px;">
-                <div class="noi-denumire">
-                    <%= products[i].title %>
-                </div>
-                <div class="noi-pret">
-                    $<%= products[i].price %>
-                </div>
-                <div class="rel">
-                    <div class="mai-multe">
-                        <a href="/product-review?id=<%= products[i]._id %>">Mai multe detalii</a>
+        <div class=" mirror-choose">
+                <% for (var i = 0; i < products.length; i++) { %>
+                <div>
+                    <img src="/uploads/<%= products[i].imagePath %>" style="width: 399px; height: 265px;">
+                    <div class="noi-denumire">
+                        <%= products[i].title %>
+                    </div>
+                    <div class="noi-pret">
+                        $<%= products[i].price %>
+                    </div>
+                    <div class="rel">
+                        <div class="mai-multe">
+                            <a href="/product-review?id=<%= products[i]._id %>">Mai multe detalii</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <% } %>
+                <% } %>
         </div>
     </section>
     <% if (pages > 0) { %>
@@ -567,7 +567,7 @@
         <div>
             <div>
                 <p class="logo2">
-                    <a href="index.html">oglinzi<span class="biz">.biz</span></a>
+                    <a href="/">oglinzi<span class="biz">.biz</span></a>
                 </p>
                 <p class="footer-text">
                     Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si Romania
@@ -576,10 +576,10 @@
             </div>
             <div>
                 <ul class="nav-list2">
-                    <li><a href="index.html">Acasa</a></li>
-                    <li><a href="oglinzi.html">Oglinzi</a></li>
-                    <li><a href="index.html#despre">Despre noi</a></li>
-                    <li><a href="contacte.html">Contacte</a></li>
+                    <li><a href="/">Acasa</a></li>
+                    <li><a href="/products/1">Oglinzi</a></li>
+                    <li><a href="/#despre">Despre noi</a></li>
+                    <li><a href="/contacts">Contacte</a></li>
                 </ul>
             </div>
             <div class="third-column">
@@ -604,8 +604,8 @@
                     Chisinau, <br /> str Tudor Vladimirescu 3
                 </p>
                 <br />
-                <a href=""><img width="36" height="36" src="../assets/img/facebook.svg" alt="error" /></a>
-                <a href=""><img class="instagram" width="35" height="35" src="../assets/img/instagram2.svg"
+                <a href="#"><img width="36" height="36" src="../assets/img/facebook.svg" alt="error" /></a>
+                <a href="#"><img class="instagram" width="35" height="35" src="../assets/img/instagram2.svg"
                         alt="error" /></a>
             </div>
         </div>

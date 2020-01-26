@@ -103,6 +103,10 @@
     .nav-list {
         margin-left: -69px;
     }
+
+    .testimonials>:nth-child(2) {
+        display: block;
+    }
 </style>
 
 <title>Oglinzi.biz</title>
@@ -426,12 +430,13 @@
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/language.js"></script>
     <script>
-        var k = 0;
+        var k = 0, b = 0;
+        setInterval(myMethod, 4000);
+
 
         function myMethod() {
             if (k > 3) k = 1;
             else k++;
-
             if (k == 1) {
                 $(".testimonials>:nth-child(2)").show("slow");
                 $(".testimonials>:nth-child(3)").hide("slow");
@@ -453,7 +458,6 @@
                 $(".testimonials>:nth-child(4)").hide("slow");
                 $(".testimonials>:nth-child(5)").show("slow");
             }
-            setInterval(myMethod, 4000);
         }
     </script>
     <script src="/assets/js/sideBar.js"></script>

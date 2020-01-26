@@ -106,6 +106,65 @@
     #sign_up {
         cursor: pointer;
     }
+
+    @media screen and (max-width: 9999px) and (min-width: 1640px) {
+        .alert-register {
+            background-color: yellow;
+            padding: 25px;
+            width: 357px;
+            height: auto;
+            top: 21px;
+            left: calc(50% - 477px/ 2);
+            z-index: 1;
+            position: relative;
+            display: block;
+        }
+
+        .alert-reg2 {
+            background-color: yellow;
+            padding: 25px;
+            width: 357px;
+            height: auto;
+            top: 21px !important;
+            left: calc(50% - 300px/ 2) !important;
+            z-index: 1;
+            position: relative;
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 1640px) and (min-width: 0) {
+        .alert {
+            background-color: yellow;
+            padding: 10px;
+            width: 300px;
+            height: auto;
+            position: relative;
+            top: -28px;
+            left: calc(50% - 324px / 2);
+            margin-bottom: -54px;
+            color: white;
+            font-size: 29px;
+        }
+
+        .alert-succes {
+            background-color: green;
+            padding: 25px;
+            width: 300px;
+            height: auto;
+            top: -7px;
+            left: calc(50% - 341px/ 2);
+            z-index: 124354;
+            position: relative;
+            color: white;
+            font-size: 29px;
+        }
+
+        .register-responsive #log-in {
+            display: block;
+            margin: 50px auto;
+        }
+    }
 </style>
 <title>Oglinzi.biz</title>
 
@@ -155,13 +214,7 @@
     </header>
 
     <section class="register-responsive">
-        {{#if message}}
-        <div class="alert alert-danger">{{message}}</div>
-        {{/if}}
 
-        {{#if succesMessage}}
-        <div class="alert-succes">{{succesMessage}}</div>
-        {{/if}}
         <div class="register-buttons">
             <p id="sign_up" class="sign-up">
                 SIGN UP
@@ -173,6 +226,9 @@
         <div class="container">
             <div class="sign-up">
                 <form id="sign-up" action="/authpost" method="POST">
+                    {{#if message}}
+                    <div class="alert alert-danger">{{message}}</div>
+                    {{/if}}
                     <input class="nume" type="text" placeholder="Nume" name="username"><img class="input-icon"
                         src="assets/img/account-black.svg" alt="">
                     <br>
@@ -190,6 +246,13 @@
             </div>
             <div class="log-in">
                 <form id="log-in" action="/authpost" method="POST">
+                    {{#if message}}
+                    <div class="alert alert-danger">{{message}}</div>
+                    {{/if}}
+
+                    {{#if message2}}
+                    <div class="alert-succes">{{message2}}</div>
+                    {{/if}}
 
                     <input class="email" placeholder="Email" type="email" name="logemail" /><img class="input-icon"
                         src="assets/img/account-black.svg" alt="" /> <br />
@@ -205,10 +268,7 @@
 
     </section>
     <section class="register">
-        {{#if message}}
-        <div class="alert-register alert-danger">{{message}}</div>
-        {{/if}}
-        <a href="index.html">
+        <a href="/">
             <div class="close">
                 <hr class="left" />
                 <hr class="right" />
@@ -220,6 +280,9 @@
                     LOG IN
                 </p>
                 <form id="log-in" action="/authpost" method="POST">
+                    {{#if message}}
+                    <div class="alert-register alert-danger alert-reg2">{{message}}</div>
+                    {{/if}}
                     <input class="email" placeholder="Email" type="email" name="logemail" /> <br />
                     <input class="parola" placeholder="Password" type="password" name="logpassword" />
                     <br />
@@ -250,6 +313,9 @@
                         SIGN UP
                     </p>
                     <form id="sign-up" action="/authpost" method="post">
+                        {{#if message}}
+                        <div class="alert-register alert-danger">{{message}}</div>
+                        {{/if}}
                         <input class="nume" placeholder="username" type="text" name="username" /><img class="input-icon"
                             src="assets/img/account-black.svg" alt="" />
                         <br />

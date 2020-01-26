@@ -23,6 +23,30 @@
         .burger {
             display: block;
         }
+
+        .pret-total {
+            font-family: "Gordita", sans-serif;
+            font-size: 42px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            justify-self: center;
+            align-self: center;
+            position: relative;
+            left: 33%;
+        }
+
+        .cart i[class] {
+            font-size: 4em;
+            color: white;
+            margin: auto 0;
+            margin-top: 80px;
+            margin-left: -47%;
+        }
     }
 
     @media screen and (max-width: 1700px) and (min-width: 1130px) {
@@ -33,19 +57,35 @@
         }
     }
 
-    @media screen and (max-width: 500px) and (min-width: 200px) {
+    @media screen and (max-width: 550px) and (min-width: 200px) {
         .cart i[class] {
-            font-size: 4em;
+            font-size: 2.5em !important;
             color: white;
             margin: auto 0;
             margin-top: 80px;
             margin-left: -51px !important;
             position: relative;
-            top: 402px !important;
+            top: 306px !important;
         }
     }
 
-    @media screen and (max-width: 768px) and (min-width: 300px) {
+    @media screen and (max-width: 768px) and (min-width: 550px) {
+        .pret-total {
+            font-family: "Gordita", sans-serif;
+            font-size: 42px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            justify-self: center;
+            align-self: center;
+            position: relative;
+            left: 28% !important;
+        }
+
         .cart i[class] {
             font-size: 4em;
             color: white;
@@ -53,7 +93,7 @@
             margin-top: 80px;
             margin-left: -51px !important;
             position: relative;
-            top: 483px;
+            top: 392px;
         }
     }
 
@@ -61,13 +101,6 @@
         .mainContainer {
             max-width: 1130px;
             overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .pret-total {
-            position: relative;
-            left: 0 !important;
-            width: 287px;
             margin: 0 auto;
         }
     }
