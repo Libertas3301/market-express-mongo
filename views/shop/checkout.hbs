@@ -1,127 +1,10 @@
-{{!-- <link rel="stylesheet" href="stylesheets/payment.css">
-<link rel="stylesheet" href="stylesheets/normalize.css"> --}}
-{{!-- <div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-        <h1>Checkout</h1>
-        <h4>Your Total: ${{total}}</h4>
-        <input type="hidden" name="userIdentificator" value="{{user._id}}">
-        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
-            {{errMsg}}
-        </div>
-        <form action="/checkout" method="post" id="checkout-form">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" required name="name">
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" id="address" class="form-control" required name="address">
-                    </div>
-                </div>
-                <hr>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="card-name">Card Holder Name</label>
-                        <input type="text" id="card-name" class="form-control" required>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="card-number">Credit Card Number</label>
-                        <input type="text" id="card-number" class="form-control" required>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="card-expiry-month">Expiration Month</label>
-                                <input type="text" id="card-expiry-month" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="card-expiry-year">Expiration Year</label>
-                                <input type="text" id="card-expiry-year" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="card-cvc">CVC</label>
-                        <input type="text" id="card-cvc" class="form-control" required>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-success">Buy now</button>
-        </form>
-    </div>
-</div> --}}
-
-{{!-- <body>
-    <div class="container">
-        <input type="hidden" name="userIdentificator" value="{{user._id}}">
-        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
-            {{errMsg}}
-        </div>
-        <div class="mGrid">
-            <div class="total">
-                <p>total</p>
-                <p>${{total}}</p>
-            </div>
-            <div class="detail">
-                <p>Deatlii</p>
-
-                <ul>
-                    <li>iPad Pro</li>
-                    <li>$799</li>
-                </ul>
-            </div>
-            <button>pay now</button>
-        </div>
-        <!-- Small Side Card detail-->
-        <div class="subContainer">
-            <!-- svg Logo-->
-            <div class="visaCont">
-                <svg class="visa" enable-background="new 0 0 291.764 291.764" version="1.1" viewbox="5 70 290 200"
-                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                    <path class="svgcolor"
-                        d="m119.26 100.23l-14.643 91.122h23.405l14.634-91.122h-23.396zm70.598 37.118c-8.179-4.039-13.193-6.765-13.193-10.896 0.1-3.756 4.24-7.604 13.485-7.604 7.604-0.191 13.193 1.596 17.433 3.374l2.124 0.948 3.182-19.065c-4.623-1.787-11.953-3.756-21.007-3.756-23.113 0-39.388 12.017-39.489 29.204-0.191 12.683 11.652 19.721 20.515 23.943 9.054 4.331 12.136 7.139 12.136 10.987-0.1 5.908-7.321 8.634-14.059 8.634-9.336 0-14.351-1.404-21.964-4.696l-3.082-1.404-3.273 19.813c5.498 2.444 15.609 4.595 26.104 4.705 24.563 0 40.546-11.835 40.747-30.152 0.08-10.048-6.165-17.744-19.659-24.035zm83.034-36.836h-18.108c-5.58 0-9.82 1.605-12.236 7.331l-34.766 83.509h24.563l6.765-18.08h27.481l3.51 18.153h21.664l-18.873-90.913zm-26.97 54.514c0.474 0.046 9.428-29.514 9.428-29.514l7.13 29.514h-16.558zm-160.86-54.796l-22.931 61.909-2.498-12.209c-4.24-14.087-17.533-29.395-32.368-36.999l20.998 78.33h24.764l36.799-91.021h-24.764v-0.01z"
-                        fill="#FFF"></path>
-                    <path class="svgtipcolor"
-                        d="m51.916 111.98c-1.787-6.948-7.486-11.634-15.226-11.734h-36.316l-0.374 1.686c28.329 6.984 52.107 28.474 59.821 48.688l-7.905-38.64z"
-                        fill="#EFC75E"></path>
-                </svg>
-            </div>
-            <div class="cardNum">
-                <ul>
-                    <li>
-                        <input type="text" value="Numarul cardului de credit">
-                    </li>
-                </ul>
-            </div>
-            <div class="date">
-                <input type="text" class="datepara datepara1" value="" placeholder="luna"></input>
-                <input type="text" class="datepara datepara2" value="" placeholder="anul"></input>
-            </div>
-            <div class="ccv">
-                <input type="text" value="ccv"></input>
-            </div>
-        </div>
-    </div>
-    <div class="backlayer"></div>
-</body> --}}
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link rel="stylesheet" href="assets/css/all.css" />
 <link rel="stylesheet" href="../assets/css/oglinzi.css" />
 <link rel="stylesheet" href="stylesheets/card.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
     body {
         display: block;
@@ -148,7 +31,7 @@
 
     .dropdown-content2 {
         width: 80px;
-        color: #484848;
+        color: white;
     }
 
     .dropdown-content2>p:nth-child(1)>a {
@@ -160,7 +43,7 @@
         line-height: 1.2;
         letter-spacing: normal;
         text-align: left;
-        color: #484848;
+        color: white;
         position: relative;
         top: -6px;
     }
@@ -174,7 +57,7 @@
         line-height: 1.2;
         letter-spacing: normal;
         text-align: center;
-        color: #484848;
+        color: white;
         position: relative;
         top: 6px;
     }
@@ -192,7 +75,7 @@
         opacity: .9;
     }
 
-    @media screen and (max-width: 1920px) and (min-width: 300px) {
+    @media screen and (max-width: 9999px) and (min-width: 1000px) {
         .mainContainer {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -205,6 +88,111 @@
             margin-top: 300px;
         }
 
+        .text-block2 {
+            display: none;
+        }
+
+        .text-block {
+            display: block;
+        }
+
+    }
+
+    @media screen and (max-width: 1000px) and (min-width: 0) {
+        .text-block2 {
+            display: block;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .text-block {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 1134px) {
+        .dropdown>span {
+            font-size: 36px;
+            position: relative;
+            top: -5px;
+            */
+        }
+    }
+
+    .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .btn-success {
+        background-color: red;
+        position: relative;
+        top: 271px;
+    }
+
+    .text-block {
+        margin-left: 5px;
+        margin-bottom: 102px;
+        position: relative;
+        top: -25px;
+        text-align: center;
+    }
+
+    div.not-available-error {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 100vw;
+        height: 200vh;
+        font-family: "Montserrat", cursive;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        background-color: white;
+        display: none;
     }
 </style>
 
@@ -267,12 +255,22 @@
                 </div>
             </nav>
         </header>
-        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
-            {{errMsg}}
-        </div>
         <h1 style="color: black; font-size: 2rem; margin: 20px 0; font-weight: 400;">Achitarea comenzii cu pretul total
             de:
             <b style="font-weight: 800;">${{total}}</b></h1>
+        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+            {{errMsg}}
+        </div>
+        <div class=" text-block2" style="margin-left: 5px;">
+            {{# each cart}}
+            <div class="textCont" style="margin: 20px 0; font-size: 18px;">
+                Denumirea produsului:
+                <b style="font-weight: 900;">{{ this.item.title }} </b><br>
+                Pretul produsului:
+                <b style="font-weight: 900;">{{this.item.price}}$ </b><br>
+            </div>
+            {{/each}}
+        </div>
         <div class="mainContainer">
             <div class="container3 preload">
                 <div class="creditcard">
@@ -390,10 +388,13 @@
                         </svg>
                     </div>
                 </div>
-                <div class="text-block">
+                <div class="text-block" style="margin-left: 5px;">
                     {{# each cart}}
-                    <div class="textCont">
-                        {{ cart.totalPrice }}
+                    <div class="textCont" style="margin: 20px 0; font-size: 18px;">
+                        Denumirea produsului:
+                        <b style="font-weight: 900;">{{ this.item.title }} </b><br>
+                        Pretul produsului:
+                        <b style="font-weight: 900;">{{this.item.price}}$ </b><br>
                     </div>
                     {{/each}}
                 </div>
@@ -443,6 +444,61 @@
                 <button type="submit" class="btn btn-success">Buy now</button>
             </form>
         </div>
+
+        <footer>
+            <div>
+                <div>
+                    <p class="logo2">
+                        <a href="index.html">oglinzi<span class="biz">.biz</span></a>
+                    </p>
+                    <p class="footer-text">
+                        Oglinzi LED la comanda si in stoc. Livrare si instalare Chisinau . Livram toata Moldova si
+                        Romania Cu
+                        senzor de aprindere garanție 1 an. Dimensiuni la comanda
+                    </p>
+                </div>
+                <div>
+                    <ul class="nav-list2">
+                        <li><a href="/">Acasa</a></li>
+                        <li><a href="/products/1">Oglinzi</a></li>
+                        <li><a href="/#despre">Despre noi</a></li>
+                        <li><a href="/contacts">Contacte</a></li>
+                    </ul>
+                </div>
+                <div class="third-column">
+                    <p class="footer-title">
+                        Telefon
+                    </p>
+                    <p class="footer-subtitle">
+                        +373 603 77771
+                    </p>
+                    <br />
+                    <p class="footer-title">
+                        Email
+                    </p>
+                    <p class="footer-subtitle">
+                        oglinzibiz@gmail.com
+                    </p>
+                    <br />
+                    <p class="footer-title">
+                        Oficiu
+                    </p>
+                    <p class="footer-subtitle">
+                        Chisinau, <br /> str Tudor Vladimirescu 3
+                    </p>
+                    <br />
+                    <a href=""><img width="36" height="36" src="assets/img/facebook.svg" alt="error" /></a>
+                    <a href=""><img class="instagram" width="35" height="35" src="assets/img/instagram2.svg"
+                            alt="error" /></a>
+                </div>
+            </div>
+            <div class="footer-stick-container">
+                <hr class="footer-stick" />
+            </div>
+            <p class="copyright">
+                Copyright © 2019, Oglinzi.biz. All Rights Reserved.
+            </p>
+        </footer>
         <script src="assets/js/jquery.js"></script>
         <script src="assets/js/language.js"></script>
         <script>

@@ -99,10 +99,10 @@ router.get('/checkout', isLoggedInCheckout, (req, res, next) => {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart');
   }
-  var cart = new Cart(req.session.cart);
-  var errMsg = req.flash('error')[0];
   User.findById(req.session.userId).exec((error, user) => {
-    res.render('shop/checkout.hbs', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg, user, cart: cart });
+    var cart = new Cart(req.session.cart);
+    var errMsg = req.flash('error')[0];
+    res.render('shop/checkout.hbs', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg, user, cart: cart.generateArray() });
   });
 });
 
