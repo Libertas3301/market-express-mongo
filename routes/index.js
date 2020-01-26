@@ -238,7 +238,7 @@ router.post('/authpost', (req, res, next) => {
     var err = 'Passwords do not match.';
     req.flash('message', err);
     res.redirect('back');
-    res.redirect('back');
+    res.redirect('/auth');
   }
 
   User.findOne({ email: req.body.email }, (err, user) => {
