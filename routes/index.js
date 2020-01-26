@@ -294,20 +294,22 @@ router.post('/authpost', (req, res, next) => {
 
 // Get profile page
 router.get('/profile', isLoggedIn, (req, res, next) => {
-  User.findById(req.session.userId).exec((error, user) => {
-    Order.find({ user: user._id }).sort({ _id: -1 }).exec((err, orders) => {
+  if (req.session.userId) {
+    User.findById(req.session.userId).exec((error, user) => {
+      Order.find({ user: user._id }).sort({ _id: -1 }).exec((err, orders) => {
 
-      if (err) {
-        return res.write('Error!');
-      }
-      let cart;
-      orders.forEach((order) => {
-        cart = new Cart(order.cart);
-        order.items = cart.generateArray();
-      });
-      res.render('user/profile.hbs', { orders, user });
-    })
-  });
+        if (err) {
+          return res.write('Error!');
+        }
+        let cart;
+        orders.forEach((order) => {
+          cart = new Cart(order.cart);
+          order.items = cart.generateArray();
+        });
+        res.render('user/profile.hbs', { orders, user });
+      })
+    });
+  }
 });
 
 // Logout from app
@@ -326,7 +328,7 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
 });
 
 // Get delete product page
-router.get('/dashboard/deletePost/:page', isAdmin, (req, res, next) => {
+router.get('/dashboard/deletePost/:page', isLoggedIn, isAdmin, (req, res, next) => {
   var perPage = 9
   var page = req.params.page || 1
   Product
@@ -362,7 +364,7 @@ router.post('/deletePost228', (req, res) => {
 });
 
 // Get edit product page
-router.get('/dashboard/editPost/:page', isAdmin, (req, res, next) => {
+router.get('/dashboard/editPost/:page', isLoggedIn, isAdmin, (req, res, next) => {
   var perPage = 9;
   var page = req.params.page || 1;
   Product
@@ -595,7 +597,7 @@ router.post('/filterRequest', (req, res) => {
 });
 
 // Get new product page
-router.get('/dashboard/newPost', isAdmin, (req, res, next) => {
+router.get('/dashboard/newPost', isLoggedIn, isAdmin, (req, res, next) => {
   res.render('shop/dashboard.hbs');
 });
 
@@ -630,7 +632,7 @@ router.post('/addproduct', (req, res) => {
 });
 
 // Get orders page
-router.get('/dashboard/orders', isAdmin, (req, res, next) => {
+router.get('/dashboard/orders', isLoggedIn, isAdmin, (req, res, next) => {
   Order.find({}).sort({ _id: -1 }).exec((err, orders) => {
 
     if (err) {
@@ -646,7 +648,7 @@ router.get('/dashboard/orders', isAdmin, (req, res, next) => {
 });
 
 // Get dashboard page
-router.get('/dashboard', isAdmin, (req, res, next) => {
+router.get('/dashboard', isLoggedIn, isAdmin, (req, res, next) => {
   res.render('shop/dashboard.hbs');
 });
 
