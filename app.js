@@ -12,9 +12,9 @@ const MongoStore = require('connect-mongo')(session);
 
 const router = require('./routes/index');
 const app = express();
-
+url = process.env.MONGODB_URI || "mongodb://localhost:27017/market"
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect('mongodb://localhost:27017/market', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true });
 let db = mongoose.connection;
 
 //handle mongo error
