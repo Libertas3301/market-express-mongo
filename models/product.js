@@ -61,7 +61,7 @@ const productadd = new Schema({
     },
     buton_dubluBool: {
         type: Boolean,
-    }
+    },
 });
 
 module.exports = mongoose.model('Product', productadd);

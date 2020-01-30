@@ -312,6 +312,16 @@
     .sideFilter {
         padding-top: 0;
     }
+
+    @media screen and (max-width: 1450px) {
+        .resetdeploy {
+            position: relative;
+            position: relative;
+            left: -51px !important;
+            top: 61px !important;
+            margin-bottom: 41px !important;
+        }
+    }
 </style>
 <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <div class="not-available-error">
@@ -333,7 +343,7 @@
         </div>
         <nav>
             <p class="logo">
-                <a href="index.html">oglinzi<span class="biz">.biz</span></a>
+                <a href="/">oglinzi<span class="biz">.biz</span></a>
                 <span onclick="openNav(80)" class="burger"><i class="fas fa-bars"></i></span>
             </p>
             <div>
@@ -511,27 +521,28 @@
                     <input type="radio" name="radiogroup3" id="rv4" value="cu_incalzire" />
                     <label for="rv4">cu_incalzire</label> <br />
                 </div>
-                <a href="/products/1"><input type="submit" value="Anulare" style="background-color: #d33123;" /></a>
-                <input type="submit" value="Filtreaza"" />
+                <a href="/products/1"><input type="submit" value="Anulare" style="background-color: #d33123; POSITION: RELATIVE;
+                    left: 73px;" class="submitdeploy" /></a>
+                <input type="submit" value="Filtreaza" style="position: relative;left: 89px;" class="resetdeploy" />
             </form>
         </div>
         <div class=" mirror-choose">
-                <% for (var i = 0; i < products.length; i++) { %>
-                <div>
-                    <img src="/uploads/<%= products[i].imagePath %>" style="width: 399px; height: 265px;">
-                    <div class="noi-denumire">
-                        <%= products[i].title %>
-                    </div>
-                    <div class="noi-pret">
-                        $<%= products[i].price %>
-                    </div>
-                    <div class="rel">
-                        <div class="mai-multe">
-                            <a href="/product-review?id=<%= products[i]._id %>">Mai multe detalii</a>
-                        </div>
+            <% for (var i = 0; i < products.length; i++) { %>
+            <div>
+                <img src="/uploads/<%= products[i].imagePath %>" style="width: 399px; height: 265px;">
+                <div class="noi-denumire">
+                    <%= products[i].title %>
+                </div>
+                <div class="noi-pret">
+                    $<%= products[i].price %>
+                </div>
+                <div class="rel">
+                    <div class="mai-multe">
+                        <a href="/product-review?id=<%= products[i]._id %>">Mai multe detalii</a>
                     </div>
                 </div>
-                <% } %>
+            </div>
+            <% } %>
         </div>
     </section>
     <% if (pages > 0) { %>

@@ -59,6 +59,68 @@
     .detalii>div:nth-child(2) {
         margin: 0 auto;
     }
+
+    .plus {
+        font-size: 30px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        top: -7px;
+        background-color: grey;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .minus {
+        font-size: 30px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        top: -7px;
+        background-color: grey;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .plus>span {
+        position: relative;
+        top: 8px;
+    }
+
+    .minus>span {
+        position: relative;
+        top: 6px;
+    }
+
+    .nav-icon {
+        width: 27px;
+    }
+
+    .dropdown-content2 {
+        width: 110px !important;
+    }
+
+    .dropdown-content {
+        width: 68px;
+    }
+
+    .dropdown>span {
+        position: relative;
+        top: -5px;
+    }
+
+    @media screen and (max-width: 9999px) and (min-width: 768px) {
+        .caracteristici-grid>div:nth-child(2) {
+            position: relative;
+            left: 40px;
+        }
+    }
 </style>
 <div class="not-available-error">
     <i class="fas fa-exclamation-triangle"></i>
@@ -90,8 +152,16 @@
             <a href="/shopping-cart">
                 <img class="nav-icon" width="21" height="27" src="assets/img/shopping-bag-black.svg" alt="" /></a>
 
-            <a href="/profile">
-                <img class="nav-icon" width="27" height="27" src="assets/img/account-black.svg" alt="" /></a>
+            <div class="dropdown">
+                <img class="nav-icon" width="27" height="27" src="assets/img/account-black.svg" alt="" />
+                <div class="dropdown-content2 dropdown-content">
+                    <p><a href="/profile">
+                            Profile</a></p>
+                    <hr>
+                    <p><a href="/logout">
+                            Logout</a></p>
+                </div>
+            </div>
             <div class="dropdown">
                 <span>RO</span>
                 <div class="dropdown-content">
@@ -103,7 +173,7 @@
 
     </nav>
 </header>
-<form class="detalii" action="/actlikepro" method="POST">
+<form class="detalii" action="/actlikepro" method="POST" style="max-width: 1920px; margin: 0 auto;">
     <div class="first-column">
         <img class="big-image" src="/uploads/{{ products.imagePath }}" alt="">
     </div>
@@ -112,13 +182,16 @@
             Oglinda 100/80 sipla cablu
         </p>
         <p class="pret"><span name="">{{ products.price }}</span>.00$</p>
-        <p class="pret" style="display:none;"><input type="text" name="pretTotalA" value="{{ products.price }}">.00$</p>
+        <p class="pret" style="display: none;"><input type="text" name="pretTotalA" class="badumtss"
+                value="{{ products.price }}">.00$</p>
         <hr class="detalii-stick">
         <p class="dimensiuni">{{ products.description }}</p>
         <p class="inaltime-latime">inaltime mm x latime mm</p>
-        <input type="number" class="caseta1" value="{{products.marime1}}">
+        <input type="number" class="caseta1" value="{{products.marime1}}" readonly="readonly" name="marimenr1">
         <span class="x">X</span>
-        <input type="number" class="caseta2" value="{{products.marime2}}">
+        <input type="number" class="caseta2" value="{{products.marime2}}" readonly="readonly" name="marimenr2">
+        <span class="plus"><span>+</span></span>
+        <span class="minus"><span>-</span></span>
         <div class="caracteristici-grid">
             <div>
                 <p class="caracteristici">
@@ -167,16 +240,18 @@
                     Culoarea luminii
                 </p>
                 <div class="radio">
-                    <input type="radio" name="radiogroup10" id="rv1" value="neutra">
-                    <label for="rv1">Neutra</label>
-                    <input type="radio" name="radiogroup10" id="rv2" value="calda">
-                    <label for="rv2">Calda</label>
+                    <input type="radio" name="radiogroup10" id="rv1" value="neutra"
+                        class="checkbox_check1 checkbox_check">
+                    <label for="rv1" class="rvv1">Neutra</label>
+                    <input type="radio" name="radiogroup10" id="rv2" value="calda"
+                        class="checkbox_check2 checkbox_check">
+                    <label for="rv2" class="rvv1">Calda</label>
                     <br>
                 </div>
             </div>
         </div>
         <input type="hidden" name="identificator" value="{{ products._id }}">
-        <button type="submit" class="detalii-button clicked1 clickedbl2">informatie aditionala</button>
+        <button type="submit" class="detalii-button">Adauga la cos</button>
     </div>
 </form>
 <footer>
@@ -257,9 +332,60 @@
     });
 
     var pret;
+    let marime1initiala1 = $('.caseta1').val();
+    let marime1initiala2 = $('.caseta2').val();
+    let cnt1 = 0;
+    let cnt2 = 0;
+    let adaos_la_pret;
     setInterval(() => {
         pret = $('.pret>span').text();
+        $('.badumtss').val(pret);
+        if (cnt1 < 0) {
+            $('.caseta1').val(600);
+            $('.caseta2').val(600);
+        }
+
+        if (cnt1 > 5) {
+            $('.caseta1').val(1100);
+        }
+
+        if (cnt1 > 7) {
+            $('.caseta1').val(1100);
+            $('.caseta2').val(1400);
+        }
     }, 100);
+
+    $('.plus').click(() => {
+        if (cnt1 < 8) {
+            $('.pret>span').text(parseFloat($('.pret>span').text()) + 100);
+            $('.caseta1').val(parseFloat($('.caseta1').val()) + 100)
+            $('.caseta2').val(parseFloat($('.caseta2').val()) + 100)
+            cnt1++;
+        }
+    })
+
+    $('.minus').click(() => {
+        if (cnt1 > 0) {
+            $('.pret>span').text(parseFloat($('.pret>span').text()) - 100);
+            $('.caseta1').val(parseFloat($('.caseta1').val()) - 100)
+            $('.caseta2').val(parseFloat($('.caseta2').val()) - 100)
+            cnt1--;
+        }
+    })
+
+    let rvv = 100;
+
+    $("input[type=radio][name=radiogroup10]").change(() => {
+        if ($("input[name='radiogroup10']:checked").val() == 'neutra') {
+            $('.pret>span').text(parseFloat($('.pret>span').text()) + rvv);
+            rvv = 0
+        }
+        else if ($("input[name='radiogroup10']:checked").val() == 'calda') {
+            $('.pret>span').text(parseFloat($('.pret>span').text()) + rvv);
+            rvv = 0
+        }
+    })
+
     var counter = 0;
     var counter2 = 0;
     var counter3 = 0;

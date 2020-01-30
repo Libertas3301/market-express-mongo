@@ -166,7 +166,8 @@ router.post('/actlikepro', (req, res, next) => {
   let buton = req.body.buton;
   let ramaInox = req.body.ramaInox;
   let buton_dublu = req.body.buton_dublu;
-  console.log(dezabuire, senzor, buton_dublu, buton, ramaInox);
+  let marime11 = req.body.marimenr1;
+  let marime22 = req.body.marimenr2;
   let culoare_lumina = req.body.radiogroup10;
   let pretMaximototal = req.body.pretTotalA;
   Product.findById(productId, (err, product) => {
@@ -178,27 +179,37 @@ router.post('/actlikepro', (req, res, next) => {
     if (dezabuire) {
       product.dezabuireBool = true;
       dez = true;
-    } else { product.dezabuireBool = false; dez = false; }
+    } else {
+      product.dezabuireBool = false;
+      dez = false;
+    }
 
     if (senzor) {
       product.senzorBool = true;
       sen = true;
     }
     else {
-      product.senzorBool = false; sen = false;
+      product.senzorBool = false;
+      sen = false;
     }
 
     if (buton) {
       product.butonBool = true;
       but = true;
     }
-    else { product.butonBool = false; but = false; }
+    else {
+      product.butonBool = false;
+      but = false;
+    }
 
     if (ramaInox) {
       product.ramainoxBool = true;
       ram = true;
     }
-    else { product.ramainoxBool = false; ram = false; }
+    else {
+      product.ramainoxBool = false;
+      ram = false;
+    }
 
     if (buton_dublu) {
       product.buton_dubluBool = true;
@@ -213,18 +224,17 @@ router.post('/actlikepro', (req, res, next) => {
     });
     let mesaj = cart.items[product.id].message;
     if (!mesaj) {
+      cart.items[product.id].size1 = marime11;
+      cart.items[product.id].size2 = marime22;
       cart.items[product.id].item.price = parseFloat(pretMaximototal);
       cart.items[product.id].price = parseFloat(pretMaximototal);
       cart.totalPrice += parseFloat(cart.items[product.id].item.price);
-      console.log(cart.items[product.id].qty);
     }
-    console.log(cart.items[product.id].price);
-    console.log(mesaj);
     req.session.cart = cart;
     console.log(req.session.cart);
     res.redirect('/shopping-cart');
   });
-})
+});
 
 // Get authentification page
 router.get('/auth', isLoggedInFoAuth, (req, res, next) => {
@@ -642,7 +652,8 @@ router.post('/addproduct', (req, res) => {
       butonBool: false,
       senzorBool: false,
       ramainoxBool: false,
-      buton_dubluBool: false
+      buton_dubluBool: false,
+      culoare: ''
     }).save(function (err, doc) {
       if (err) res.json(err);
       else {

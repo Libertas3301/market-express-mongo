@@ -49,6 +49,10 @@
         }
     }
 
+    .nav-icon {
+        width: 27px;
+    }
+
     @media screen and (max-width: 1700px) and (min-width: 1130px) {
         .mainContainer {
             max-width: 1700px;
@@ -256,6 +260,8 @@
             <p class="cosul">Cosul de cumparaturi</p>
             <br />
             {{# each products }}
+            ss{{this.item.size1}}
+            dd{{this.item.size2}}
             <div class="cart">
                 <img class="cart-image" width="200" height="152" style="position: relative; left: 50px;"
                     src="/uploads/{{ this.item.imagePath }}" alt="" />
@@ -264,10 +270,10 @@
                     <div>
                         <p class="denumire-oglinda">{{ this.item.title }}</p>
                         <p class="inaltime-latime-caracteristica">
-                            Inaltime: <span class="marime">{{this.item.marime1}}mm</span>
+                            Inaltime: <span class="marime">{{this.size1}}mm</span>
                         </p>
                         <p class="inaltime-latime-caracteristica">
-                            Latime: <span class="marime">{{this.item.marime2}}mm</span>
+                            Latime: <span class="marime">{{this.size2}}mm</span>
                         </p>
                     </div>
                     <div>

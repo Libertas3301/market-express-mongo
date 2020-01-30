@@ -3,12 +3,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="assets/css/contacte.css">
 <link rel="stylesheet" href="assets/css/all.css">
-<link rel="stylesheet" href="assets/css/profile.css">
+{{!-- <link rel="stylesheet" href="assets/css/profile.css"> --}}
+<link rel="stylesheet" href="stylesheets/profile.css">
 
 <title>Oglinzi.biz</title>
 {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> --}}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+{{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"> --}}
 <style>
     @media screen and (max-width: 1920px) and (min-width: 1130px) {
         .panel.panel-default {
@@ -70,6 +71,58 @@
         top: 6px;
 
     }
+
+    .istoric {
+        font-family: "Gordita", sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: left;
+        color: #d33123;
+        margin-left: 11%;
+        margin-top: 198px;
+    }
+
+    .nav-icon {
+        width: 27px;
+    }
+
+    .dropdown>span {
+        font-family: "Montserrat", sans-serif;
+        font-size: 30px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #484848;
+        position: relative;
+        top: -3px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #484848;
+        width: 36px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        z-index: 1;
+    }
+
+    .dropdown-content2 {
+        display: none;
+        position: absolute;
+        background-color: #484848;
+        width: 77px !important;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        z-index: 1;
+    }
 </style>
 <div class="not-available-error">
     <i class="fas fa-exclamation-triangle"></i>
@@ -118,33 +171,45 @@
                 </div>
             </div>
         </div>
-
     </nav>
 </header>
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
 
-        <h2 style="font-size: 60px; text-align: center;">Comezile efectuate</h2>
+<section class="history">
+    <p class="istoric">
+        Istoric comenzi
+    </p>
+    <hr class="stick">
+    {{# each orders }}
+    {{# each this.items }}
+    <div class="cart">
+        <img class="cart-image" width="250" height="202" src="/uploads/{{ this.item.imagePath }}" alt="" />
 
-        {{# each orders }}
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <ul class="list-group">
-                    {{# each this.items }}
-                    <li class="list-group-item">
-                        <span class="badge">{{ this.price }}</span>
-                        {{ this.item.title }} | {{ this.qty }} Unitate
-                    </li>
-                    {{/each}}
-                </ul>
+        <div class="product-info">
+            <div>
+                <p class="denumire-oglinda">{{ this.item.title }}</p>
+                <p class="inaltime-latime-caracteristica">
+                    Inaltime: <span class="marime">150mm</span>
+                </p>
+                <p class="inaltime-latime-caracteristica">
+                    Latime: <span class="marime">150mm</span>
+                </p>
             </div>
-            <div class="panel-footer">
-                <strong>Pretul total: ${{ this.cart.totalPrice }}</strong>
+            <div>
+                <div class="pret-pentru1"><span>{{ this.price }}</span>.00$</div>
+                <p class="inaltime-latime-caracteristica">Dezaburire</p>
+                <p class="inaltime-latime-caracteristica">Senzor de miscare</p>
+            </div>
+            <div>
+                <p class="inaltime-latime-caracteristica">Dezaburire</p>
+                <p class="inaltime-latime-caracteristica">Senzor de miscare</p>
+                <p class="inaltime-latime-caracteristica">Cantitatea de produse: {{ this.qty }}</p>
             </div>
         </div>
-        {{/each}}
     </div>
-</div>
+    {{/each}}
+    {{/each}}
+    <hr class="stick1">
+</section>
 
 <footer>
     <div>
