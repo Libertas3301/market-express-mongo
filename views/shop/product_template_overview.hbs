@@ -423,7 +423,7 @@
     })
 
     $('.minus').click(() => {
-        if ($('.caseta2').val() > marime1initiala1) {
+        if ($('.caseta1').val() > marime1initiala1 || $('.caseta2').val() > marime1initiala2) {
             $('.pret>span').text(parseFloat($('.pret>span').text()) - 100);
             $('.caseta1').val(parseFloat($('.caseta1').val()) - 100)
             $('.caseta2').val(parseFloat($('.caseta2').val()) - 100)
