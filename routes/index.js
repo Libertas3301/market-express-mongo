@@ -153,7 +153,7 @@ router.post('/checkout', (req, res, next) => {
 router.get('/product-review', (req, res, next) => {
   const { query } = url.parse(req.url, true);
   Product.findOne({ _id: query.id }, (err, docs) => {
-    res.render('shop/product_template_overview.hbs', { products: docs });
+    res.render('shop/product_template_overview.hbs', { products: docs, message2: req.flash('message2') });
   });
 });
 
@@ -230,10 +230,13 @@ router.post('/actlikepro', (req, res, next) => {
       cart.items[product.id].item.price = parseFloat(pretMaximototal);
       cart.items[product.id].price = parseFloat(pretMaximototal);
       cart.totalPrice += parseFloat(cart.items[product.id].item.price);
+      req.session.cart = cart;
+      res.redirect('/shopping-cart');
+    } else {
+      var err = 'Deja aveti acest produs in cos';
+      req.flash('message2', err);
+      res.redirect('back');
     }
-    req.session.cart = cart;
-    console.log(req.session.cart);
-    res.redirect('/shopping-cart');
   });
 });
 
