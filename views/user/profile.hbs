@@ -196,12 +196,37 @@
             </div>
             <div>
                 <div class="pret-pentru1"><span>{{ this.price }}</span>.00$</div>
+                {{#if this.item.dezabuireBool}}
                 <p class="inaltime-latime-caracteristica">Dezaburire</p>
+                {{/if}}
+                {{#if this.item.senzorBool}}
                 <p class="inaltime-latime-caracteristica">Senzor de miscare</p>
+                {{/if}}
             </div>
             <div>
-                <p class="inaltime-latime-caracteristica">Dezaburire</p>
-                <p class="inaltime-latime-caracteristica">Senzor de miscare</p>
+                {{#if this.item.butonBool}}
+                <p class="inaltime-latime-caracteristica">
+                    Buton touch (54$)
+                </p>
+                {{/if}}
+
+                {{#if this.item.ramainoxBool}}
+                <p class="inaltime-latime-caracteristica">
+                    Rama de inox (74$)
+                </p>
+                {{/if}}
+
+                {{#if this.item.buton_dubluBool}}
+                <p class="inaltime-latime-caracteristica">
+                    Buton Dublu (158$)
+                </p>
+                {{/if}}
+
+                {{#if this.culoare}}
+                <p class="inaltime-latime-caracteristica">
+                    Culoarea iluminatiei: {{this.culoare}}
+                </p>
+                {{/if}}
                 <p class="inaltime-latime-caracteristica">Cantitatea de produse: {{ this.qty }}</p>
             </div>
         </div>
