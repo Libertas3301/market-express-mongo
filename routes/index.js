@@ -226,6 +226,7 @@ router.post('/actlikepro', (req, res, next) => {
     if (!mesaj) {
       cart.items[product.id].size1 = marime11;
       cart.items[product.id].size2 = marime22;
+      cart.items[product.id].culoare = culoare_lumina;
       cart.items[product.id].item.price = parseFloat(pretMaximototal);
       cart.items[product.id].price = parseFloat(pretMaximototal);
       cart.totalPrice += parseFloat(cart.items[product.id].item.price);

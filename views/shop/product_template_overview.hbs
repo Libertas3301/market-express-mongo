@@ -340,36 +340,37 @@
     setInterval(() => {
         pret = $('.pret>span').text();
         $('.badumtss').val(pret);
-        if (cnt1 < 0) {
-            $('.caseta1').val(600);
-            $('.caseta2').val(600);
+
+        if ($('.caseta1').val() < marime1initiala1) {
+            $('.caseta1').val(marime1initiala1);
         }
 
-        if (cnt1 > 5) {
+        if ($('.caseta2').val() < marime1initiala2) {
+            $('.caseta2').val(marime1initiala2);
+        }
+
+        if ($('.caseta1').val() > 1100) {
             $('.caseta1').val(1100);
         }
 
-        if (cnt1 > 7) {
-            $('.caseta1').val(1100);
+        if ($('.caseta2').val() > 1400) {
             $('.caseta2').val(1400);
         }
     }, 100);
 
     $('.plus').click(() => {
-        if (cnt1 < 8) {
+        if ($('.caseta1').val() < 1100 || $('.caseta2').val() < 1400) {
             $('.pret>span').text(parseFloat($('.pret>span').text()) + 100);
             $('.caseta1').val(parseFloat($('.caseta1').val()) + 100)
             $('.caseta2').val(parseFloat($('.caseta2').val()) + 100)
-            cnt1++;
         }
     })
 
     $('.minus').click(() => {
-        if (cnt1 > 0) {
+        if ($('.caseta2').val() > marime1initiala1) {
             $('.pret>span').text(parseFloat($('.pret>span').text()) - 100);
             $('.caseta1').val(parseFloat($('.caseta1').val()) - 100)
             $('.caseta2').val(parseFloat($('.caseta2').val()) - 100)
-            cnt1--;
         }
     })
 
@@ -540,15 +541,3 @@
         }
     });
 </script>
-<h2 class="product__name">{{ products.title }}</h2>
-
-<a href="#" class="product__link">
-    <span class="emoji-left">🛒</span>
-    <span>{{products.price}}</span>
-</a>
-
-<p class="product__description">
-    {{ products.description }}
-</p>
-<a href="/add-to-cart/{{products._id}}" class="btn btn-success pull-right" role="button">add to cart</a>
-<script src="assets/js/sideBar.js"></script>
